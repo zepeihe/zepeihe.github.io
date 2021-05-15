@@ -6,18 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2013 | Leo的博客</title>
+  <title>Ambari集群部署(一) | Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Leo的博客">
-<meta property="og:url" content="http://example.com/archives/2013/index.html">
+  <meta name="description" content="1 Ambari 介绍​    随着 Hadoop 越来越普及，Hadoop生态圈现在发展算是相当繁荣了，而在这些繁荣的背后又是谁在推动的呢？ ​    Hadoop最早是始于Yahoo，但是现在主要是由 HortonWorks 和  Cloudera 这2家公司在维护，大部分的都属于这两家公司，所以现在市面上看到的主要有2个版本：CDH系列 和  社区版 。 ​    社区版的典型代表是：HDP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ambari集群部署(一)">
+<meta property="og:url" content="http://example.com/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/index.html">
 <meta property="og:site_name" content="Leo的博客">
-<meta property="og:description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
+<meta property="og:description" content="1 Ambari 介绍​    随着 Hadoop 越来越普及，Hadoop生态圈现在发展算是相当繁荣了，而在这些繁荣的背后又是谁在推动的呢？ ​    Hadoop最早是始于Yahoo，但是现在主要是由 HortonWorks 和  Cloudera 这2家公司在维护，大部分的都属于这两家公司，所以现在市面上看到的主要有2个版本：CDH系列 和  社区版 。 ​    社区版的典型代表是：HDP">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Users/hezepei/blog/source/assets/img/1c76a47a-58dd-42fe-959a-e231402e57a8-1094123.jpg">
+<meta property="og:image" content="http://example.com/Users/hezepei/blog/source/assets/img/3c05a2b7-0da2-4499-8e18-0c7b63f7c220-1094123.png">
+<meta property="og:image" content="http://example.com/Users/hezepei/blog/source/assets/img/b6fb6c40-468e-478d-838b-f08e713d3f4a-1094123.png">
+<meta property="article:published_time" content="2019-03-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-15T16:00:01.338Z">
 <meta property="article:author" content="Leo He">
-<meta property="article:tag" content="大数据,Hadoop,Spark,Flink,Hive,Kafka,Kylin,Hbase,Java,Scala,Python,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder">
+<meta property="article:tag" content="集群搭建">
+<meta property="article:tag" content="Ambari">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Users/hezepei/blog/source/assets/img/1c76a47a-58dd-42fe-959a-e231402e57a8-1094123.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Leo的博客" type="application/atom+xml">
   
@@ -149,60 +156,254 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Ambari集群搭建(一)" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2013" class="archive-year">2013</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2013/08/11/brief-oauth/" class="archive-article-date">
-  	<time datetime="2013-08-11T02:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2013-08-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2013/08/11/brief-oauth/">谈谈OAuth1,OAuth2异同</a>
+    <h1 class="article-title" itemprop="name">
+      Ambari集群部署(一)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/" class="archive-article-date">
+  	<time datetime="2019-03-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Ambari-介绍"><a href="#1-Ambari-介绍" class="headerlink" title="1 Ambari 介绍"></a>1 Ambari 介绍</h1><p>​    随着 Hadoop 越来越普及，Hadoop生态圈现在发展算是相当繁荣了，而在这些繁荣的背后又是谁在推动的呢？</p>
+<p>​    Hadoop最早是始于Yahoo，但是现在主要是由 HortonWorks 和  Cloudera 这2家公司在维护，大部分的都属于这两家公司，所以现在市面上看到的主要有2个版本：<strong>CDH系列</strong> 和  <strong>社区版</strong> 。</p>
+<p>​    社区版的典型代表是：HDP，这个HDP 可以通过 Ambari 进行安装和管理hadoop集群。</p>
+<h2 id="1-1-什么是Ambari？"><a href="#1-1-什么是Ambari？" class="headerlink" title="1.1 什么是Ambari？"></a>1.1 什么是Ambari？</h2><p>​    Ambari 跟 Hadoop 等开源软件一样，也是 Apache 软件基金会的一个顶级项目。2019年3月为止最新的发布版本是 2.7.3。就 Ambari 的作用来说，就是创建、管理、监视 Hadoop 的集群，但是这里的 Hadoop 是广义，指的是 Hadoop 整个生态圈(例如 Hive，Hbase，Sqoop，Zookeeper 等)，而并不仅是特指 Hadoop。用一句话来说，Ambari 就是为了让 Hadoop 以及相关的大数据软件更容易使用的一个工具。</p>
+<span id="more"></span>
+<p><strong>Ambari使系统管理员能够：</strong></p>
+<ul>
+<li><strong>提供Hadoop集群</strong></li>
+</ul>
+<p>​      1） Ambari提供了跨任意数量的主机安装Hadoop服务的分步向导。</p>
+<p>​      2）Ambari处理群集的Hadoop服务配置。</p>
+<ul>
+<li><strong>管理Hadoop集群</strong></li>
+</ul>
+<p>​      1） Ambari提供集中管理，用于在整个集群中启动，停止和重新配置Hadoop服务。</p>
+<ul>
+<li><strong>监控Hadoop集群</strong></li>
+</ul>
+<p>​      1）Ambari提供了一个仪表板，用于监控Hadoop集群的运行状况和状态。</p>
+<p>​      2）Ambari利用Ambari指标系统进行指标收集。</p>
+<p>​      3）Ambari利用Ambari Alert Framework进行系统警报，并在需要您注意时通知您（例如，节点出现故障，剩余磁盘空间不足等）。</p>
+<p><strong>Ambari使应用程序开发人员和系统集成商能够</strong></p>
+<ul>
+<li>使用Ambari REST API轻松将Hadoop配置，管理和监控功能集成到自己的应用程序中。</li>
+</ul>
+<h1 id="2-Ambari-架构组成"><a href="#2-Ambari-架构组成" class="headerlink" title="2 Ambari 架构组成"></a>2 Ambari 架构组成</h1><p><strong>Ambari 主要分为三部分：</strong></p>
+<ul>
+<li><strong>Server</strong><pre><code>server 将集群的状态通过web UI 或RESTAPI的形式呈献给用户，也是通过这两种形式将用户的指令（比如stop namenode、start datanode）下发到集群，从而完成用户与hadoop集群的交互。
+</code></pre>
+</li>
+</ul>
+<p>​        hadoop集群节点上一般没有server。</p>
+<ul>
+<li><strong>Ambari-Agent</strong><pre><code>ambari-agent 是由Python语言开发，负责对集群内主机状态的采集以及执行ambari-server发来的指令，将执行结果上报给ambari-server。ambari-agent虽然是离hadoop集群最近的一个模块，但是它不保存集群的任何状态信息，完全听命于ambari-server。
+</code></pre>
+</li>
+</ul>
+<p>​        hadoop集群节点上有Ambari-Agent。</p>
+<ul>
+<li><strong>Ambari-Metrics</strong></li>
+</ul>
+<blockquote>
+<p>​    又称AMS（Ambari-Metrics-System），是Ambari中负责监控集群状态的功能组件。内含ambari-xxxx-sink(java)、ambari-metrics-collector(java)、ambari-metrics-monitor(java)等；</p>
+<p><strong>Ambari收集两类信息放到Collector上：</strong> </p>
+<p>1）各节点“系统级”的指标 </p>
+<p>​    通过安装在每个节点上的Metrics Monitor（就是Agent）来收集的；</p>
+<p>2） Hadoop各组件的指标 </p>
+<p>通过面向特定Hadoop组件的Sink（概念上和Flume的Sink是一样的）来收集的。 </p>
+</blockquote>
+<p>-———————————————————————————————————————</p>
+<p><img src="/Users/hezepei/blog/source/assets/img/1c76a47a-58dd-42fe-959a-e231402e57a8-1094123.jpg" alt="img"></p>
+<p><img src="" alt="img"></p>
+<p>-———————————————————————————————————————</p>
+<p><strong>心跳机制：</strong></p>
+<p>​    ambari-server和ambari-agent是通过ambari-agent定期发送post请求上报agent所在主机的状态，ambari-server在接收到ambari-agent上报的状态后，给ambari-agent返回应该在这台主机上执行的指令，这样一次完整的流程就是一次心跳，通过心跳完成主从交互的这种机制就是心跳机制。</p>
+<p><strong>用户和集群的交互流程：</strong></p>
+<p>​    1）在server安装、配置完成并启动后；</p>
+<p>​    2）用户通过浏览器访问server，在地址栏输入的url是由ambari-web（以后简称web）模块响应请求，web端又调用ambari-server 的rest api获取数据显示在浏览器页面上。</p>
+<p>​    3）当用户想要通过浏览器操作集群（stop、start某些组件）时，由web端向ambari-server发送post或put请求，ambari-server 接收到请求后通过心跳机制，向ambari-agent(以后简称agent)发送指令，最后由agent执行shell或python脚本来完成。</p>
+<p><strong>显示在浏览器上的数据来源：</strong></p>
+<p>​    浏览器页面上显示的数据根据时间状态可以分为两种类型。</p>
+<p>​    一种是集群内各服务的实时状态信息，这类数据是由AMS模块实时采集上报给Ambari-Metrics-Collector，再由Ambari-Server调用ambari-metrics-collector的REST AP显示在页面上。这部分数据没有落地到ambari-server 的数据库中，在每次web端调用ambari-server的数据时，ambari-server都会调用ambari-metrics-collector获取数据，进行适当的加工处理后直接返回给web端 显示在浏览器页面上。</p>
+<p>​    还有一种由ambari-server缓存在内存，持久化到数据库的数据，这类数据比如主机列表、服务列表、服务的配置信息等。这些数据是由agent采集通过心跳发送给ambari-server后，ambari-server更新自身的数据状态。当web端调用ambari-server的rest api获取这些数据时，ambari-server将web端请求的数据直接返回给web显示在浏览器页面。</p>
+<h1 id="3-Ambari-安装规划及安装步骤"><a href="#3-Ambari-安装规划及安装步骤" class="headerlink" title="3 Ambari 安装规划及安装步骤"></a>3 Ambari 安装规划及安装步骤</h1><p><strong>HDP提供了两种安装方式：</strong></p>
+<p>1）网络安装：如果访问国外的网站网速快，可以采用；</p>
+<p>2）本地库的方式安装：如果访问国外的网速慢，需要采用这种方式。</p>
+<p>本次安装采用本地库的安装方式。</p>
+<p>本地库的安装方式，需要手动把安装包下载下来，然后制作本地yum源，这一样当安装的时候，就不会去国外源下载了。</p>
+<p>本地yum源，已经在192.168.169.130 server1 这台机器上配置完成。</p>
+<p>本地yum源的配置，参考《搭建ambari  本地yum源》</p>
+<p><strong>集群规划：</strong></p>
+<p>一台server：server1</p>
+<p>4台agent：agent1、agent2、agent3、agent4</p>
+<p><strong>选用版本：</strong></p>
+<p>ambari 2.7.3（最新版）</p>
+<p><strong>参考文档：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://docs.hortonworks.com/HDPDocuments/Ambari/Ambari-2.7.3.0/index.html">https://docs.hortonworks.com/HDPDocuments/Ambari/Ambari-2.7.3.0/index.html</a></p>
+<p><img src="" alt="img"></p>
+<p><img src="/Users/hezepei/blog/source/assets/img/3c05a2b7-0da2-4499-8e18-0c7b63f7c220-1094123.png" alt="img"></p>
+<p><strong>安装步骤：</strong></p>
+<p>1）先配置本地yum源，建议用集群的；</p>
+<p>2）在server1 机器上 安装并启动 ambari-server；参考《ambari-server安装》</p>
+<p>3）在web页面搭建hadoop集群。参考《Ambari web 页面搭建hadoop 集群》</p>
+<h1 id="4-Ambari-的使用"><a href="#4-Ambari-的使用" class="headerlink" title="4 Ambari 的使用"></a>4 Ambari 的使用</h1><p>使用参考官方文档。</p>
+<p><a target="_blank" rel="noopener" href="https://docs.hortonworks.com/HDPDocuments/Ambari/Ambari-2.7.3.0/index.html">https://docs.hortonworks.com/HDPDocuments/Ambari/Ambari-2.7.3.0/index.html</a></p>
+<p><img src="/Users/hezepei/blog/source/assets/img/b6fb6c40-468e-478d-838b-f08e713d3f4a-1094123.png" alt="img"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ambari</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%BA%8C)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Ambari集群部署(二)
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spark部署</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+  <div id="SOHUCS" sid="Ambari集群搭建(一)" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyvsmwACT",
+        conf: "d4a9131c3f72e7526d8cba4214deb9fd"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -225,8 +426,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
@@ -307,15 +508,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
               </li>
             
             <div class="clearfix"></div>
