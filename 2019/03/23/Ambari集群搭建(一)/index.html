@@ -15,16 +15,16 @@
 <meta property="og:site_name" content="Leo的博客">
 <meta property="og:description" content="1 Ambari 介绍​    随着 Hadoop 越来越普及，Hadoop生态圈现在发展算是相当繁荣了，而在这些繁荣的背后又是谁在推动的呢？ ​    Hadoop最早是始于Yahoo，但是现在主要是由 HortonWorks 和  Cloudera 这2家公司在维护，大部分的都属于这两家公司，所以现在市面上看到的主要有2个版本：CDH系列 和  社区版 。 ​    社区版的典型代表是：HDP">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/Users/hezepei/blog/source/assets/img/1c76a47a-58dd-42fe-959a-e231402e57a8-1094123.jpg">
-<meta property="og:image" content="http://example.com/Users/hezepei/blog/source/assets/img/3c05a2b7-0da2-4499-8e18-0c7b63f7c220-1094123.png">
-<meta property="og:image" content="http://example.com/Users/hezepei/blog/source/assets/img/b6fb6c40-468e-478d-838b-f08e713d3f4a-1094123.png">
+<meta property="og:image" content="http://example.com/assets/img/1c76a47a-58dd-42fe-959a-e231402e57a8-1094123.jpg">
+<meta property="og:image" content="http://example.com/assets/img/3c05a2b7-0da2-4499-8e18-0c7b63f7c220-1094123.png">
+<meta property="og:image" content="http://example.com/assets/img/b6fb6c40-468e-478d-838b-f08e713d3f4a-1094123.png">
 <meta property="article:published_time" content="2019-03-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-15T16:00:01.338Z">
+<meta property="article:modified_time" content="2021-05-15T16:07:56.641Z">
 <meta property="article:author" content="Leo He">
 <meta property="article:tag" content="集群搭建">
 <meta property="article:tag" content="Ambari">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/Users/hezepei/blog/source/assets/img/1c76a47a-58dd-42fe-959a-e231402e57a8-1094123.jpg">
+<meta name="twitter:image" content="http://example.com/assets/img/1c76a47a-58dd-42fe-959a-e231402e57a8-1094123.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Leo的博客" type="application/atom+xml">
   
@@ -226,8 +226,7 @@ var _hmt = _hmt || [];
 <p>通过面向特定Hadoop组件的Sink（概念上和Flume的Sink是一样的）来收集的。 </p>
 </blockquote>
 <p>-———————————————————————————————————————</p>
-<p><img src="/Users/hezepei/blog/source/assets/img/1c76a47a-58dd-42fe-959a-e231402e57a8-1094123.jpg" alt="img"></p>
-<p><img src="" alt="img"></p>
+<p><img src="/assets/img/1c76a47a-58dd-42fe-959a-e231402e57a8-1094123.jpg" alt="img"></p>
 <p>-———————————————————————————————————————</p>
 <p><strong>心跳机制：</strong></p>
 <p>​    ambari-server和ambari-agent是通过ambari-agent定期发送post请求上报agent所在主机的状态，ambari-server在接收到ambari-agent上报的状态后，给ambari-agent返回应该在这台主机上执行的指令，这样一次完整的流程就是一次心跳，通过心跳完成主从交互的这种机制就是心跳机制。</p>
@@ -253,15 +252,14 @@ var _hmt = _hmt || [];
 <p>ambari 2.7.3（最新版）</p>
 <p><strong>参考文档：</strong></p>
 <p><a target="_blank" rel="noopener" href="https://docs.hortonworks.com/HDPDocuments/Ambari/Ambari-2.7.3.0/index.html">https://docs.hortonworks.com/HDPDocuments/Ambari/Ambari-2.7.3.0/index.html</a></p>
-<p><img src="" alt="img"></p>
-<p><img src="/Users/hezepei/blog/source/assets/img/3c05a2b7-0da2-4499-8e18-0c7b63f7c220-1094123.png" alt="img"></p>
+<p><img src="/assets/img/3c05a2b7-0da2-4499-8e18-0c7b63f7c220-1094123.png" alt="img"></p>
 <p><strong>安装步骤：</strong></p>
 <p>1）先配置本地yum源，建议用集群的；</p>
 <p>2）在server1 机器上 安装并启动 ambari-server；参考《ambari-server安装》</p>
 <p>3）在web页面搭建hadoop集群。参考《Ambari web 页面搭建hadoop 集群》</p>
 <h1 id="4-Ambari-的使用"><a href="#4-Ambari-的使用" class="headerlink" title="4 Ambari 的使用"></a>4 Ambari 的使用</h1><p>使用参考官方文档。</p>
 <p><a target="_blank" rel="noopener" href="https://docs.hortonworks.com/HDPDocuments/Ambari/Ambari-2.7.3.0/index.html">https://docs.hortonworks.com/HDPDocuments/Ambari/Ambari-2.7.3.0/index.html</a></p>
-<p><img src="/Users/hezepei/blog/source/assets/img/b6fb6c40-468e-478d-838b-f08e713d3f4a-1094123.png" alt="img"></p>
+<p><img src="/assets/img/b6fb6c40-468e-478d-838b-f08e713d3f4a-1094123.png" alt="img"></p>
 
       
 
@@ -359,25 +357,11 @@ var _hmt = _hmt || [];
     </a>
   
   
-    <a href="/2018/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spark部署</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
 </nav>
 
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
         
         
     </div>
@@ -500,11 +484,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -512,7 +496,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
               </li>
             
             <div class="clearfix"></div>

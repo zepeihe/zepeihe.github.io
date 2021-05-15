@@ -6,24 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hadoop伪分布式集群部署 | Leo的博客</title>
+  <title>Archives: 2019/10 | Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 环境和软件版本说明系统：MacOS终端：iTerm + zshJDK：1.8.0_251，dmgssh：系统默认Hadoop：hadoop2.6.0-cdh5.16.2 hadoop-2.6.0-cdh5.16.2.tar.gz 2 准备工作在家目录下创建目录 1mkdir software app tmp data log lib shell sourcecode">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hadoop伪分布式集群部署">
-<meta property="og:url" content="http://example.com/2018/10/14/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/index.html">
+  <meta name="description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Leo的博客">
+<meta property="og:url" content="http://example.com/archives/2019/10/index.html">
 <meta property="og:site_name" content="Leo的博客">
-<meta property="og:description" content="1 环境和软件版本说明系统：MacOS终端：iTerm + zshJDK：1.8.0_251，dmgssh：系统默认Hadoop：hadoop2.6.0-cdh5.16.2 hadoop-2.6.0-cdh5.16.2.tar.gz 2 准备工作在家目录下创建目录 1mkdir software app tmp data log lib shell sourcecode">
+<meta property="og:description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/assets/img/image-20210208225451739.png">
-<meta property="og:image" content="http://example.com/assets/img/image-20210208225647813.png">
-<meta property="article:published_time" content="2018-10-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-15T10:02:00.158Z">
 <meta property="article:author" content="Leo He">
-<meta property="article:tag" content="集群搭建">
-<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="大数据,Hadoop,Spark,Flink,Hive,Kafka,Kylin,Hbase,Java,Scala,Python,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/assets/img/image-20210208225451739.png">
   
     <link rel="alternative" href="/atom.xml" title="Leo的博客" type="application/atom+xml">
   
@@ -155,87 +149,36 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MacOS搭建Hadoop伪分布式集群" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Hadoop伪分布式集群部署
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/10/14/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" class="archive-article-date">
+  	<time datetime="2019-10-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-14</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/10/14/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/">Hadoop伪分布式集群部署</a>
     </h1>
   
 
-        
-        <a href="/2018/10/14/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" class="archive-article-date">
-  	<time datetime="2018-10-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-环境和软件版本说明"><a href="#1-环境和软件版本说明" class="headerlink" title="1 环境和软件版本说明"></a>1 环境和软件版本说明</h3><p>系统：MacOS<br>终端：iTerm + zsh<br>JDK：1.8.0_251，dmg<br>ssh：系统默认<br>Hadoop：hadoop2.6.0-cdh5.16.2 hadoop-2.6.0-cdh5.16.2.tar.gz</p>
-<h3 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2 准备工作"></a>2 准备工作</h3><p>在家目录下创建目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir software app tmp data log lib shell sourcecode</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<h3 id="3-安装JDK"><a href="#3-安装JDK" class="headerlink" title="3 安装JDK"></a>3 安装JDK</h3><p>下载dmg，安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro ~ % java -version</span><br><span class="line">java version &quot;1.8.0_251&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_251-b08)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.251-b08, mixed mode)</span><br></pre></td></tr></table></figure>
-
-<p>配置环境变量</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro ~ % vim .bash_profile</span><br><span class="line">export JAVA_HOME=&quot;/Library/Java/JavaVirtualMachines/jdk1.8.0_251.jdk/Contents/Home&quot;</span><br><span class="line">export PATH=$PATH:$MYSQL_HOME/bin:$JAVA_HOME/bin:$MAVEN_HOME/bin:$M2_HOME/bin:$AZCOPY_HOME:$SCALA_HOME/bin</span><br><span class="line"></span><br><span class="line">(base) hezepei@MacBook-Pro ~ % source .bash_profile</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-配置信任关系"><a href="#4-配置信任关系" class="headerlink" title="4 配置信任关系"></a>4 配置信任关系</h3><p>先查看有没有打开“远程登陆”<strong>系统偏好设置</strong> -&gt; <strong>共享</strong> -&gt; <strong>远程登录</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa </span><br><span class="line">cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys </span><br><span class="line">cat authorized_keys</span><br><span class="line">ssh localhost</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-安装Hadoop"><a href="#5-安装Hadoop" class="headerlink" title="5 安装Hadoop"></a>5 安装Hadoop</h3><h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro software % tar -xzvf hadoop-2.6.0-cdh5.16.2.tar.gz -C ../app/</span><br></pre></td></tr></table></figure>
-
-<h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--  1 hezepei  staff  2362  1 17 14:34 core-site.xml</span><br><span class="line">-rw-r--r--  1 hezepei  staff  4552  1 17 14:34 hdfs-site.xml</span><br><span class="line">-rw-r--r--  1 hezepei  staff  1063  1 17 14:34 mapred-site.xml</span><br><span class="line">-rw-r--r--  1 hezepei  staff  5330  1 17 14:34 yarn-site.xml</span><br></pre></td></tr></table></figure>
-
-<p>core-site.xml</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!--Yarn 需要使用 fs.defaultFS 指定NameNode URI --&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;hdfs://localhost:8020&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">         &lt;!--指定hadoop临时目录, hadoop.tmp.dir 是hadoop文件系统依赖的基础配置，很多路径都依赖它。如果hdfs-site.xml中不配 置namenode和datanode的存放位置，默认就放在这&gt;个路径中 --&gt;</span><br><span class="line">        &lt;property&gt;   </span><br><span class="line">                &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;/Users/hezepei/tmp/hadoop&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">      &lt;property&gt;</span><br><span class="line">		  &lt;name&gt;io.compression.codecs&lt;/name&gt;</span><br><span class="line">		  &lt;value&gt;org.apache.hadoop.io.compress.GzipCodec,</span><br><span class="line">			org.apache.hadoop.io.compress.DefaultCodec,</span><br><span class="line">			org.apache.hadoop.io.compress.BZip2Codec,</span><br><span class="line">			org.apache.hadoop.io.compress.SnappyCodec</span><br><span class="line">		  &lt;/value&gt;</span><br><span class="line">      &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-
-<p>hdfs-site.xml</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line"></span><br><span class="line">	&lt;!--开启web hdfs --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.webhdfs.enabled&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;true&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;/Users/hezepei/data/dfs/name&lt;/value&gt;</span><br><span class="line">		&lt;description&gt; namenode 存放name table(fsimage)本地目录（需要修改）&lt;/description&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;/Users/hezepei/data/dfs/data&lt;/value&gt;</span><br><span class="line">		&lt;description&gt;datanode存放block本地目录（需要修改）&lt;/description&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;1&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- 块大小128M （默认128M） --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.blocksize&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;134217728&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;localhost:9001&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>mapred-site.xml</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!-- 配置 MapReduce Applications --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- JobHistory Server ============================================================== --&gt;</span><br><span class="line">	&lt;!-- 配置 MapReduce JobHistory Server 地址 ，默认端口10020 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;mapreduce.jobhistory.address&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;localhost:10020&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- 配置 MapReduce JobHistory Server web ui 地址， 默认端口19888 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;mapreduce.jobhistory.webapp.address&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;localhost:19888&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>yarn-site.xml</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.nodemanager.aux-services.mapreduce_shuffle.class&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro hadoop % vim ~/.bash_profile</span><br><span class="line">export HADOOP_HOME=&quot;/Users/hezepei/app/hadoop&quot;</span><br><span class="line">export PATH=$MYSQL_HOME/bin:$JAVA_HOME/bin:$MAVEN_HOME/bin:$M2_HOME/bin:$AZCOPY_HOME:$SCALA_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$PATH</span><br><span class="line">(base) hezepei@MacBook-Pro hadoop % source ~/.bash_profile</span><br></pre></td></tr></table></figure>
-
-<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro bin % hadoop namenode -format</span><br><span class="line">18/02/08 22:46:29 INFO util.GSet: Computing capacity for map NameNodeRetryCache</span><br><span class="line">18/02/08 22:46:29 INFO util.GSet: VM type       = 64-bit</span><br><span class="line">18/02/08 22:46:29 INFO util.GSet: 0.029999999329447746% max memory 889 MB = 273.1 KB</span><br><span class="line">18/02/08 22:46:29 INFO util.GSet: capacity      = 2^15 = 32768 entries</span><br><span class="line">18/02/08 22:46:29 INFO namenode.FSNamesystem: ACLs enabled? false</span><br><span class="line">18/02/08 22:46:29 INFO namenode.FSNamesystem: XAttrs enabled? true</span><br><span class="line">18/02/08 22:46:29 INFO namenode.FSNamesystem: Maximum size of an xattr: 16384</span><br><span class="line">18/02/08 22:46:29 INFO namenode.FSImage: Allocated new BlockPoolId: BP-1265621088-192.168.123.21-1612795589310</span><br><span class="line">18/02/08 22:46:29 INFO common.Storage: Storage directory /Users/hezepei/data/dfs/name has been successfully formatted.</span><br><span class="line">18/02/08 22:46:29 INFO namenode.FSImageFormatProtobuf: Saving image file /Users/hezepei/data/dfs/name/current/fsimage.ckpt_0000000000000000000 using no compression</span><br><span class="line">18/02/08 22:46:29 INFO namenode.FSImageFormatProtobuf: Image file /Users/hezepei/data/dfs/name/current/fsimage.ckpt_0000000000000000000 of size 324 bytes saved in 0 seconds .</span><br><span class="line">18/02/08 22:46:29 INFO namenode.NNStorageRetentionManager: Going to retain 1 images with txid &gt;= 0</span><br><span class="line">18/02/08 22:46:29 INFO util.ExitUtil: Exiting with status 0</span><br><span class="line">18/02/08 22:46:29 INFO namenode.NameNode: SHUTDOWN_MSG:</span><br><span class="line">/************************************************************</span><br><span class="line">SHUTDOWN_MSG: Shutting down NameNode at MacBook-Pro.lan/192.168.123.21</span><br><span class="line">************************************************************/</span><br></pre></td></tr></table></figure>
-
-<h4 id="启动和关闭hdfs"><a href="#启动和关闭hdfs" class="headerlink" title="启动和关闭hdfs"></a>启动和关闭hdfs</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro bin % start-dfs.sh</span><br><span class="line">(base) hezepei@MacBook-Pro bin % stop-dfs.sh</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro hadoop % start-dfs.sh</span><br><span class="line">18/02/08 22:51:30 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">Starting namenodes on [localhost]</span><br><span class="line">localhost: starting namenode, logging to /Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/logs/hadoop-hezepei-namenode-MacBook-Pro.lan.out</span><br><span class="line">localhost: WARNING: An illegal reflective access operation has occurred</span><br><span class="line">localhost: WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/share/hadoop/common/lib/hadoop-auth-2.6.0-cdh5.16.2.jar) to method sun.security.krb5.Config.getInstance()</span><br><span class="line">localhost: WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil</span><br><span class="line">localhost: WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations</span><br><span class="line">localhost: WARNING: All illegal access operations will be denied in a future release</span><br><span class="line">localhost: datanode running as process 48555. Stop it first.</span><br><span class="line">Starting secondary namenodes [localhost]</span><br><span class="line">localhost: starting secondarynamenode, logging to /Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/logs/hadoop-hezepei-secondarynamenode-MacBook-Pro.lan.out</span><br><span class="line">localhost: WARNING: An illegal reflective access operation has occurred</span><br><span class="line">localhost: WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/share/hadoop/common/lib/hadoop-auth-2.6.0-cdh5.16.2.jar) to method sun.security.krb5.Config.getInstance()</span><br><span class="line">localhost: WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil</span><br><span class="line">localhost: WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations</span><br><span class="line">localhost: WARNING: All illegal access operations will be denied in a future release</span><br><span class="line">18/02/08 22:51:41 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line"></span><br><span class="line">(base) hezepei@MacBook-Pro hadoop % stop-dfs.sh</span><br><span class="line">18/02/08 22:53:16 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">Stopping namenodes on [localhost]</span><br><span class="line">localhost: stopping namenode</span><br><span class="line">localhost: stopping datanode</span><br><span class="line">Stopping secondary namenodes [localhost]</span><br><span class="line">localhost: stopping secondarynamenode</span><br><span class="line">18/02/08 22:53:34 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br></pre></td></tr></table></figure>
-
-<h4 id="启动成功"><a href="#启动成功" class="headerlink" title="启动成功"></a>启动成功</h4><p><img src="/assets/img/image-20210208225451739.png" alt="image-20210208225451739"></p>
-<h4 id="启动和关闭yarn"><a href="#启动和关闭yarn" class="headerlink" title="启动和关闭yarn"></a>启动和关闭yarn</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro hadoop % start-yarn.sh</span><br><span class="line">(base) hezepei@MacBook-Pro hadoop % stop-yarn.sh</span><br><span class="line"></span><br><span class="line">(base) hezepei@MacBook-Pro hadoop % start-yarn.sh</span><br><span class="line">starting yarn daemons</span><br><span class="line">starting resourcemanager, logging to /Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/logs/yarn-hezepei-resourcemanager-MacBook-Pro.lan.out</span><br><span class="line">localhost: starting nodemanager, logging to /Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/logs/yarn-hezepei-nodemanager-MacBook-Pro.lan.out</span><br></pre></td></tr></table></figure>
-<p><img src="/assets/img/image-20210208225647813.png" alt="image-20210208225647813"></p>
-<h4 id="启动和关闭全部"><a href="#启动和关闭全部" class="headerlink" title="启动和关闭全部"></a>启动和关闭全部</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-all.sh</span><br><span class="line">stop-all.sh</span><br></pre></td></tr></table></figure>
-
-<h4 id="单进程启动命令-按顺序"><a href="#单进程启动命令-按顺序" class="headerlink" title="单进程启动命令(按顺序)"></a>单进程启动命令(按顺序)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hadoop-daemon.sh start namenode</span><br><span class="line">hadoop-daemon.sh start datanode</span><br><span class="line">yarn-daemon.sh start secondarynamenode</span><br><span class="line">yarn-daemon.sh start resourcemanager</span><br><span class="line">yarn-daemon.sh start nodemanager</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro software % vim /Users/hezepei/app/hadoop/sbin/hadoop-daemon.sh</span><br><span class="line">150     echo starting $command, logging to $log</span><br><span class="line">151     cd &quot;$HADOOP_PREFIX&quot;</span><br><span class="line">152     case $command in</span><br><span class="line">153       namenode|secondarynamenode|datanode|journalnode|dfs|dfsadmin|fsck|bala    ncer|zkfc)</span><br></pre></td></tr></table></figure>
-
-<p>启动顺序</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro software % start-all.sh</span><br><span class="line">This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh</span><br><span class="line">18/02/09 17:05:46 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">Starting namenodes on [localhost]</span><br><span class="line">localhost: starting namenode, logging to /Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/logs/hadoop-hezepei-namenode-MacBook-Pro.local.out</span><br><span class="line">localhost: starting datanode, logging to /Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/logs/hadoop-hezepei-datanode-MacBook-Pro.local.out</span><br><span class="line">localhost: WARNING: An illegal reflective access operation has occurred</span><br><span class="line">localhost: WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/share/hadoop/common/lib/hadoop-auth-2.6.0-cdh5.16.2.jar) to method sun.security.krb5.Config.getInstance()</span><br><span class="line">localhost: WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil</span><br><span class="line">localhost: WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations</span><br><span class="line">localhost: WARNING: All illegal access operations will be denied in a future release</span><br><span class="line">Starting secondary namenodes [localhost]</span><br><span class="line">localhost: starting secondarynamenode, logging to /Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/logs/hadoop-hezepei-secondarynamenode-MacBook-Pro.local.out</span><br><span class="line">localhost: WARNING: An illegal reflective access operation has occurred</span><br><span class="line">localhost: WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/share/hadoop/common/lib/hadoop-auth-2.6.0-cdh5.16.2.jar) to method sun.security.krb5.Config.getInstance()</span><br><span class="line">localhost: WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil</span><br><span class="line">localhost: WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations</span><br><span class="line">localhost: WARNING: All illegal access operations will be denied in a future release</span><br><span class="line">18/02/09 17:06:02 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">starting yarn daemons</span><br><span class="line">starting resourcemanager, logging to /Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/logs/yarn-hezepei-resourcemanager-MacBook-Pro.local.out</span><br><span class="line">localhost: starting nodemanager, logging to /Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/logs/yarn-hezepei-nodemanager-MacBook-Pro.local.out</span><br></pre></td></tr></table></figure>
-
-<h4 id="JPS"><a href="#JPS" class="headerlink" title="JPS"></a>JPS</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro software % jps</span><br><span class="line">59074 NameNode</span><br><span class="line">59428 NodeManager</span><br><span class="line">59350 ResourceManager</span><br><span class="line">56006</span><br><span class="line">57704 Launcher</span><br><span class="line">56025 NailgunRunner</span><br><span class="line">52217</span><br><span class="line">52027 MainApp</span><br><span class="line">59613 Jps</span><br><span class="line">59247 SecondaryNameNode</span><br><span class="line">59151 DataNode</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -251,120 +194,19 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2018/10/14/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/11/15/MacOSHive%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Hive的安装与配置
-        
-      </div>
-    </a>
   
   
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-  <div id="SOHUCS" sid="MacOS搭建Hadoop伪分布式集群" ></div> 
-<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
-<script type="text/javascript">
-    window.changyan.api.config({
-        appid: "cyvsmwACT",
-        conf: "d4a9131c3f72e7526d8cba4214deb9fd"
-    });
-</script>
-</script>
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -387,8 +229,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
@@ -461,11 +303,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -473,7 +315,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
               </li>
             
             <div class="clearfix"></div>

@@ -15,16 +15,16 @@
 <meta property="og:site_name" content="Leo的博客">
 <meta property="og:description" content="搭建ambari 本地yum源 制作本地源是因为在线安装Ambari太慢。制作本地源在主节点上进行。 ambari版本： Ambari-2.7.3.0 1 配置HTTP 服务1.1 配置HTTP 服务到系统层使其随系统自动启动yum install httpd chkconfig httpd on service httpd start 1.2 创建&#x2F;var&#x2F;www&#x2F;html 目录httpd 是A">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/Users/hezepei/blog/source/assets/img/5519e716-6159-41ec-aa6a-0b6195ed8d1d.png">
-<meta property="og:image" content="http://example.com/Users/hezepei/blog/source/assets/img/3aeb4a68-f133-4bb4-9ba3-4ac950d6981f.png">
-<meta property="og:image" content="http://example.com/Users/hezepei/blog/source/assets/img/7abdc784-88ed-426c-b38f-8372368ba274.png">
+<meta property="og:image" content="http://example.com/assets/img/5519e716-6159-41ec-aa6a-0b6195ed8d1d.png">
+<meta property="og:image" content="http://example.com/assets/img/3aeb4a68-f133-4bb4-9ba3-4ac950d6981f.png">
+<meta property="og:image" content="http://example.com/assets/img/7abdc784-88ed-426c-b38f-8372368ba274.png">
 <meta property="article:published_time" content="2019-03-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-15T15:53:15.039Z">
+<meta property="article:modified_time" content="2021-05-15T16:07:31.582Z">
 <meta property="article:author" content="Leo He">
 <meta property="article:tag" content="集群搭建">
 <meta property="article:tag" content="Ambari">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/Users/hezepei/blog/source/assets/img/5519e716-6159-41ec-aa6a-0b6195ed8d1d.png">
+<meta name="twitter:image" content="http://example.com/assets/img/5519e716-6159-41ec-aa6a-0b6195ed8d1d.png">
   
     <link rel="alternative" href="/atom.xml" title="Leo的博客" type="application/atom+xml">
   
@@ -286,7 +286,7 @@ var _hmt = _hmt || [];
 <p><strong>4）上传到linux，并解压到/var/www/html 目录下</strong></p>
 <p>-———————————————–</p>
 <p>HDP文件较大，使用ftp上传</p>
-<p><img src="/Users/hezepei/blog/source/assets/img/5519e716-6159-41ec-aa6a-0b6195ed8d1d.png" alt="img"></p>
+<p><img src="/assets/img/5519e716-6159-41ec-aa6a-0b6195ed8d1d.png" alt="img"></p>
 <p><strong>5）在linux上，通过wget 命令下载.repo文件</strong></p>
 <p><strong>6）修改ambari.repo 的源</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#VERSION_NUMBER=2.7.3.0-139</span><br><span class="line">[ambari-2.7.3.0]</span><br><span class="line">#json.url = http://public-repo-1.hortonworks.com/HDP/hdp_urlinfo.json</span><br><span class="line">name=ambari Version - ambari-2.7.3.0</span><br><span class="line">baseurl=http://server1/ambari/centos7/2.7.3.0-139</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=http://server1/ambari/centos7/2.7.3.0-139/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins</span><br><span class="line">enabled=1</span><br><span class="line">priority=1</span><br></pre></td></tr></table></figure>
@@ -294,13 +294,13 @@ var _hmt = _hmt || [];
 <p><strong>7）重名ambari  baseurl 目录下的*index.html</strong> </p>
 <p>因为该目录下如果有*index.html 文件，默认就访问该文件，所以要对该文件进行重命名</p>
 <p>重名后，可以在页面看见</p>
-<p><img src="/Users/hezepei/blog/source/assets/img/3aeb4a68-f133-4bb4-9ba3-4ac950d6981f.png" alt="img"></p>
+<p><img src="/assets/img/3aeb4a68-f133-4bb4-9ba3-4ac950d6981f.png" alt="img"></p>
 <p><strong>8）hdp.repo 也参考ambari.repo 文件</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#VERSION_NUMBER=3.0.0.0-1634</span><br><span class="line">[HDP-3.0.0.0]</span><br><span class="line">name=HDP Version - HDP-3.0.0.0</span><br><span class="line">baseurl=http://nn1.hadoop/HDP/centos7/3.0.0.0-1634</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=http://nn1.hadoop/HDP/centos7/3.0.0.0-1634/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins</span><br><span class="line">enabled=1</span><br><span class="line">priority=1</span><br><span class="line">[HDP-UTILS-1.1.0.22]</span><br><span class="line">name=HDP-UTILS Version - HDP-UTILS-1.1.0.22</span><br><span class="line">baseurl=http://nn1.hadoop/HDP-UTILS/centos7/1.1.0.22</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=http://nn1.hadoop/HDP-UTILS/centos7/1.1.0.22/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins</span><br><span class="line">enabled=1</span><br><span class="line">priority=1</span><br></pre></td></tr></table></figure>
 
 <p><strong>9）hdp.gpl.repo 也参考ambari.repo 文件</strong></p>
 <p>-————————————</p>
-<p><img src="/Users/hezepei/blog/source/assets/img/7abdc784-88ed-426c-b38f-8372368ba274.png" alt="img"></p>
+<p><img src="/assets/img/7abdc784-88ed-426c-b38f-8372368ba274.png" alt="img"></p>
 <p>cd /etc/yum.repos.d</p>
 
       
@@ -409,15 +409,6 @@ var _hmt = _hmt || [];
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
         
         
     </div>
@@ -540,11 +531,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,7 +543,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
               </li>
             
             <div class="clearfix"></div>

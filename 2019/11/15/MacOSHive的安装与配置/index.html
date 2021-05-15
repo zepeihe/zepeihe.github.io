@@ -6,21 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Spark部署 | Leo的博客</title>
+  <title>Hive的安装与配置 | Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 环境和软件版本说明系统：MacOS终端：iTerm + zshJDK：1.8.0_251，dmgssh：系统默认Spark：spark-3.1.1-bin-hadoop2.7.tgz">
+  <meta name="description" content="1 环境和软件版本 系统：MacOS终端：iTerm + zshHadoop: hadoop-2.6.0-cdh5.16.2.tar.gz下载地址:http:&#x2F;&#x2F;archive.cloudera.com&#x2F;cdh5&#x2F;cdh&#x2F;5&#x2F;Hive：hive-1.1.0-cdh5.16.2.tar.gz下载地址：http:&#x2F;&#x2F;archive.cloudera.com&#x2F;cdh5&#x2F;cdh&#x2F;5&#x2F;MySQL：5.7.1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spark部署">
-<meta property="og:url" content="http://example.com/2018/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/index.html">
+<meta property="og:title" content="Hive的安装与配置">
+<meta property="og:url" content="http://example.com/2019/11/15/MacOSHive%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Leo的博客">
-<meta property="og:description" content="1 环境和软件版本说明系统：MacOS终端：iTerm + zshJDK：1.8.0_251，dmgssh：系统默认Spark：spark-3.1.1-bin-hadoop2.7.tgz">
+<meta property="og:description" content="1 环境和软件版本 系统：MacOS终端：iTerm + zshHadoop: hadoop-2.6.0-cdh5.16.2.tar.gz下载地址:http:&#x2F;&#x2F;archive.cloudera.com&#x2F;cdh5&#x2F;cdh&#x2F;5&#x2F;Hive：hive-1.1.0-cdh5.16.2.tar.gz下载地址：http:&#x2F;&#x2F;archive.cloudera.com&#x2F;cdh5&#x2F;cdh&#x2F;5&#x2F;MySQL：5.7.1">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2018-11-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-15T10:01:52.367Z">
+<meta property="og:image" content="http://example.com/assets/img/image-20210208232150492.png">
+<meta property="og:image" content="http://example.com/assets/img/image-20210209112239744.png">
+<meta property="article:published_time" content="2019-11-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-15T16:10:42.986Z">
 <meta property="article:author" content="Leo He">
 <meta property="article:tag" content="集群搭建">
-<meta property="article:tag" content="Spark">
+<meta property="article:tag" content="Hive">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/img/image-20210208232150492.png">
   
     <link rel="alternative" href="/atom.xml" title="Leo的博客" type="application/atom+xml">
   
@@ -152,45 +155,89 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MacOS部署Spark" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MacOSHive的安装与配置" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Spark部署
+      Hive的安装与配置
     </h1>
   
 
         
-        <a href="/2018/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/" class="archive-article-date">
-  	<time datetime="2018-11-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-19</time>
+        <a href="/2019/11/15/MacOSHive%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2019-11-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-环境和软件版本说明"><a href="#1-环境和软件版本说明" class="headerlink" title="1 环境和软件版本说明"></a>1 环境和软件版本说明</h3><p>系统：MacOS<br>终端：iTerm + zsh<br>JDK：1.8.0_251，dmg<br>ssh：系统默认<br>Spark：spark-3.1.1-bin-hadoop2.7.tgz</p>
+        <h3 id="1-环境和软件版本"><a href="#1-环境和软件版本" class="headerlink" title="1 环境和软件版本"></a>1 环境和软件版本</h3><blockquote>
+<p>系统：MacOS<br>终端：iTerm + zsh<br>Hadoop: hadoop-2.6.0-cdh5.16.2.tar.gz<br>下载地址:<a href="https://link.zhihu.com/?target=http://archive.cloudera.com/cdh5/cdh/5/">http://archive.cloudera.com/cdh5/cdh/5/</a><br>Hive：hive-1.1.0-cdh5.16.2.tar.gz<br>下载地址：<a href="https://link.zhihu.com/?target=http://archive.cloudera.com/cdh5/cdh/5/">http://archive.cloudera.com/cdh5/cdh/5/</a><br>MySQL：5.7.11 dmg镜像<br>下载地址：<a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
+</blockquote>
 <span id="more"></span>
 
+<h4 id="mysql安装"><a href="#mysql安装" class="headerlink" title="mysql安装"></a>mysql安装</h4><p><img src="/assets/img/image-20210208232150492.png" alt="image-20210208232150492"></p>
+<p>保存临时密码5v8eN6YaS&amp;fj，登录mysql修改密码</p>
+<h4 id="启动mysql"><a href="#启动mysql" class="headerlink" title="启动mysql"></a>启动mysql</h4><p><img src="/assets/img/image-20210209112239744.png" alt="image-20210209112239744"><br>修改密码并创建hive源数据库metastore</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> <span class="built_in">set</span> password <span class="keyword">for</span> root@localhost = password(<span class="string">&#x27;123456&#x27;</span>);  <span class="comment">#修改mysql密码为123456</span></span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> create database metastore</span></span><br><span class="line">    -&gt; ;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-安装JDK"><a href="#2-安装JDK" class="headerlink" title="2 安装JDK"></a>2 安装JDK</h3><p>下载dmg，安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro ~ % java -version</span><br><span class="line">java version &quot;1.8.0_251&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_251-b08)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.251-b08, mixed mode)</span><br></pre></td></tr></table></figure>
+<h3 id="2-Hive-安装"><a href="#2-Hive-安装" class="headerlink" title="2 Hive 安装"></a>2 Hive 安装</h3><h4 id="解压-创建软连接"><a href="#解压-创建软连接" class="headerlink" title="解压,创建软连接"></a>解压,创建软连接</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro software % tar -xzvf hive-1.1.0-cdh5.16.2.tar.gz -C ../app</span><br><span class="line">(base) hezepei@MacBook-Pro app % ln -s hive-1.1.0-cdh5.16.2 hive</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-安装Spark"><a href="#3-安装Spark" class="headerlink" title="3 安装Spark"></a>3 安装Spark</h3><h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hezepei@MacBook-Pro software % tar -xzvf spark-3.1.1-bin-hadoop2.7.tgz -C ../app</span><br></pre></td></tr></table></figure>
+<h4 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro app % vim ~/.bash_profile</span><br><span class="line">export HIVE_HOME=/Users/hezepei/app/hive</span><br><span class="line">export PATH=$HIVE_HOME/bin:$MYSQL_HOME/bin:$JAVA_HOME/bin:$MAVEN_HOME/bin:$M2_HOME/bin:$AZCOPY_HOME:$SCALA_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$PATH</span><br><span class="line">(base) hezepei@MacBook-Pro app % source ~/.bash_profile</span><br></pre></td></tr></table></figure>
 
-<p>配置环境变量</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">hezepei@MacBook-Pro spark % cat ~/.bash_profile</span><br><span class="line"><span class="meta">#</span><span class="bash"> HomeBrew</span></span><br><span class="line">export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles</span><br><span class="line">export MAVEN_HOME=/Users/hezepei/app/maven</span><br><span class="line">export M2_HOME=$MAVEN_HOME</span><br><span class="line">export AZCOPY_HOME=/Users/hezepei/opt/azcopy_darwin_amd64_10.4.3</span><br><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_251.jdk/Contents/Home</span><br><span class="line">export SCALA_HOME=/Users/hezepei/app/scala</span><br><span class="line">export MYSQL_HOME=/usr/local/mysql</span><br><span class="line">export HADOOP_HOME=/Users/hezepei/app/hadoop</span><br><span class="line">export HIVE_HOME=/Users/hezepei/app/hive</span><br><span class="line">export FLUME_HOME=/Users/hezepei/app/flume</span><br><span class="line">export SPARK_HOME=/Users/hezepei/app/spark</span><br><span class="line"></span><br><span class="line">export PATH=$SPARK_HOME/bin:$FLUME_HOME/bin:$HIVE_HOME/bin:$MYSQL_HOME/bin:$JAVA_HOME/bin:$MAVEN_HOME/bin:$M2_HOME/bin:$AZCOPY_HOME:$SCALA_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$PATH</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(base) hezepei@MacBook-Pro ~ % source .bash_profile</span><br></pre></td></tr></table></figure>
+<h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>cp hive-site.xml hive-site.xml.template</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;jdbc:mysql://localhost:3306/metastore?characterEncoding=utf-8&amp;amp;useSSL=true&lt;/value&gt;&lt;!--MySQL地址metastore是元数据库的名称，需要在mysql中创建相同名字的数据库--&gt;                &lt;!--MySQL地址metastore是元数据库的名称，需要在mysql中创建相同名字的数据库--&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;&lt;!--MySQL驱动--&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;root&lt;/value&gt;&lt;!--MySQL用户名--&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;123456&lt;/value&gt;&lt;!--MySQL密码--&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="4-修改配置文件"><a href="#4-修改配置文件" class="headerlink" title="4 修改配置文件"></a>4 修改配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hezepei@MacBook-Pro spark % vim ~/.bash_profile</span><br><span class="line">hezepei@MacBook-Pro spark % source ~/.bash_profile</span><br><span class="line"></span><br><span class="line">hezepei@MacBook-Pro conf % vim spark-env.sh</span><br><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_251.jdk/Contents/Home</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>hive-env.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro conf % cp hive-env.sh.template hive-env.sh</span><br><span class="line">(base) hezepei@MacBook-Pro conf % vim hive-env.sh</span><br><span class="line"><span class="meta">#</span><span class="bash"> Set HADOOP_HOME to point to a specific hadoop install directory</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> HADOOP_HOME=<span class="variable">$&#123;bin&#125;</span>/../../hadoop</span></span><br><span class="line">HADOOP_HOME=$&#123;HADOOP_HOME&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="5-启动Spark-shell"><a href="#5-启动Spark-shell" class="headerlink" title="5 启动Spark-shell"></a>5 启动Spark-shell</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hezepei@MacBook-Pro 资料 % hadoop fs -text hdfs://localhost:8020/data/hdfsapi/wc-io2.txt</span><br><span class="line">21/03/08 15:26:40 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">leo,leo,leo</span><br><span class="line">peiyi,peiyi</span><br><span class="line">zepei</span><br><span class="line"></span><br><span class="line">sc.textFile(&quot;hdfs://localhost:8020/data/hdfsapi/wc-io2.txt&quot;)</span><br><span class="line">.flatMap(_.split(&quot;,&quot;))</span><br><span class="line">.map((_,1))</span><br><span class="line">.reduceByKey(_+_)</span><br><span class="line">.collect</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>执行结果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">scala&gt;</span><span class="bash"> .collect</span></span><br><span class="line">res29: Array[(String, Int)] = Array((leo,3), (zepei,1), (peiyi,2))</span><br></pre></td></tr></table></figure>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro bin % schematool -initSchema -dbType mysql</span><br><span class="line">readlink: illegal option -- f</span><br><span class="line">usage: readlink [-n] [file ...]</span><br><span class="line">Metastore connection URL:	 jdbc:mysql://localhost:3306/metastore?createDatabaseIfNotExist=true</span><br><span class="line">Metastore Connection Driver :	 com.mysql.jdbc.Driver</span><br><span class="line">Metastore connection User:	 root</span><br><span class="line">Tue Feb 09 13:43:26 CST 2021 WARN: Establishing SSL connection without server&#x27;s identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn&#x27;t set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to &#x27;false&#x27;. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.</span><br><span class="line">Starting metastore schema initialization to 1.1.0-cdh5.16.2</span><br><span class="line">Initialization script hive-schema-1.1.0.mysql.sql</span><br><span class="line">Tue Feb 09 13:43:26 CST 2021 WARN: Establishing SSL connection without server&#x27;s identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn&#x27;t set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to &#x27;false&#x27;. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.</span><br><span class="line">Initialization script completed</span><br><span class="line">Tue Feb 09 13:43:28 CST 2021 WARN: Establishing SSL connection without server&#x27;s identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn&#x27;t set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to &#x27;false&#x27;. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.</span><br><span class="line">schemaTool completed</span><br><span class="line">(base) hezepei@MacBook-Pro bin %</span><br></pre></td></tr></table></figure>
 
-<h3 id="6-Spark-配置使用hive元数据"><a href="#6-Spark-配置使用hive元数据" class="headerlink" title="6 Spark 配置使用hive元数据"></a>6 Spark 配置使用hive元数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">拷贝jar包</span><br><span class="line">hezepei@MacBook-Pro lib % cp /Users/hezepei/lib/mysql-connector-java-5.1.47.jar /Users/hezepei/app/spark/jars</span><br><span class="line">软连接</span><br><span class="line">ln -s /Users/hezepei/app/hive/conf/hive-site.xml /Users/hezepei/app/spark/conf/hive-site.xml</span><br></pre></td></tr></table></figure>
+<p>初始化后登录mysql查看</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> use metastore;</span></span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show tables;</span></span><br><span class="line">+---------------------------+</span><br><span class="line">| Tables_in_metastore       |</span><br><span class="line">+---------------------------+</span><br><span class="line">| BUCKETING_COLS            |</span><br><span class="line">| CDS                       |</span><br><span class="line">| COLUMNS_V2                |</span><br><span class="line">| COMPACTION_QUEUE          |</span><br><span class="line">| COMPLETED_TXN_COMPONENTS  |</span><br><span class="line">| DATABASE_PARAMS           |</span><br><span class="line">| DBS                       |</span><br><span class="line">| DB_PRIVS                  |</span><br><span class="line">| DELEGATION_TOKENS         |</span><br><span class="line">| FUNCS                     |</span><br><span class="line">| FUNC_RU                   |</span><br><span class="line">| GLOBAL_PRIVS              |</span><br><span class="line">| HIVE_LOCKS                |</span><br><span class="line">| IDXS                      |</span><br><span class="line">| INDEX_PARAMS              |</span><br><span class="line">| MASTER_KEYS               |</span><br><span class="line">| METASTORE_DB_PROPERTIES   |</span><br><span class="line">| NEXT_COMPACTION_QUEUE_ID  |</span><br><span class="line">| NEXT_LOCK_ID              |</span><br><span class="line">| NEXT_TXN_ID               |</span><br><span class="line">| NOTIFICATION_LOG          |</span><br><span class="line">| NOTIFICATION_SEQUENCE     |</span><br><span class="line">| NUCLEUS_TABLES            |</span><br><span class="line">| PARTITIONS                |</span><br><span class="line">| PARTITION_EVENTS          |</span><br><span class="line">| PARTITION_KEYS            |</span><br><span class="line">| PARTITION_KEY_VALS        |</span><br><span class="line">| PARTITION_PARAMS          |</span><br><span class="line">| PART_COL_PRIVS            |</span><br><span class="line">| PART_COL_STATS            |</span><br><span class="line">| PART_PRIVS                |</span><br><span class="line">| ROLES                     |</span><br><span class="line">| ROLE_MAP                  |</span><br><span class="line">| SDS                       |</span><br><span class="line">| SD_PARAMS                 |</span><br><span class="line">| SEQUENCE_TABLE            |</span><br><span class="line">| SERDES                    |</span><br><span class="line">| SERDE_PARAMS              |</span><br><span class="line">| SKEWED_COL_NAMES          |</span><br><span class="line">| SKEWED_COL_VALUE_LOC_MAP  |</span><br><span class="line">| SKEWED_STRING_LIST        |</span><br><span class="line">| SKEWED_STRING_LIST_VALUES |</span><br><span class="line">| SKEWED_VALUES             |</span><br><span class="line">| SORT_COLS                 |</span><br><span class="line">| TABLE_PARAMS              |</span><br><span class="line">| TAB_COL_STATS             |</span><br><span class="line">| TBLS                      |</span><br><span class="line">| TBL_COL_PRIVS             |</span><br><span class="line">| TBL_PRIVS                 |</span><br><span class="line">| TXNS                      |</span><br><span class="line">| TXN_COMPONENTS            |</span><br><span class="line">| TYPES                     |</span><br><span class="line">| TYPE_FIELDS               |</span><br><span class="line">| VERSION                   |</span><br><span class="line">+---------------------------+</span><br><span class="line">54 rows in set (0.00 sec)</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">mysql&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="启动Hive"><a href="#启动Hive" class="headerlink" title="启动Hive"></a>启动Hive</h4><p>启动前需要启动Hadoop(Yarn和Hdfs)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro bin % hive</span><br><span class="line">readlink: illegal option -- f</span><br><span class="line">usage: readlink [-n] [file ...]</span><br><span class="line">21/02/09 13:45:28 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line"></span><br><span class="line">Logging initialized using configuration in jar:file:/Users/hezepei/app/hive-1.1.0-cdh5.16.2/lib/hive-common-1.1.0-cdh5.16.2.jar!/hive-log4j.properties</span><br><span class="line">WARNING: Hive CLI is deprecated and migration to Beeline is recommended.</span><br><span class="line">hive&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动hiveserver2服务"><a href="#启动hiveserver2服务" class="headerlink" title="启动hiveserver2服务"></a>启动hiveserver2服务</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 后台运行</span></span><br><span class="line">nohup hiveserver2 &gt;&gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭服务</span></span><br><span class="line">ps -ef | grep HiveServer2 | grep -v grep | awk &#x27;&#123;print $2&#125;&#x27; | xargs kill</span><br><span class="line"><span class="meta">#</span><span class="bash"> beeline连接</span></span><br><span class="line">beeline -u jdbc:hive2://localhost:10000</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">(base) hezepei@MacBook-Pro bin % ./hiveserver2</span><br><span class="line">readlink: illegal option -- f</span><br><span class="line">usage: readlink [-n] [file ...]</span><br><span class="line">21/02/10 10:24:21 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line"></span><br><span class="line">(base) hezepei@MacBook-Pro bin % nohup hiveserver2 &gt;&gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">[1] 63697</span><br><span class="line">(base) hezepei@MacBook-Pro bin %</span><br><span class="line">(base) hezepei@MacBook-Pro bin %</span><br><span class="line">(base) hezepei@MacBook-Pro bin % ps -aux | grep 63697</span><br><span class="line">ps: No user named &#x27;x&#x27;</span><br><span class="line">(base) hezepei@MacBook-Pro bin % ps -ef | grep 63697</span><br><span class="line">  501 63697 62386   0 10:27上午 ttys000    0:13.95 /Library/Java/JavaVirtualMachines/jdk1.8.0_251.jdk/Contents/Home/bin/java -Xmx256m -Djava.net.preferIPv4Stack=true -Dhadoop.log.dir=/Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/logs -Dhadoop.log.file=hadoop.log -Dhadoop.home.dir=/Users/hezepei/app/hadoop-2.6.0-cdh5.16.2 -Dhadoop.id.str=hezepei -Dhadoop.root.logger=INFO,console -Djava.library.path=/Users/hezepei/app/hadoop-2.6.0-cdh5.16.2/lib/native -Dhadoop.policy.file=hadoop-policy.xml -Djava.net.preferIPv4Stack=true -Xmx512m -Dhadoop.security.logger=INFO,NullAppender org.apache.hadoop.util.RunJar /Users/hezepei/app/hive/lib/hive-service-1.1.0-cdh5.16.2.jar org.apache.hive.service.server.HiveServer2 --hiveconf hive.aux.jars.path=file:///Users/hezepei/app/hive/auxlib/hive-exec-1.1.0-cdh5.16.2-core.jar</span><br><span class="line">  501 63757 62386   0 10:28上午 ttys000    0:00.00 grep 63697</span><br><span class="line"></span><br><span class="line">(base) hezepei@MacBook-Pro ~ % beeline</span><br><span class="line">readlink: illegal option -- f</span><br><span class="line">usage: readlink [-n] [file ...]</span><br><span class="line">Beeline version 1.1.0-cdh5.16.2 by Apache Hive</span><br><span class="line"><span class="meta">beeline&gt;</span><span class="bash"> !connect jdbc:hive2://localhost:10000</span></span><br><span class="line">scan complete in 2ms</span><br><span class="line">Connecting to jdbc:hive2://localhost:10000</span><br><span class="line">Enter username for jdbc:hive2://localhost:10000:</span><br><span class="line">Enter password for jdbc:hive2://localhost:10000:</span><br><span class="line">Connected to: Apache Hive (version 1.1.0-cdh5.16.2)</span><br><span class="line">Driver: Hive JDBC (version 1.1.0-cdh5.16.2)</span><br><span class="line">Transaction isolation: TRANSACTION_REPEATABLE_READ</span><br><span class="line">0: jdbc:hive2://localhost:10000&gt; show databases;</span><br><span class="line">INFO  : Compiling command(queryId=hezepei_20210210102525_df66079f-4fdb-414e-9e7c-f5053d3a31ab): show databases</span><br><span class="line">INFO  : Semantic Analysis Completed</span><br><span class="line">INFO  : Returning Hive schema: Schema(fieldSchemas:[FieldSchema(name:database_name, type:string, comment:from deserializer)], properties:null)</span><br><span class="line">INFO  : Completed compiling command(queryId=hezepei_20210210102525_df66079f-4fdb-414e-9e7c-f5053d3a31ab); Time taken: 0.32 seconds</span><br><span class="line">INFO  : Concurrency mode is disabled, not creating a lock manager</span><br><span class="line">INFO  : Executing command(queryId=hezepei_20210210102525_df66079f-4fdb-414e-9e7c-f5053d3a31ab): show databases</span><br><span class="line">INFO  : Starting task [Stage-0:DDL] in serial mode</span><br><span class="line">INFO  : Completed executing command(queryId=hezepei_20210210102525_df66079f-4fdb-414e-9e7c-f5053d3a31ab); Time taken: 0.043 seconds</span><br><span class="line">INFO  : OK</span><br><span class="line">+----------------+--+</span><br><span class="line">| database_name  |</span><br><span class="line">+----------------+--+</span><br><span class="line">| default        |</span><br><span class="line">+----------------+--+</span><br><span class="line">1 row selected (0.613 seconds)</span><br><span class="line">0: jdbc:hive2://localhost:10000&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-问题解决"><a href="#3-问题解决" class="headerlink" title="3 问题解决"></a>3 问题解决</h3><h4 id="mysql告警处理"><a href="#mysql告警处理" class="headerlink" title="mysql告警处理"></a>mysql告警处理</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">修改前：</span><br><span class="line">&lt;value&gt;jdbc:mysql://localhost:3306/metastore&lt;/value&gt;&lt;!--MySQL地址metastore是元数据库的名称，需要在mysql中创建相同名字的数据库--&gt;</span><br><span class="line"></span><br><span class="line">hive&gt; show tables;</span><br><span class="line">Tue Feb 09 13:56:55 CST 2021 WARN: Establishing SSL connection without server&#x27;s identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn&#x27;t set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to &#x27;false&#x27;. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.</span><br><span class="line"></span><br><span class="line">修改前：</span><br><span class="line">                &lt;value&gt;jdbc:mysql://localhost:3306/metastore?characterEncoding=utf-8&amp;useSSL=true&lt;/value&gt;&lt;!--MySQL地址metastore是元数据库的名称，需要在mysql中创建相同名字的数据库--&gt;</span><br><span class="line"></span><br><span class="line">报错：</span><br><span class="line">	at org.apache.hadoop.util.RunJar.run(RunJar.java:226)</span><br><span class="line">	at org.apache.hadoop.util.RunJar.main(RunJar.java:141)</span><br><span class="line">Exception in thread &quot;main&quot; java.lang.RuntimeException: org.xml.sax.SAXParseException; systemId: file:/Users/hezepei/app/hive-1.1.0-cdh5.16.2/conf/hive-site.xml; lineNumber: 7; columnNumber: 92; The reference to entity &quot;useSSL&quot; must end with the &#x27;;&#x27; delimiter.</span><br><span class="line">	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:2817)</span><br><span class="line">	at org.apache.hadoop.conf.Configuration.loadResources(Configuration.java:2663)</span><br><span class="line">	at org.apache.hadoop.conf.Configuration.getProps(Configuration.java:2559)</span><br><span class="line"></span><br><span class="line">使用amp;转义</span><br><span class="line">修改:</span><br><span class="line">                &lt;value&gt;jdbc:mysql://localhost:3306/metastore?characterEncoding=utf-8&amp;amp;useSSL=true&lt;/value&gt;&lt;!--MySQL地址metastore是元数据库的名称，需要在mysql中创建相同名字的数据库--&gt;</span><br><span class="line">                </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       
 
       
@@ -207,7 +254,7 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
         		</li>
       		
 		</ul>
@@ -263,7 +310,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2018/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2019/11/15/MacOSHive%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -277,18 +324,18 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Ambari集群部署(一)
+          Spark部署
         
       </div>
     </a>
   
   
-    <a href="/2018/11/15/MacOSHive%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hive的安装与配置</div>
+    <a href="/2019/10/14/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hadoop伪分布式集群部署</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -297,15 +344,6 @@ var _hmt = _hmt || [];
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
         
         
     </div>
@@ -318,7 +356,7 @@ var _hmt = _hmt || [];
   
 
   
-  <div id="SOHUCS" sid="MacOS部署Spark" ></div> 
+  <div id="SOHUCS" sid="MacOSHive的安装与配置" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -428,11 +466,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -440,7 +478,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
               </li>
             
             <div class="clearfix"></div>
