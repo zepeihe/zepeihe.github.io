@@ -238,6 +238,347 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-Ambari集群搭建(四)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/11/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E5%9B%9B)/">Ambari集群部署(四)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/11/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E5%9B%9B)/" class="archive-article-date">
+  	<time datetime="2019-04-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Ambari web 页面搭建hadoop集群</strong></p>
+<p>输入admin  admin  后，进入主界面，点击创建集群，并输入集群名称</p>
+<p><img src="/Users/hezepei/blog/source/assets/img/47781561-7019-42f4-98a1-59f093a0e53d.png" alt="img"></p>
+<p>选择HDP版本，用本地下载的版本</p>
+<p><img src="/Users/hezepei/blog/source/assets/img/30914b21-6006-494d-8a38-aef44953ffbc.png" alt="img"></p>
+<p>选择本地库，配置上本地源。先remove，保留redhat7</p>
+        
+          <a class="article-more-a" href="/2019/04/11/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E5%9B%9B)/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ambari</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/11/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E5%9B%9B)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Ambari集群搭建(三)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/29/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%89)/">Ambari集群部署(三)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/29/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%89)/" class="archive-article-date">
+  	<time datetime="2019-03-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>ambari-server 安装</strong></p>
+<h1 id="1-安装基础环境"><a href="#1-安装基础环境" class="headerlink" title="1 安装基础环境"></a>1 安装基础环境</h1><p>1）安装Centos系统</p>
+<p>2）配置网络</p>
+<p>3）配置阿里云 yum 源</p>
+<p>4）执行yum源更新命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum clean all </span><br><span class="line">#服务器的包信息下载到本地电脑缓存起来</span><br><span class="line">yum makecache </span><br><span class="line">yum update -y</span><br></pre></td></tr></table></figure>
+
+<p>5） 安装常用软件</p>
+        
+          <a class="article-more-a" href="/2019/03/29/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%89)/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ambari</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/29/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%89)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Ambari集群搭建(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/">Ambari集群部署(一)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/" class="archive-article-date">
+  	<time datetime="2019-03-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Ambari-介绍"><a href="#1-Ambari-介绍" class="headerlink" title="1 Ambari 介绍"></a>1 Ambari 介绍</h1><p>​    随着 Hadoop 越来越普及，Hadoop生态圈现在发展算是相当繁荣了，而在这些繁荣的背后又是谁在推动的呢？</p>
+<p>​    Hadoop最早是始于Yahoo，但是现在主要是由 HortonWorks 和  Cloudera 这2家公司在维护，大部分的都属于这两家公司，所以现在市面上看到的主要有2个版本：<strong>CDH系列</strong> 和  <strong>社区版</strong> 。</p>
+<p>​    社区版的典型代表是：HDP，这个HDP 可以通过 Ambari 进行安装和管理hadoop集群。</p>
+<h2 id="1-1-什么是Ambari？"><a href="#1-1-什么是Ambari？" class="headerlink" title="1.1 什么是Ambari？"></a>1.1 什么是Ambari？</h2><p>​    Ambari 跟 Hadoop 等开源软件一样，也是 Apache 软件基金会的一个顶级项目。2019年3月为止最新的发布版本是 2.7.3。就 Ambari 的作用来说，就是创建、管理、监视 Hadoop 的集群，但是这里的 Hadoop 是广义，指的是 Hadoop 整个生态圈(例如 Hive，Hbase，Sqoop，Zookeeper 等)，而并不仅是特指 Hadoop。用一句话来说，Ambari 就是为了让 Hadoop 以及相关的大数据软件更容易使用的一个工具。</p>
+        
+          <a class="article-more-a" href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ambari</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Ambari集群搭建(二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%BA%8C)/">Ambari集群部署(二)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%BA%8C)/" class="archive-article-date">
+  	<time datetime="2019-03-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>搭建ambari 本地yum源</strong></p>
+<p>制作本地源是因为在线安装Ambari太慢。制作本地源在主节点上进行。</p>
+<p>ambari版本： Ambari-2.7.3.0</p>
+<h1 id="1-配置HTTP-服务"><a href="#1-配置HTTP-服务" class="headerlink" title="1 配置HTTP 服务"></a>1 配置HTTP 服务</h1><h2 id="1-1-配置HTTP-服务到系统层使其随系统自动启动"><a href="#1-1-配置HTTP-服务到系统层使其随系统自动启动" class="headerlink" title="1.1 配置HTTP 服务到系统层使其随系统自动启动"></a>1.1 配置HTTP 服务到系统层使其随系统自动启动</h2><p>yum install httpd</p>
+<p>chkconfig httpd on</p>
+<p>service httpd start</p>
+<h2 id="1-2-创建-var-www-html-目录"><a href="#1-2-创建-var-www-html-目录" class="headerlink" title="1.2 创建/var/www/html 目录"></a>1.2 创建/var/www/html 目录</h2><p>httpd 是Apache的， 默认http目录</p>
+        
+          <a class="article-more-a" href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%BA%8C)/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ambari</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%BA%8C)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-MacOS部署Spark" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -602,11 +943,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
         		</li>
       		
 		</ul>
@@ -739,7 +1080,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Ambari</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -747,11 +1088,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
