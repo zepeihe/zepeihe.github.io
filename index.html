@@ -6,17 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Leo的博客">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Leo的博客">
+<meta property="og:description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Leo He">
+<meta property="article:tag" content="大数据,Hadoop,Spark,Flink,Hive,Kafka,Kylin,Hbase,Java,Scala,Python,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Leo的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/assets/img/favicon.ico">
@@ -148,31 +151,34 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Hadoop/MacOS搭建Hadoop伪分布式集群" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-MacOSAzkaban部署" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/14/Hadoop/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/">MacOS搭建Hadoop伪分布式集群</a>
+      <a class="article-title" href="/2018/11/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/">Azkaban部署</a>
     </h1>
   
 
         
-        <a href="/2018/12/14/Hadoop/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" class="archive-article-date">
-  	<time datetime="2018-12-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-14</time>
+        <a href="/2018/11/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/" class="archive-article-date">
+  	<time datetime="2018-11-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-环境和软件版本说明"><a href="#1-环境和软件版本说明" class="headerlink" title="1 环境和软件版本说明"></a>1 环境和软件版本说明</h3><p>系统：MacOS<br>终端：iTerm + zsh<br>JDK：1.8.0_251，dmg<br>ssh：系统默认<br>Hadoop：hadoop2.6.0-cdh5.16.2 hadoop-2.6.0-cdh5.16.2.tar.gz</p>
-<h3 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2 准备工作"></a>2 准备工作</h3><p>在家目录下创建目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir software app tmp data log lib shell sourcecode</span><br></pre></td></tr></table></figure>
+        <h3 id="1-0-编译"><a href="#1-0-编译" class="headerlink" title="1.0 编译"></a>1.0 编译</h3><p>github地址</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/azkaban/azkaban">https://github.com/azkaban/azkaban</a></p>
+<p>官网</p>
+<p><a target="_blank" rel="noopener" href="https://azkaban.github.io/">https://azkaban.github.io/</a></p>
+<p>github下载</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/azkaban/azkaban/releases">https://github.com/azkaban/azkaban/releases</a></p>
         
-          <a class="article-more-a" href="/2018/12/14/Hadoop/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/#more">more >></a>
+          <a class="article-more-a" href="/2018/11/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/#more">more >></a>
         
       
 
@@ -186,11 +192,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Azkaban</a>
         		</li>
       		
 		</ul>
@@ -200,7 +206,251 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/14/Hadoop/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/11/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-MacOS部署Spark" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/">Spark部署</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/" class="archive-article-date">
+  	<time datetime="2018-11-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-环境和软件版本说明"><a href="#1-环境和软件版本说明" class="headerlink" title="1 环境和软件版本说明"></a>1 环境和软件版本说明</h3><p>系统：MacOS<br>终端：iTerm + zsh<br>JDK：1.8.0_251，dmg<br>ssh：系统默认<br>Spark：spark-3.1.1-bin-hadoop2.7.tgz</p>
+        
+          <a class="article-more-a" href="/2018/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-MacOSHive的安装与配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/15/MacOSHive%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">Hive的安装与配置</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/15/MacOSHive%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2018-11-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-环境和软件版本"><a href="#1-环境和软件版本" class="headerlink" title="1 环境和软件版本"></a>1 环境和软件版本</h3><blockquote>
+<p>系统：MacOS<br>终端：iTerm + zsh<br>Hadoop: hadoop-2.6.0-cdh5.16.2.tar.gz<br>下载地址:<a href="https://link.zhihu.com/?target=http://archive.cloudera.com/cdh5/cdh/5/">http://archive.cloudera.com/cdh5/cdh/5/</a><br>Hive：hive-1.1.0-cdh5.16.2.tar.gz<br>下载地址：<a href="https://link.zhihu.com/?target=http://archive.cloudera.com/cdh5/cdh/5/">http://archive.cloudera.com/cdh5/cdh/5/</a><br>MySQL：5.7.11 dmg镜像<br>下载地址：<a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2018/11/15/MacOSHive%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/15/MacOSHive%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-MacOS搭建Hadoop伪分布式集群" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/14/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/">Hadoop伪分布式集群部署</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/14/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" class="archive-article-date">
+  	<time datetime="2018-10-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-环境和软件版本说明"><a href="#1-环境和软件版本说明" class="headerlink" title="1 环境和软件版本说明"></a>1 环境和软件版本说明</h3><p>系统：MacOS<br>终端：iTerm + zsh<br>JDK：1.8.0_251，dmg<br>ssh：系统默认<br>Hadoop：hadoop2.6.0-cdh5.16.2 hadoop-2.6.0-cdh5.16.2.tar.gz</p>
+<h3 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2 准备工作"></a>2 准备工作</h3><p>在家目录下创建目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir software app tmp data log lib shell sourcecode</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2018/10/14/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/14/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/">展开全文 >></a>
         </p>
       
 
@@ -350,11 +600,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
         		</li>
       		
 		</ul>
@@ -404,7 +654,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 John Doe
+    		&copy; 2021 Leo He
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -483,11 +733,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color5">集群搭建</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -499,7 +749,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">集群搭建</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
             
             <div class="clearfix"></div>
