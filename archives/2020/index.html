@@ -6,20 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Azkaban部署 | Leo的博客</title>
+  <title>Archives: 2020 | Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.0 编译github地址 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban 官网 https:&#x2F;&#x2F;azkaban.github.io&#x2F; github下载 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban&#x2F;releases">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Azkaban部署">
-<meta property="og:url" content="http://example.com/2018/11/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/index.html">
+  <meta name="description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Leo的博客">
+<meta property="og:url" content="http://example.com/archives/2020/index.html">
 <meta property="og:site_name" content="Leo的博客">
-<meta property="og:description" content="1.0 编译github地址 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban 官网 https:&#x2F;&#x2F;azkaban.github.io&#x2F; github下载 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban&#x2F;releases">
+<meta property="og:description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2018-11-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-15T10:01:19.781Z">
 <meta property="article:author" content="Leo He">
-<meta property="article:tag" content="集群搭建">
-<meta property="article:tag" content="Azkaban">
+<meta property="article:tag" content="大数据,Hadoop,Spark,Flink,Hive,Kafka,Kylin,Hbase,Java,Scala,Python,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Leo的博客" type="application/atom+xml">
@@ -152,176 +149,36 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MacOSAzkaban部署" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Azkaban部署
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/07/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/" class="archive-article-date">
+  	<time datetime="2020-07-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-20</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/07/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/">Azkaban部署</a>
     </h1>
   
 
-        
-        <a href="/2018/11/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/" class="archive-article-date">
-  	<time datetime="2018-11-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-0-编译"><a href="#1-0-编译" class="headerlink" title="1.0 编译"></a>1.0 编译</h3><p>github地址</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/azkaban/azkaban">https://github.com/azkaban/azkaban</a></p>
-<p>官网</p>
-<p><a target="_blank" rel="noopener" href="https://azkaban.github.io/">https://azkaban.github.io/</a></p>
-<p>github下载</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/azkaban/azkaban/releases">https://github.com/azkaban/azkaban/releases</a></p>
-<span id="more"></span>
-<p>解压出源码</p>
-<p>hezepei@MacBook-Pro software % tar -xzvf azkaban-3.90.0.tar.gz -C ../sourcecode/</p>
-<p>单机部署方式</p>
-<p>azkaban-solo-server</p>
-<p>多节点部署</p>
-<p>azkaban-exec-server</p>
-<p>azkaban-web-server</p>
-<p>编译</p>
-<p>hezepei@MacBook-Pro azkaban-3.90.0 % ./gradlew clean &amp;&amp; ./gradlew installDist -x test</p>
-<p>为了编译加速，修改指定手动下载的gradle-4.6-all.zip，将包放到当前目录下</p>
-<p>下载地址: <a target="_blank" rel="noopener" href="https://services.gradle.org/distributions/">https://services.gradle.org/distributions/</a></p>
-<p>/Users/hezepei/sourcecode/azkaban-3.90.0/gradle/wrapper/gradle-wrapper.properties</p>
-<p>distributionUrl=https://services.gradle.org/distributions/gradle-4.6-all.zip</p>
-<p>修改为</p>
-<p>distributionUrl=./gradle-4.6-all.zip</p>
-<p>编译成功显示：</p>
-<p>Download <a target="_blank" rel="noopener" href="https://repo.maven.apache.org/maven2/com/h2database/h2/1.4.193/h2-1.4.193.pom">https://repo.maven.apache.org/maven2/com/h2database/h2/1.4.193/h2-1.4.193.pom</a></p>
-<p>Download <a target="_blank" rel="noopener" href="https://repo.maven.apache.org/maven2/com/h2database/h2/1.4.193/h2-1.4.193.jar">https://repo.maven.apache.org/maven2/com/h2database/h2/1.4.193/h2-1.4.193.jar</a></p>
-<p>BUILD SUCCESSFUL in 3m 27s</p>
-<p>55 actionable tasks: 55 executed</p>
-<h3 id="2-0-部署"><a href="#2-0-部署" class="headerlink" title="2.0 部署"></a>2.0 部署</h3><p>把编译得到的二进制文件压缩</p>
-<p>hezepei@MacBook-Pro install % tar -czvf azkaban-solo-server.tar.gz azkaban-solo-server</p>
-<p>解压</p>
-<p>hezepei@MacBook-Pro install % tar -xzvf ~/software/azkaban-solo-server.tar.gz -C ~/app</p>
-<p>2.1 修改配置文件</p>
-<p>/Users/hezepei/app/azkaban-solo-server/conf</p>
-<p>rwxr-xr-x 1 hezepei staff 1873 5 10 11:18 azkaban.properties*</p>
-<p>-rwxr-xr-x 1 hezepei staff  267 5 10 11:18 azkaban-users.xml*</p>
-<p>azkaban.properties</p>
-<p>azkaban.name=leo</p>
-<p>azkaban.label=leo-azkaban</p>
-<p>#时区修改</p>
-<p>default.timezone.id=Asia/Shanghai</p>
-<p>#页面端口</p>
-<p>jetty.port=8081</p>
-<h3 id="3-0-启动"><a href="#3-0-启动" class="headerlink" title="3.0 启动"></a>3.0 启动</h3><p>hezepei@MacBook-Pro azkaban-solo-server % bin/start-solo.sh</p>
-<p>hezepei@MacBook-Pro azkaban-solo-server %</p>
-<p>访问：</p>
-<p><a target="_blank" rel="noopener" href="http://localhost:8081/">http://localhost:8081/</a></p>
-<p>账号azkaban密码azkaban</p>
-<p>hezepei@MacBook-Pro azkaban-solo-server % jps</p>
-<p>768 RemoteMavenServer36</p>
-<p>2243 NodeManager</p>
-<p>1898 NameNode</p>
-<p>2062 SecondaryNameNode</p>
-<p>13938 AzkabanSingleServer</p>
-<p>7058 RemoteMavenServer36</p>
-<p>1971 DataNode</p>
-<p>10228 Launcher</p>
-<p>13940 Jps</p>
-<p>2165 ResourceManager</p>
-<p>379</p>
-<p>13436 GradleDaemon</p>
-<p>13087 MainApp</p>
-<p>关闭：</p>
-<p>hezepei@MacBook-Pro azkaban-solo-server % bin/shutdown-solo.sh</p>
-<p>Killing solo-server. [pid: 13897], attempt: 1</p>
-<p>shutdown succeeded</p>
-<p>hezepei@MacBook-Pro azkaban-solo-server %</p>
-<h3 id="4-0-创建工作流"><a href="#4-0-创建工作流" class="headerlink" title="4.0 创建工作流"></a>4.0 创建工作流</h3><p>文档参考：<a target="_blank" rel="noopener" href="https://azkaban.readthedocs.io/en/latest/createFlows.html">https://azkaban.readthedocs.io/en/latest/createFlows.html</a></p>
-<p>Step 1:</p>
-<p>创建文件 flow20.project</p>
-<p>内容</p>
-<p>azkaban-flow-version: 2.0</p>
-<p>Step 2:</p>
-<p>创建文件 basic.flow</p>
-<p>basic名字可以自定义</p>
-<p>内容</p>
-<p>nodes:</p>
-<p> - name: jobA</p>
-<p>  type: command</p>
-<p>  config:</p>
-<p>   command: echo “This is an Leo text.”</p>
-<p>Step 3:</p>
-<p>打包命令：</p>
-<p>hezepei@MacBook-Pro azkaban flow % zip -r Leo-test.zip flow20.project basic.flow</p>
-<p>hezepei@MacBook-Pro azkaban flow % ll</p>
-<p>total 24</p>
-<p>drwxr-xr-x 4 hezepei staff 128 5 10 11:41 ../</p>
-<p>-rw-r–r– 1 hezepei staff  25 5 10 11:42 flow20.project</p>
-<p>-rw-r–r– 1 hezepei staff  94 5 10 11:46 basic.flow</p>
-<p>-rw-r–r– 1 hezepei staff 430 5 10 11:47 Leo-test.zip</p>
-<p>Step 4:</p>
-<p>上传包到UI</p>
-<p>执行成功UI日志：</p>
-<p>Flow log</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Assigned executor : localhost:12321</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Running execid:1 flow:basic project:1 version:1</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Updating initial flow directory.</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Fetching job and shared properties.</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Starting flows</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Running flow ‘basic’.</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Configuring Azkaban metrics tracking for jobrunner object</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Submitting job ‘jobA’ to run.</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Log file path for job: jobA is: /Users/hezepei/app/azkaban-solo-server/executions/1/_job.1.jobA.log</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Created file appender for job jobA</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Attached file appender for job jobA</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Job Started: jobA</p>
-<p>11-20-2018 11:49:23 CST basic INFO - No attachment file for job jobA written.</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Job jobA finished with status SUCCEEDED in 0 seconds</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Flow ‘basic’ is set to SUCCEEDED in 0 seconds</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Finishing up flow. Awaiting Termination</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Finished Flow</p>
-<p>11-20-2018 11:49:23 CST basic INFO - Setting end time for flow 1 to 1620618563706</p>
-<p>任务依赖的flow</p>
-<p>dependencies.flow</p>
-<p>nodes:</p>
-<p> - name: jobC</p>
-<p>  type: noop</p>
-<p>  # jobC depends on jobA and jobB</p>
-<p>  dependsOn:</p>
-<p>   - jobA</p>
-<p>   - jobB</p>
-<p> - name: jobA</p>
-<p>  type: command</p>
-<p>  config:</p>
-<p>   command: echo “This is an Leo text.”</p>
-<p> - name: jobB</p>
-<p>  type: command</p>
-<p>  config:</p>
-<p>   command: pwd</p>
-<p>注意：文件内容严格按照yaml格式。</p>
-<p>附加：</p>
-<p>1.0 az数据库使用mysql存储元数据</p>
-<p>mysql&gt; CREATE DATABASE azkaban;</p>
-<p>mysql&gt; CREATE USER ‘azkaban’@’%’ IDENTIFIED BY ‘123456’;</p>
-<p>mysql&gt; GRANT SELECT,INSERT,UPDATE,DELETE ON azkaban.* to ‘<azkaban>‘@’%’ WITH GRANT OPTION;</p>
-<p>生产环境mysql配置修改，如果任务依赖多内存不够可能会展示不出来</p>
-<p>/etc/my.cnf</p>
-<p>[mysqld]</p>
-<p>…</p>
-<p>max_allowed_packet=1024M</p>
-<p>$ sudo /sbin/service mysqld restart</p>
-<p>初始化azkaban 的数据库 </p>
-<p>source sql</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -337,116 +194,19 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2018/11/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
   
   
-    <a href="/2018/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spark部署</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-  <div id="SOHUCS" sid="MacOSAzkaban部署" ></div> 
-<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
-<script type="text/javascript">
-    window.changyan.api.config({
-        appid: "cysX3aGWt",
-        conf: "prod_1dcda447175aada96edcdb7e412338fa"
-    });
-</script>
-</script>
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -469,8 +229,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>谈谈OAuth1,OAuth2异同 | Leo的博客</title>
+  <title>Azkaban部署 | Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##一、写在前面在收集资料时，我查询和学习了许多介绍OAuth的文章，这些文章有好有坏，但大多是从个例出发。因此我想从官方文档出发，结合在stackoverflow上的一些讨论，一并整理一下。整理的内容分为OAuth1.0a和OAuth2两部分。  OAuth 1.0a：One Leg -&gt;Two Leg -&gt; Three LeggedOAuth 2:Two Leg -&gt;Thre">
+  <meta name="description" content="1.0 编译github地址 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban 官网 https:&#x2F;&#x2F;azkaban.github.io&#x2F; github下载 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban&#x2F;releases 解压出源码 hezepei@MacBook-Pro software % tar -xzvf azkaban-3.90.0.tar.g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="谈谈OAuth1,OAuth2异同">
-<meta property="og:url" content="http://example.com/2013/08/11/brief-oauth/index.html">
+<meta property="og:title" content="Azkaban部署">
+<meta property="og:url" content="http://example.com/2020/07/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="Leo的博客">
-<meta property="og:description" content="##一、写在前面在收集资料时，我查询和学习了许多介绍OAuth的文章，这些文章有好有坏，但大多是从个例出发。因此我想从官方文档出发，结合在stackoverflow上的一些讨论，一并整理一下。整理的内容分为OAuth1.0a和OAuth2两部分。  OAuth 1.0a：One Leg -&gt;Two Leg -&gt; Three LeggedOAuth 2:Two Leg -&gt;Thre">
+<meta property="og:description" content="1.0 编译github地址 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban 官网 https:&#x2F;&#x2F;azkaban.github.io&#x2F; github下载 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban&#x2F;releases 解压出源码 hezepei@MacBook-Pro software % tar -xzvf azkaban-3.90.0.tar.g">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2013-08-11T02:55:00.000Z">
-<meta property="article:modified_time" content="2021-05-15T10:07:10.591Z">
+<meta property="article:published_time" content="2020-07-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-15T15:23:33.576Z">
 <meta property="article:author" content="Leo He">
-<meta property="article:tag" content="web">
+<meta property="article:tag" content="集群搭建">
+<meta property="article:tag" content="Azkaban">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Leo的博客" type="application/atom+xml">
@@ -151,229 +152,103 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-brief-oauth" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MacOSAzkaban部署" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      谈谈OAuth1,OAuth2异同
+      Azkaban部署
     </h1>
   
 
         
-        <a href="/2013/08/11/brief-oauth/" class="archive-article-date">
-  	<time datetime="2013-08-11T02:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2013-08-11</time>
+        <a href="/2020/07/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/" class="archive-article-date">
+  	<time datetime="2020-07-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##<strong>一、写在前面</strong><br>在收集资料时，我查询和学习了许多介绍OAuth的文章，这些文章有好有坏，但大多是从个例出发。因此我想从官方文档出发，结合在stackoverflow上的一些讨论，一并整理一下。整理的内容分为OAuth1.0a和OAuth2两部分。</p>
-<blockquote>
-<p>OAuth 1.0a：One Leg -&gt;Two Leg -&gt; Three Legged<br>OAuth 2:Two Leg -&gt;Three Legged (附：Refresh Token的方式)</p>
-</blockquote>
-<p>这两种模式都是按箭头从左往右安全性递增，其实现也会相对复杂。关于官方的这种leg（腿？）的说法，在中文翻译中比较少有文章提及。下面分别来介绍OAuth的这5种授权流程。</p>
+        <h3 id="1-0-编译"><a href="#1-0-编译" class="headerlink" title="1.0 编译"></a>1.0 编译</h3><p>github地址</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/azkaban/azkaban">https://github.com/azkaban/azkaban</a></p>
+<p>官网</p>
+<p><a target="_blank" rel="noopener" href="https://azkaban.github.io/">https://azkaban.github.io/</a></p>
+<p>github下载</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/azkaban/azkaban/releases">https://github.com/azkaban/azkaban/releases</a></p>
+<p>解压出源码</p>
+<p>hezepei@MacBook-Pro software % tar -xzvf azkaban-3.90.0.tar.gz -C ../sourcecode/</p>
 <span id="more"></span>
-<p>##<strong>二、OAuth1.0a</strong><br><strong>2.1 OAuth 1.0a (One Leg)</strong></p>
-<ol>
-<li>应用给服务器发送一个签名请求，附带以下参数：           <ul>
-<li>oauth_token Empty String             </li>
-<li>oauth_consumer_key                  </li>
-<li>oauth_timestamp                   </li>
-<li>oauth_nonce                    </li>
-<li>oauth_signature                  </li>
-<li>oauth_signature_method              </li>
-<li>oauth_version Optional                  </li>
+
+<p>单机部署方式</p>
+<p>azkaban-solo-server</p>
+<p>多节点部署</p>
+<p>azkaban-exec-server</p>
+<p>azkaban-web-server</p>
+<p>编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">hezepei@MacBook-Pro azkaban-3.90.0 % ./gradlew clean &amp;&amp; ./gradlew installDist -x test</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">为了编译加速，修改指定手动下载的gradle-4.6-all.zip，将包放到当前目录下</span><br><span class="line"></span><br><span class="line">下载地址: https://services.gradle.org/distributions/</span><br><span class="line"></span><br><span class="line">/Users/hezepei/sourcecode/azkaban-3.90.0/gradle/wrapper/gradle-wrapper.properties</span><br><span class="line"></span><br><span class="line">distributionUrl=https\://services.gradle.org/distributions/gradle-4.6-all.zip</span><br><span class="line"></span><br><span class="line">修改为</span><br><span class="line"></span><br><span class="line">distributionUrl=./gradle-4.6-all.zip</span><br><span class="line"></span><br><span class="line">编译成功显示：</span><br><span class="line"></span><br><span class="line">Download https://repo.maven.apache.org/maven2/com/h2database/h2/1.4.193/h2-1.4.193.pom</span><br><span class="line"></span><br><span class="line">Download https://repo.maven.apache.org/maven2/com/h2database/h2/1.4.193/h2-1.4.193.jar</span><br><span class="line"></span><br><span class="line">BUILD SUCCESSFUL in 3m 27s</span><br><span class="line"></span><br><span class="line">55 actionable tasks: 55 executed</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-0-部署"><a href="#2-0-部署" class="headerlink" title="2.0 部署"></a>2.0 部署</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">把编译得到的二进制文件压缩</span><br><span class="line"></span><br><span class="line">hezepei@MacBook-Pro install % tar -czvf azkaban-solo-server.tar.gz azkaban-solo-server</span><br><span class="line"></span><br><span class="line">解压</span><br><span class="line"></span><br><span class="line">hezepei@MacBook-Pro install % tar -xzvf ~/software/azkaban-solo-server.tar.gz -C ~/app</span><br><span class="line"></span><br><span class="line">2.1 修改配置文件</span><br><span class="line"></span><br><span class="line">/Users/hezepei/app/azkaban-solo-server/conf</span><br><span class="line"></span><br><span class="line">rwxr-xr-x 1 hezepei staff 1873 5 10 11:18 azkaban.properties*</span><br><span class="line"></span><br><span class="line">-rwxr-xr-x 1 hezepei staff  267 5 10 11:18 azkaban-users.xml*</span><br><span class="line"></span><br><span class="line">azkaban.properties</span><br><span class="line"></span><br><span class="line">azkaban.name=leo</span><br><span class="line"></span><br><span class="line">azkaban.label=leo-azkaban</span><br><span class="line"></span><br><span class="line">\#时区修改</span><br><span class="line"></span><br><span class="line">default.timezone.id=Asia/Shanghai</span><br><span class="line"></span><br><span class="line">\#页面端口</span><br><span class="line"></span><br><span class="line">jetty.port=8081</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-0-启动"><a href="#3-0-启动" class="headerlink" title="3.0 启动"></a>3.0 启动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">hezepei@MacBook-Pro azkaban-solo-server % bin/start-solo.sh</span><br><span class="line"></span><br><span class="line">hezepei@MacBook-Pro azkaban-solo-server %</span><br><span class="line"></span><br><span class="line">访问：</span><br><span class="line"></span><br><span class="line">http://localhost:8081/</span><br><span class="line"></span><br><span class="line">账号azkaban密码azkaban</span><br><span class="line"></span><br><span class="line">hezepei@MacBook-Pro azkaban-solo-server % jps</span><br><span class="line"></span><br><span class="line">768 RemoteMavenServer36</span><br><span class="line"></span><br><span class="line">2243 NodeManager</span><br><span class="line"></span><br><span class="line">1898 NameNode</span><br><span class="line"></span><br><span class="line">2062 SecondaryNameNode</span><br><span class="line"></span><br><span class="line">13938 AzkabanSingleServer</span><br><span class="line"></span><br><span class="line">7058 RemoteMavenServer36</span><br><span class="line"></span><br><span class="line">1971 DataNode</span><br><span class="line"></span><br><span class="line">10228 Launcher</span><br><span class="line"></span><br><span class="line">13940 Jps</span><br><span class="line"></span><br><span class="line">2165 ResourceManager</span><br><span class="line"></span><br><span class="line">379</span><br><span class="line"></span><br><span class="line">13436 GradleDaemon</span><br><span class="line"></span><br><span class="line">13087 MainApp</span><br><span class="line"></span><br><span class="line">关闭：</span><br><span class="line"></span><br><span class="line">hezepei@MacBook-Pro azkaban-solo-server % bin/shutdown-solo.sh</span><br><span class="line"></span><br><span class="line">Killing solo-server. [pid: 13897], attempt: 1</span><br><span class="line"></span><br><span class="line">shutdown succeeded</span><br><span class="line"></span><br><span class="line">hezepei@MacBook-Pro azkaban-solo-server %</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-0-创建工作流"><a href="#4-0-创建工作流" class="headerlink" title="4.0 创建工作流"></a>4.0 创建工作流</h3><p>文档参考：<a target="_blank" rel="noopener" href="https://azkaban.readthedocs.io/en/latest/createFlows.html">https://azkaban.readthedocs.io/en/latest/createFlows.html</a></p>
+<ul>
+<li>Step 1:</li>
 </ul>
-</li>
-<li>服务验证并授予对资源的访问                 </li>
-<li>应用程序利用请求的资源                </li>
-</ol>
-<p><strong>2.2 OAuth 1.0a (Two Legs)</strong></p>
-<ol>
-<li>应用发送一个签名请求，以获取 Request Token：                 <ul>
-<li>oauth_consumer_key                          </li>
-<li>oauth_timestamp                     </li>
-<li>oauth_nonce                        </li>
-<li>oauth_signature                  </li>
-<li>oauth_signature_method                       </li>
-<li>oauth_version Optional                      </li>
+<p>创建文件 flow20.project</p>
+<p>内容</p>
+<p>azkaban-flow-version: 2.0</p>
+<ul>
+<li>Step 2:</li>
 </ul>
-</li>
-<li>服务器返回Request Token：                   <ul>
-<li>oauth_token                    </li>
-<li>oauth_token_secret                  </li>
-<li>Additional Parameters / Arguments                   </li>
+<p>创建文件 basic.flow</p>
+<p>basic名字可以自定义</p>
+<p>内容</p>
+<p>nodes:</p>
+<p> - name: jobA</p>
+<p>  type: command</p>
+<p>  config:</p>
+<p>   command: echo “This is an Leo text.”</p>
+<ul>
+<li>Step 3:</li>
 </ul>
-</li>
-<li>发送签名请求，用Request Token换取Access Token                      <ul>
-<li>oauth_token Request Token                    </li>
-<li>oauth_consumer_key                   </li>
-<li>oauth_nonce                 </li>
-<li>oauth_signature                      </li>
-<li>oauth_signature_method                    </li>
-<li>oauth_version                           </li>
+<p>打包命令：</p>
+<p>hezepei@MacBook-Pro azkaban flow % zip -r Leo-test.zip flow20.project basic.flow</p>
+<p>hezepei@MacBook-Pro azkaban flow % ll</p>
+<p>total 24</p>
+<p>drwxr-xr-x 4 hezepei staff 128 5 10 11:41 ../</p>
+<p>-rw-r–r– 1 hezepei staff  25 5 10 11:42 flow20.project</p>
+<p>-rw-r–r– 1 hezepei staff  94 5 10 11:46 basic.flow</p>
+<p>-rw-r–r– 1 hezepei staff 430 5 10 11:47 Leo-test.zip</p>
+<ul>
+<li>Step 4:</li>
 </ul>
-</li>
-<li>服务器返回Access Token和Token Secret    </li>
-<li>应用通过Access Token和Token Secret利用请求的资源</li>
-</ol>
-<p><strong>2.3 OAuth 1.0a (Three Legged)</strong></p>
-<ol>
-<li>应用发送一个签名请求，以获取 Request Token：                <ul>
-<li>oauth_consumer_key                       </li>
-<li>oauth_timestamp                       </li>
-<li>oauth_nonce                       </li>
-<li>oauth_signature                       </li>
-<li>oauth_signature_method                       </li>
-<li>oauth_version Optional                       </li>
-</ul>
-</li>
-<li>服务器返回Request Token：                       <ul>
-<li>oauth_token                       </li>
-<li>oauth_token_secret                       </li>
-<li>oauth_callback_confirmed                       </li>
-<li>… Additional Parameters / Arguments                       </li>
-</ul>
-</li>
-<li>发送给用户授权的URL                       <ul>
-<li>oauth_token                       </li>
-</ul>
-</li>
-<li>提示用户进行授权                       </li>
-<li>用户进行授权                       </li>
-<li>授权结束后返回应用，附带上：                       <ul>
-<li>oauth_token                       </li>
-<li>oauth_verifier                       </li>
-</ul>
-</li>
-<li>发送签名请求，用Request Token换取Access Token                       <ul>
-<li>oauth_token Request Token                       </li>
-<li>oauth_consumer_key                       </li>
-<li>oauth_nonce                       </li>
-<li>oauth_signature                       </li>
-<li>oauth_signature_method                       </li>
-<li>oauth_version                       </li>
-<li>oauth_verifier                       </li>
-</ul>
-</li>
-<li>服务器返回Access Token和Token Secret                       </li>
-<li>应用通过Access Token和Token Secret利用请求的资源                       </li>
-</ol>
-<p>##<strong>三、OAuth2</strong>         </p>
-<p>** 3.1 OAuth 2 (Two Legged)**</p>
-<p>3.1.1 客户端凭据方式              </p>
-<ol>
-<li>应用发送请求到服务器：                   <ul>
-<li>grant_type = client_credentials<br>如果没有使用Authorization（Authorization: Basic Base64(client_id:client_secret)） 的header，必须附带参数为：                   </li>
-<li>client_id                   </li>
-<li>client_secret                   </li>
-</ul>
-</li>
-<li>服务器以Access Token回应                   <ul>
-<li>access_token                   </li>
-<li>expires_in                   </li>
-<li>token_type                   </li>
-</ul>
-</li>
-</ol>
-<p>3.1.2 隐式授予方式               </p>
-<ol>
-<li>应用发送请求到服务器：                                                <ul>
-<li>response_type = token                      </li>
-<li>redirect_uri This is a server-side Redirection URI hosted by the provider or yourself.                      </li>
-<li>scope                      </li>
-<li>state Optional                      </li>
-<li>client_id                      </li>
-</ul>
-</li>
-<li>用户可根据需要授权。                      <ul>
-<li>username                      </li>
-<li>password                      </li>
-</ul>
-</li>
-<li>服务器将响应包含access_token在内的redirect_uri                      </li>
-<li>应用程序跳转至redirect_uri                      </li>
-<li>redirect_uri将响应一段脚本或HTML片段。响应的脚本或HTML片段包含参数access_token，还有您可能需要的任何其他参数。                  </li>
-</ol>
-<p>3.1.3 资源所有者密码方式                  </p>
-<ol>
-<li>应用向资源所有者请求凭证                   <ul>
-<li>username                   </li>
-<li>password                   </li>
-</ul>
-</li>
-<li>应用使用凭证，向服务器发送请求                   <ul>
-<li>grant_type = password                   </li>
-<li>username                   </li>
-<li>password<br>url看起来会像这样：grant_type=password&amp;username=my_username&amp;password=my_password<br>如果你没有使用Authorization的header，必须附带上参数：                   </li>
-<li>client_id                   </li>
-<li>client_secret<br>url看起来会像是：<br>grant_type=password&amp;username=my_username&amp;password=my_password&amp;client_id=random_string&amp;client_secret=random_secret                   </li>
-</ul>
-</li>
-<li>服务器返回Access Toke                   <ul>
-<li>access_token                   </li>
-<li>expires_in                   </li>
-<li>token_type                   </li>
-</ul>
-</li>
-</ol>
-<p>** 3.2 OAuth 2 (Three Legged) **</p>
-<ol>
-<li>应用重定向用户到授权服务：                    <ul>
-<li>client_id                    </li>
-<li>redirect_uri                    </li>
-<li>response_type                    </li>
-<li>state Optional; Unique identifier to protect against CSRF                    </li>
-<li>scope Optional; what data your application can access.<br>url看起来会像是：<br>oauth_service/login/oauth/authorize?client_id=3MVG9lKcPoNINVB&amp;redirect_uri=<a target="_blank" rel="noopener" href="http://localhost/oauth/code_callback&amp;scope=user">http://localhost/oauth/code_callback&amp;scope=user</a>                    </li>
-</ul>
-</li>
-<li>用户登录服务器并确认授权给应用                    </li>
-<li>服务器重定向用户到redirect_url ，附带参数：                    <ul>
-<li>code                    </li>
-<li>state                    </li>
-</ul>
-</li>
-<li>应用拿到code，并换取Access Token                    <ul>
-<li>client_id                    </li>
-<li>client_secret                    </li>
-<li>code                    </li>
-<li>redirect_uri Optional;                    </li>
-<li>grant_type = “authorization_code”                    </li>
-</ul>
-</li>
-<li>如果的client_id和client_secret是有效的，服务器将调用一个回调redirect_url，包含ACCESS_TOKEN                    <ul>
-<li>access_token                    </li>
-<li>expires_in                    </li>
-<li>refresh_token                    </li>
-</ul>
-</li>
-<li>应用保存ACCESS_TOKEN，在随后的请求中使用。通常这个值被存储在session或或cookie，需要时作为授权请求的参数。   </li>
-</ol>
-<p>** 3.3 OAuth 2 (Refresh Token 刷新token) **</p>
-<p>在OAuth2中，Token会有过期时间，我们必须去refresh_token，使用其他一些先前获得的参数，生成一个新的token。这是一个容易得多的流程。    </p>
-<ol>
-<li>创建刷新令牌请求                  <ul>
-<li>grant_type = “refresh_token”                      </li>
-<li>scope Optional; Cannot have any new scopes not previously defined.                     </li>
-<li>refresh_token                     </li>
-<li>client_id                     </li>
-<li>client_secret                     </li>
-</ul>
-</li>
-<li>服务验证和响应以下参数：                     <ul>
-<li>access_token                     </li>
-<li>issued_at                     </li>
-</ul>
-</li>
-</ol>
-<p>##<strong>四、stackoverflow上的一些问答</strong>         </p>
-<p><strong>Q</strong>：OpenID和OAuth的区别是什么？<br><strong>A</strong>：OpenID是有关身份验证（即证明你是谁），OAuth有关授权（即授予访问权限），推荐博文：<a target="_blank" rel="noopener" href="http://cakebaker.42dh.com/2008/04/01/openid-versus-oauth-from-the-users-perspective/">从用户的角度来看OpenID和OAuth</a>                    </p>
-<p><strong>Q</strong>：OAuth2与OAuth1不同的地方是？有人可以简单的解释的OAuth2和OAuth1之间的区别吗？ OAuth1现在已经过时，应实施的OAuth2？我没有看到许多实现的OAuth2，大多数仍在使用OAuth，这让我怀疑的OAuth2的准备使用。是吗？<br><strong>A</strong>：OAuth2能更好地支持不是基于浏览器的应用。对于不是基于浏览器的应用程序，这是对OAuth的主要挑战。例如，在OAuth1.0，桌面应用或手机应用必须引导用户打开浏览器所需的服务，与服务进行身份验证，并复制令牌从服务返回给应用程序。这里的主要批评是针对用户体验。使用OAuth2.0，可以用新的方式为用户的应用程序获得授权。<br>OAuth2.0不再需要客户端应用程序拥有密钥。这让人回想起老的Twitter认证的API，它并不需要应用得到HMAC哈希令牌和请求字符串。使用OAuth2.0，应用程序可以通过HTTPS获得令牌。<br>OAuth2.0的签名流程简单得多。没有更多的特殊解析，排序，或编码。<br>OAuth2.0的访问令牌是“短命”的。通常情况下，OAuth1.0的访问令牌可以存储一年或一年以上（Twitter从来没有让他们到期）。 OAuth的2.0有刷新令牌的概念。虽然我不能完全肯定这是什么意思，我的猜测是，您的访问令牌可以是短暂存储的（即基于会话），而你可以刷新令牌。你使用刷新令牌获取新的访问令牌，而不是让用户重新授权您的应用程序。<br>最后，OAuth2.0使得负责处理的OAuth请求的服务器和处理用户的授权服务器之间的角色有一个干净的分离。更多信息，在上述的文章中详述。</p>
-<p><strong>Q</strong>：OAuth2服务器群怎么使用state来防范CSRF？<br><strong>A</strong>：state只是一个随机的字符串，可以做这样的事情：$state = md5(uniqid(rand(), TRUE));在session中记录satate，以便稍后你能做验证。一些额外的资料：<a target="_blank" rel="noopener" href="http://tools.ietf.org/html/draft-ietf-oauth-v2-threatmodel-00">OAuth2威胁文件模型</a>，<a target="_blank" rel="noopener" href="http://tools.ietf.org/html/draft-ietf-oauth-v2-26#section-10.12">特别CSRF保护</a>                                    </p>
+<p>上传包到UI</p>
+<p>执行成功UI日志：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">Flow log</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Assigned executor : localhost:12321</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Running execid:1 flow:basic project:1 version:1</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Updating initial flow directory.</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Fetching job and shared properties.</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Starting flows</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Running flow &#x27;basic&#x27;.</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Configuring Azkaban metrics tracking for jobrunner object</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Submitting job &#x27;jobA&#x27; to run.</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Log file path for job: jobA is: /Users/hezepei/app/azkaban-solo-server/executions/1/_job.1.jobA.log</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Created file appender for job jobA</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Attached file appender for job jobA</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Job Started: jobA</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - No attachment file for job jobA written.</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Job jobA finished with status SUCCEEDED in 0 seconds</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Flow &#x27;basic&#x27; is set to SUCCEEDED in 0 seconds</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Finishing up flow. Awaiting Termination</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Finished Flow</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Setting end time for flow 1 to 1620618563706</span><br></pre></td></tr></table></figure>
+
+<p>任务依赖的flow</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">dependencies.flow</span><br><span class="line"></span><br><span class="line">nodes:</span><br><span class="line"></span><br><span class="line"> - name: jobC</span><br><span class="line"></span><br><span class="line">  type: noop</span><br><span class="line"></span><br><span class="line">  # jobC depends on jobA and jobB</span><br><span class="line"></span><br><span class="line">  dependsOn:</span><br><span class="line"></span><br><span class="line">   - jobA</span><br><span class="line"></span><br><span class="line">   - jobB</span><br><span class="line"></span><br><span class="line"> - name: jobA</span><br><span class="line"></span><br><span class="line">  type: command</span><br><span class="line"></span><br><span class="line">  config:</span><br><span class="line"></span><br><span class="line">   command: echo &quot;This is an Leo text.&quot;</span><br><span class="line"></span><br><span class="line"> - name: jobB</span><br><span class="line"></span><br><span class="line">  type: command</span><br><span class="line"></span><br><span class="line">  config:</span><br><span class="line"></span><br><span class="line">   command: pwd</span><br></pre></td></tr></table></figure>
+
+<p>注意：文件内容严格按照yaml格式。</p>
+<hr>
+<p>附加：</p>
+<p>1.0 az数据库使用mysql存储元数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE DATABASE azkaban;</span><br><span class="line"></span><br><span class="line">mysql&gt; CREATE USER &#x27;azkaban&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT SELECT,INSERT,UPDATE,DELETE ON azkaban.* to &#x27;&lt;azkaban&gt;&#x27;@&#x27;%&#x27; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+
+<p><strong>生产环境mysql配置修改，如果任务依赖多内存不够可能会展示不出来</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/etc/my.cnf</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">max_allowed_packet=1024M</span><br><span class="line"></span><br><span class="line">$ sudo /sbin/service mysqld restart</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>初始化azkaban 的数据库<br>source xxx.sql</p>
+</blockquote>
 
       
 
@@ -387,7 +262,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Azkaban</a>
         		</li>
       		
 		</ul>
@@ -443,7 +322,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2013/08/11/brief-oauth/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/07/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -457,18 +336,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/10/14/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Hadoop伪分布式集群部署
-        
-      </div>
-    </a>
   
-  
-    <a href="/2012/12/14/css%E5%AE%9E%E7%8E%B0%E4%B9%9D%E5%AE%AB%E6%A0%BC(%E4%B8%80)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">css实现九宫格(一)</div>
+    <a href="/2018/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spark部署</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -498,7 +368,7 @@ var _hmt = _hmt || [];
   
 
   
-  <div id="SOHUCS" sid="brief-oauth" ></div> 
+  <div id="SOHUCS" sid="MacOSAzkaban部署" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
