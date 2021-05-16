@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Azkaban部署 | Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.0 编译github地址 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban 官网 https:&#x2F;&#x2F;azkaban.github.io&#x2F; github下载 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban&#x2F;releases 解压出源码 hezepei@MacBook-Pro software % tar -xzvf azkaban-3.90.0.tar.g">
+  <meta name="description" content="1.0 编译github地址https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban github下载https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban&#x2F;releases 官网https:&#x2F;&#x2F;azkaban.github.io&#x2F; 解压出源码hezepei@MacBook-Pro software % tar -xzvf azkaban-3.90.0.tar.gz -C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Azkaban部署">
 <meta property="og:url" content="http://example.com/2020/07/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="Leo的博客">
-<meta property="og:description" content="1.0 编译github地址 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban 官网 https:&#x2F;&#x2F;azkaban.github.io&#x2F; github下载 https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban&#x2F;releases 解压出源码 hezepei@MacBook-Pro software % tar -xzvf azkaban-3.90.0.tar.g">
+<meta property="og:description" content="1.0 编译github地址https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban github下载https:&#x2F;&#x2F;github.com&#x2F;azkaban&#x2F;azkaban&#x2F;releases 官网https:&#x2F;&#x2F;azkaban.github.io&#x2F; 解压出源码hezepei@MacBook-Pro software % tar -xzvf azkaban-3.90.0.tar.gz -C">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-15T15:23:33.576Z">
+<meta property="article:modified_time" content="2021-05-16T14:22:38.902Z">
 <meta property="article:author" content="Leo He">
 <meta property="article:tag" content="集群搭建">
 <meta property="article:tag" content="Azkaban">
@@ -172,14 +172,10 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-0-编译"><a href="#1-0-编译" class="headerlink" title="1.0 编译"></a>1.0 编译</h3><p>github地址</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/azkaban/azkaban">https://github.com/azkaban/azkaban</a></p>
-<p>官网</p>
-<p><a target="_blank" rel="noopener" href="https://azkaban.github.io/">https://azkaban.github.io/</a></p>
-<p>github下载</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/azkaban/azkaban/releases">https://github.com/azkaban/azkaban/releases</a></p>
-<p>解压出源码</p>
-<p>hezepei@MacBook-Pro software % tar -xzvf azkaban-3.90.0.tar.gz -C ../sourcecode/</p>
+        <h3 id="1-0-编译"><a href="#1-0-编译" class="headerlink" title="1.0 编译"></a>1.0 编译</h3><p>github地址<br><a target="_blank" rel="noopener" href="https://github.com/azkaban/azkaban">https://github.com/azkaban/azkaban</a></p>
+<p>github下载<br><a target="_blank" rel="noopener" href="https://github.com/azkaban/azkaban/releases">https://github.com/azkaban/azkaban/releases</a></p>
+<p>官网<br><a target="_blank" rel="noopener" href="https://azkaban.github.io/">https://azkaban.github.io/</a></p>
+<p>解压出源码<br>hezepei@MacBook-Pro software % tar -xzvf azkaban-3.90.0.tar.gz -C ../sourcecode/</p>
 <span id="more"></span>
 
 <p>单机部署方式</p>
@@ -232,7 +228,7 @@ var _hmt = _hmt || [];
 </ul>
 <p>上传包到UI</p>
 <p>执行成功UI日志：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">Flow log</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Assigned executor : localhost:12321</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Running execid:1 flow:basic project:1 version:1</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Updating initial flow directory.</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Fetching job and shared properties.</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Starting flows</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Running flow &#x27;basic&#x27;.</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Configuring Azkaban metrics tracking for jobrunner object</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Submitting job &#x27;jobA&#x27; to run.</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Log file path for job: jobA is: /Users/hezepei/app/azkaban-solo-server/executions/1/_job.1.jobA.log</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Created file appender for job jobA</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Attached file appender for job jobA</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Job Started: jobA</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - No attachment file for job jobA written.</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Job jobA finished with status SUCCEEDED in 0 seconds</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Flow &#x27;basic&#x27; is set to SUCCEEDED in 0 seconds</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Finishing up flow. Awaiting Termination</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Finished Flow</span><br><span class="line"></span><br><span class="line">11-20-2018 11:49:23 CST basic INFO - Setting end time for flow 1 to 1620618563706</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">Flow log</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Assigned executor : localhost:12321</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Running execid:1 flow:basic project:1 version:1</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Updating initial flow directory.</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Fetching job and shared properties.</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Starting flows</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Running flow &#x27;basic&#x27;.</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Configuring Azkaban metrics tracking for jobrunner object</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Submitting job &#x27;jobA&#x27; to run.</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Log file path for job: jobA is: /Users/hezepei/app/azkaban-solo-server/executions/1/_job.1.jobA.log</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Created file appender for job jobA</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Attached file appender for job jobA</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Job Started: jobA</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - No attachment file for job jobA written.</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Job jobA finished with status SUCCEEDED in 0 seconds</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Flow &#x27;basic&#x27; is set to SUCCEEDED in 0 seconds</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Finishing up flow. Awaiting Termination</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Finished Flow</span><br><span class="line"></span><br><span class="line">20-07-2020 11:49:23 CST basic INFO - Setting end time for flow 1 to 1620618563706</span><br></pre></td></tr></table></figure>
 
 <p>任务依赖的flow</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">dependencies.flow</span><br><span class="line"></span><br><span class="line">nodes:</span><br><span class="line"></span><br><span class="line"> - name: jobC</span><br><span class="line"></span><br><span class="line">  type: noop</span><br><span class="line"></span><br><span class="line">  # jobC depends on jobA and jobB</span><br><span class="line"></span><br><span class="line">  dependsOn:</span><br><span class="line"></span><br><span class="line">   - jobA</span><br><span class="line"></span><br><span class="line">   - jobB</span><br><span class="line"></span><br><span class="line"> - name: jobA</span><br><span class="line"></span><br><span class="line">  type: command</span><br><span class="line"></span><br><span class="line">  config:</span><br><span class="line"></span><br><span class="line">   command: echo &quot;This is an Leo text.&quot;</span><br><span class="line"></span><br><span class="line"> - name: jobB</span><br><span class="line"></span><br><span class="line">  type: command</span><br><span class="line"></span><br><span class="line">  config:</span><br><span class="line"></span><br><span class="line">   command: pwd</span><br></pre></td></tr></table></figure>
@@ -335,6 +331,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/05/16/Hive%E5%B0%86UDF%E5%87%BD%E6%95%B0%E9%9B%86%E6%88%90%E5%88%B0%E6%BA%90%E7%A0%81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
   
   
     <a href="/2019/11/19/MacOS%E9%83%A8%E7%BD%B2Spark/" id="article-nav-older" class="article-nav-link-wrap">
@@ -469,6 +474,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
               </li>
              
@@ -477,11 +490,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+                <a href="javascript:void(0)" class="js-tag color1">Scala</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Shell</a>
               </li>
             
             <div class="clearfix"></div>
