@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Ambari集群部署(二) | Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="搭建ambari 本地yum源 制作本地源是因为在线安装Ambari太慢。制作本地源在主节点上进行。 ambari版本： Ambari-2.7.3.0 1 配置HTTP 服务1.1 配置HTTP 服务到系统层使其随系统自动启动yum install httpd chkconfig httpd on service httpd start 1.2 创建&#x2F;var&#x2F;www&#x2F;html 目录httpd 是A">
+  <meta name="description" content="搭建ambari 本地yum源 制作本地源是因为在线安装Ambari太慢。制作本地源在主节点上进行。 ambari版本： Ambari-2.7.3.0 1 配置HTTP 服务1.1 配置HTTP 服务到系统层使其随系统自动启动yum install httpd chkconfig httpd on service httpd start">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ambari集群部署(二)">
 <meta property="og:url" content="http://example.com/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%BA%8C)/index.html">
 <meta property="og:site_name" content="Leo的博客">
-<meta property="og:description" content="搭建ambari 本地yum源 制作本地源是因为在线安装Ambari太慢。制作本地源在主节点上进行。 ambari版本： Ambari-2.7.3.0 1 配置HTTP 服务1.1 配置HTTP 服务到系统层使其随系统自动启动yum install httpd chkconfig httpd on service httpd start 1.2 创建&#x2F;var&#x2F;www&#x2F;html 目录httpd 是A">
+<meta property="og:description" content="搭建ambari 本地yum源 制作本地源是因为在线安装Ambari太慢。制作本地源在主节点上进行。 ambari版本： Ambari-2.7.3.0 1 配置HTTP 服务1.1 配置HTTP 服务到系统层使其随系统自动启动yum install httpd chkconfig httpd on service httpd start">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/assets/img/5519e716-6159-41ec-aa6a-0b6195ed8d1d.png">
 <meta property="og:image" content="http://example.com/assets/img/3aeb4a68-f133-4bb4-9ba3-4ac950d6981f.png">
 <meta property="og:image" content="http://example.com/assets/img/7abdc784-88ed-426c-b38f-8372368ba274.png">
 <meta property="article:published_time" content="2019-03-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-15T16:07:31.582Z">
+<meta property="article:modified_time" content="2021-06-29T06:18:15.730Z">
 <meta property="article:author" content="Leo He">
 <meta property="article:tag" content="集群搭建">
 <meta property="article:tag" content="Ambari">
@@ -182,8 +182,9 @@ var _hmt = _hmt || [];
 <h1 id="1-配置HTTP-服务"><a href="#1-配置HTTP-服务" class="headerlink" title="1 配置HTTP 服务"></a>1 配置HTTP 服务</h1><h2 id="1-1-配置HTTP-服务到系统层使其随系统自动启动"><a href="#1-1-配置HTTP-服务到系统层使其随系统自动启动" class="headerlink" title="1.1 配置HTTP 服务到系统层使其随系统自动启动"></a>1.1 配置HTTP 服务到系统层使其随系统自动启动</h2><p>yum install httpd</p>
 <p>chkconfig httpd on</p>
 <p>service httpd start</p>
-<h2 id="1-2-创建-var-www-html-目录"><a href="#1-2-创建-var-www-html-目录" class="headerlink" title="1.2 创建/var/www/html 目录"></a>1.2 创建/var/www/html 目录</h2><p>httpd 是Apache的， 默认http目录</p>
 <span id="more"></span>
+
+<h2 id="1-2-创建-var-www-html-目录"><a href="#1-2-创建-var-www-html-目录" class="headerlink" title="1.2 创建/var/www/html 目录"></a>1.2 创建/var/www/html 目录</h2><p>httpd 是Apache的， 默认http目录</p>
 <h1 id="2-存储库下载"><a href="#2-存储库下载" class="headerlink" title="2 存储库下载"></a>2 存储库下载</h1><p><strong>1）ambari存储库下载，下载地址来源于ambari说明文档</strong></p>
 <p><strong>Ambari 2.7.3存储库</strong></p>
 <p>来源： <a target="_blank" rel="noopener" href="https://docs.hortonworks.com/HDPDocuments/Ambari-2.7.3.0/bk_ambari-installation/content/ambari_repositories.html">https://docs.hortonworks.com/HDPDocuments/Ambari-2.7.3.0/bk_ambari-installation/content/ambari_repositories.html</a></p>
@@ -543,11 +544,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -556,6 +557,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
             
             <div class="clearfix"></div>

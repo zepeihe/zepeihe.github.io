@@ -151,6 +151,160 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Hive源码导入到IDEA中编译" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/09/Hive%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/">Hive源码导入到IDEA中编译</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/09/Hive%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/" class="archive-article-date">
+  	<time datetime="2019-07-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>场景: 在IDEA中运行hive-cli，控制台输入SQL查询</p>
+<h2 id="1-定位hive-cli执行类"><a href="#1-定位hive-cli执行类" class="headerlink" title="1.定位hive-cli执行类"></a>1.定位hive-cli执行类</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">1、查看hive执行命令，路径脚本。找hive执行是找哪个包哪个类。</span><br><span class="line"></span><br><span class="line">1.1、sh -x  hive。查看到hive执行main方法的包是org.apache.hadoop.hive.cli.CliDriver</span><br><span class="line"></span><br><span class="line">+ cli</span><br><span class="line">+ updateCli</span><br><span class="line">+ &#x27;[&#x27; true == true &#x27;]&#x27;</span><br><span class="line">+ CLASS=org.apache.hadoop.hive.cli.CliDriver</span><br><span class="line">+ JAR=&#x27;hive-cli-*.jar&#x27;</span><br><span class="line">+ execHiveCmd org.apache.hadoop.hive.cli.CliDriver &#x27;hive-cli-*.jar&#x27;</span><br><span class="line">+ CLASS=org.apache.hadoop.hive.cli.CliDriver</span><br><span class="line">+ shift</span><br><span class="line">+ &#x27;[&#x27; &#x27;hive-cli-*.jar&#x27; == &#x27;hive-cli-*.jar&#x27; &#x27;]&#x27;</span><br><span class="line">+ JAR=&#x27;hive-cli-*.jar&#x27;</span><br><span class="line">+ shift</span><br><span class="line">+ &#x27;[&#x27; &#x27;!&#x27; -f /Users/hezepei/app/hive/lib/hive-cli-1.1.0-cdh5.16.2.jar &#x27;]&#x27;</span><br><span class="line">+ false</span><br><span class="line">+ exec /Users/hezepei/app/hadoop/bin/hadoop jar /Users/hezepei/app/hive/lib/hive-cli-1.1.0-cdh5.16.2.jar org.apache.hadoop.hive.cli.CliDriver --hiveconf hive.aux.jars.path=file:///Users/hezepei/app/hive/auxlib/hive-exec-1.1.0-cdh5.16.2-core.jar</span><br><span class="line">21/04/02 11:21:25 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line"></span><br><span class="line">Logging initialized using configuration in jar:file:/Users/hezepei/app/hive-1.1.0-cdh5.16.2/lib/hive-common-1.1.0-cdh5.16.2.jar!/hive-log4j.properties</span><br><span class="line">WARNING: Hive CLI is deprecated and migration to Beeline is recommended.</span><br><span class="line">hive&gt;</span><br><span class="line"></span><br><span class="line">再源码中找到此包下这个类CliDriver，找到main()方法执行。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-编译hive源码"><a href="#2-编译hive源码" class="headerlink" title="2.编译hive源码"></a>2.编译hive源码</h2><p>源码编译成功，就能保证hive CliDriver执行能找到相关的依赖。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">hezepei@MacBook-Pro hive-cdh5.16.2-release % mvn clean package -DskipTests -Phadoop-2 -Pdist</span><br><span class="line"></span><br><span class="line">[INFO]</span><br><span class="line">[INFO] --- build-helper-maven-plugin:1.8:attach-artifact (attach-jdbc-driver) @ hive-packaging ---</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Reactor Summary for Hive 1.1.0-cdh5.16.2:</span><br><span class="line">[INFO]</span><br><span class="line">[INFO] Hive ............................................... SUCCESS [  1.340 s]</span><br><span class="line">[INFO] Hive Classifications ............................... SUCCESS [  0.990 s]</span><br><span class="line">[INFO] Hive Shims Common .................................. SUCCESS [  1.257 s]</span><br><span class="line">[INFO] Hive Shims 0.23 .................................... SUCCESS [  1.011 s]</span><br><span class="line">[INFO] Hive Shims Scheduler ............................... SUCCESS [  0.586 s]</span><br><span class="line">[INFO] Hive Shims ......................................... SUCCESS [  0.317 s]</span><br><span class="line">[INFO] Hive Common ........................................ SUCCESS [  3.320 s]</span><br><span class="line">[INFO] Hive Serde ......................................... SUCCESS [  2.379 s]</span><br><span class="line">[INFO] Hive Metastore ..................................... SUCCESS [ 17.147 s]</span><br><span class="line">[INFO] Hive Ant Utilities ................................. SUCCESS [  0.508 s]</span><br><span class="line">[INFO] Spark Remote Client ................................ SUCCESS [  7.397 s]</span><br><span class="line">[INFO] Hive Query Language ................................ SUCCESS [ 44.523 s]</span><br><span class="line">[INFO] Hive Service ....................................... SUCCESS [  6.640 s]</span><br><span class="line">[INFO] Hive Accumulo Handler .............................. SUCCESS [  1.395 s]</span><br><span class="line">[INFO] Hive JDBC .......................................... SUCCESS [ 33.906 s]</span><br><span class="line">[INFO] Hive Beeline ....................................... SUCCESS [  1.556 s]</span><br><span class="line">[INFO] Hive CLI ........................................... SUCCESS [  0.912 s]</span><br><span class="line">[INFO] Hive Contrib ....................................... SUCCESS [  1.347 s]</span><br><span class="line">[INFO] Hive HBase Handler ................................. SUCCESS [  8.456 s]</span><br><span class="line">[INFO] Hive HCatalog ...................................... SUCCESS [  0.200 s]</span><br><span class="line">[INFO] Hive HCatalog Core ................................. SUCCESS [  1.592 s]</span><br><span class="line">[INFO] Hive HCatalog Pig Adapter .......................... SUCCESS [  0.944 s]</span><br><span class="line">[INFO] Hive HCatalog Server Extensions .................... SUCCESS [  0.915 s]</span><br><span class="line">[INFO] Hive HCatalog Webhcat Java Client .................. SUCCESS [  0.890 s]</span><br><span class="line">[INFO] Hive HCatalog Webhcat .............................. SUCCESS [ 28.823 s]</span><br><span class="line">[INFO] Hive HCatalog Streaming ............................ SUCCESS [  1.170 s]</span><br><span class="line">[INFO] Hive HWI ........................................... SUCCESS [  0.673 s]</span><br><span class="line">[INFO] Hive ODBC .......................................... SUCCESS [  0.523 s]</span><br><span class="line">[INFO] Hive Shims Aggregator .............................. SUCCESS [  0.182 s]</span><br><span class="line">[INFO] Hive TestUtils ..................................... SUCCESS [  0.245 s]</span><br><span class="line">[INFO] Hive Packaging ..................................... SUCCESS [ 49.424 s]</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time:  03:40 min</span><br><span class="line">hezepei@MacBook-Pro hive-cdh5.16.2-release %</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mvn -Phadoop-2 是参数激活方式：-P,--activate-profiles &lt;arg&gt;           Comma-delimited list of profiles to activate</span><br><span class="line">idea里直接改pom.xml文件，profile中加上activation</span><br><span class="line"></span><br><span class="line">    &lt;profile&gt;</span><br><span class="line">      &lt;id&gt;hadoop-2&lt;/id&gt;</span><br><span class="line">      &lt;activation&gt;</span><br><span class="line">        &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">      &lt;/activation&gt;</span><br><span class="line">    &lt;/profile&gt;</span><br><span class="line"></span><br><span class="line">改完重新导包，执行main方法，成功。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>编译成功后，在IDEA中启动hive-cli查询成功：</p>
+<p><img src="/assets/img/63260283.png" alt="img"></p>
+<h2 id="3-异常处理"><a href="#3-异常处理" class="headerlink" title="3.异常处理"></a>3.异常处理</h2><p>3.1.执行show tables; 报错，无法实例化元数据相关的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Logging initialized using configuration in file:/Users/hezepei/sourcecode/hive-cdh5.16.2-release/common/target/classes/hive-log4j.properties</span><br><span class="line">WARNING: Hive CLI is deprecated and migration to Beeline is recommended.</span><br><span class="line">hive&gt; show tables;</span><br><span class="line">show tables;</span><br><span class="line">FAILED: SemanticException org.apache.hadoop.hive.ql.metadata.HiveException: java.lang.RuntimeException: Unable to instantiate org.apache.hadoop.hive.ql.metadata.SessionHiveMetaStoreClient</span><br><span class="line">hive&gt; </span><br></pre></td></tr></table></figure>
+
+<p>原因是没有配置连接上hive的mysql元数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">hive-cli模块下的pom添加mysql依赖</span><br><span class="line">  &lt;properties&gt;</span><br><span class="line">    &lt;hive.path.to.root&gt;..&lt;/hive.path.to.root&gt;</span><br><span class="line">    &lt;mysql.version&gt;5.1.47&lt;/mysql.version&gt;</span><br><span class="line">  &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;mysql.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>hive-site.xml 添加mysql相关的连接配置。<br>将mac上部署好的hive的配置文件添加到项目模块下的resource目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;jdbc:mysql://localhost:3306/metastore?characterEncoding=utf-8&amp;amp;useSSL=false&lt;/value&gt;&lt;!--MySQL地址metastore是元数据库的名称，需要在mysql中创建相同名字的数据库--&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;&lt;!--MySQL驱动--&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;root&lt;/value&gt;&lt;!--MySQL用户名--&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;123456&lt;/value&gt;&lt;!--MySQL密码--&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hive.server2.webui.host&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;localhost&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hive.server2.webui.port&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;19990&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hive.metastore.uris&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;thrift://localhost:9083&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hive.auto.convert.join&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<p>3.2.执行报错FAILED: Execution Error, return code -101 from org.apache.hadoop.hive.ql.exec.mr.MapredLocalTask. org/apache/commons/io/IOUtils</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hive-site.xml 添加</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hive.auto.convert.join&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3.3.执行报错FAILED: SemanticException org.apache.hadoop.hive.ql.metadata.HiveException: java.lang.RuntimeException: Unable to instantiate org.apache.hadoop.hive.ql.metadata.SessionHiveMetaStoreClient</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hive-site.xml 添加</span><br><span class="line">&lt;property&gt;</span><br><span class="line">     &lt;name&gt;hive.metastore.uris&lt;/name&gt;</span><br><span class="line">     &lt;value&gt;thrift://localhost:9083&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">并启动：</span><br><span class="line">hive --service metastore &amp;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/09/Hive%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Spark源码导入到IDEA中编译" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/06/Spark%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/">Spark源码导入到IDEA中编译</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/06/Spark%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/" class="archive-article-date">
+  	<time datetime="2019-07-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-下载Spark"><a href="#1-下载Spark" class="headerlink" title="1.下载Spark"></a>1.下载Spark</h2><p>首先从github中下载源码<br>Spark版本2.4.3</p>
+<p>参照官网编译文档：<br><a target="_blank" rel="noopener" href="http://spark.apache.org/docs/latest/building-spark.html">http://spark.apache.org/docs/latest/building-spark.html</a></p>
+        
+          <a class="article-more-a" href="/2019/07/06/Spark%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/06/Spark%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-MacOSAzkaban部署" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -689,7 +843,6 @@ var _hmt = _hmt || [];
 <h1 id="1-配置HTTP-服务"><a href="#1-配置HTTP-服务" class="headerlink" title="1 配置HTTP 服务"></a>1 配置HTTP 服务</h1><h2 id="1-1-配置HTTP-服务到系统层使其随系统自动启动"><a href="#1-1-配置HTTP-服务到系统层使其随系统自动启动" class="headerlink" title="1.1 配置HTTP 服务到系统层使其随系统自动启动"></a>1.1 配置HTTP 服务到系统层使其随系统自动启动</h2><p>yum install httpd</p>
 <p>chkconfig httpd on</p>
 <p>service httpd start</p>
-<h2 id="1-2-创建-var-www-html-目录"><a href="#1-2-创建-var-www-html-目录" class="headerlink" title="1.2 创建/var/www/html 目录"></a>1.2 创建/var/www/html 目录</h2><p>httpd 是Apache的， 默认http目录</p>
         
           <a class="article-more-a" href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%BA%8C)/#more">more >></a>
         
@@ -740,188 +893,9 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-Ambari集群搭建(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/">Ambari集群部署(一)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/" class="archive-article-date">
-  	<time datetime="2019-03-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Ambari-介绍"><a href="#1-Ambari-介绍" class="headerlink" title="1 Ambari 介绍"></a>1 Ambari 介绍</h1><p>​    随着 Hadoop 越来越普及，Hadoop生态圈现在发展算是相当繁荣了，而在这些繁荣的背后又是谁在推动的呢？</p>
-<p>​    Hadoop最早是始于Yahoo，但是现在主要是由 HortonWorks 和  Cloudera 这2家公司在维护，大部分的都属于这两家公司，所以现在市面上看到的主要有2个版本：<strong>CDH系列</strong> 和  <strong>社区版</strong> 。</p>
-<p>​    社区版的典型代表是：HDP，这个HDP 可以通过 Ambari 进行安装和管理hadoop集群。</p>
-<h2 id="1-1-什么是Ambari？"><a href="#1-1-什么是Ambari？" class="headerlink" title="1.1 什么是Ambari？"></a>1.1 什么是Ambari？</h2><p>​    Ambari 跟 Hadoop 等开源软件一样，也是 Apache 软件基金会的一个顶级项目。2019年3月为止最新的发布版本是 2.7.3。就 Ambari 的作用来说，就是创建、管理、监视 Hadoop 的集群，但是这里的 Hadoop 是广义，指的是 Hadoop 整个生态圈(例如 Hive，Hbase，Sqoop，Zookeeper 等)，而并不仅是特指 Hadoop。用一句话来说，Ambari 就是为了让 Hadoop 以及相关的大数据软件更容易使用的一个工具。</p>
-        
-          <a class="article-more-a" href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ambari</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CDH5.16.1部署" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/20/CDH5.16.1%E9%83%A8%E7%BD%B2/">CDH5.16.1部署</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/20/CDH5.16.1%E9%83%A8%E7%BD%B2/" class="archive-article-date">
-  	<time datetime="2019-03-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="⼀-准备⼯作"><a href="#⼀-准备⼯作" class="headerlink" title="⼀.准备⼯作"></a>⼀.准备⼯作</h3><p><strong>1.离线部署主要分为三块:</strong></p>
-<p>a.MySQL离线部署<br>b.CM离线部署<br>c.Parcel⽂件离线源部署</p>
-<p><strong>2.规划</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">节点</th>
-<th align="left">MySQL部署组件</th>
-<th align="left">Parcel⽂件离线源</th>
-<th>CM服务进程</th>
-<th>⼤数据组件</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">hadoop001</td>
-<td align="left">MySQL</td>
-<td align="left">Parcel</td>
-<td>Activity Monitor</td>
-<td>NN RM DN NM</td>
-</tr>
-<tr>
-<td align="left">Hadoop002</td>
-<td align="left"></td>
-<td align="left"></td>
-<td>AlertPublisher EventServer</td>
-<td>DN NM</td>
-</tr>
-<tr>
-<td align="left">hadoop003</td>
-<td align="left"></td>
-<td align="left"></td>
-<td>HostMonitor ServiceMonitor</td>
-<td>DNNM</td>
-</tr>
-</tbody></table>
-        
-          <a class="article-more-a" href="/2019/03/20/CDH5.16.1%E9%83%A8%E7%BD%B2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/20/CDH5.16.1%E9%83%A8%E7%BD%B2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1032,11 +1006,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1045,6 +1019,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
             
             <div class="clearfix"></div>

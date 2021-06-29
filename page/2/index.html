@@ -151,6 +151,526 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Ambari集群搭建(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/">Ambari集群部署(一)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/" class="archive-article-date">
+  	<time datetime="2019-03-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Ambari-介绍"><a href="#1-Ambari-介绍" class="headerlink" title="1 Ambari 介绍"></a>1 Ambari 介绍</h1><p>​    随着 Hadoop 越来越普及，Hadoop生态圈现在发展算是相当繁荣了，而在这些繁荣的背后又是谁在推动的呢？</p>
+<p>​    Hadoop最早是始于Yahoo，但是现在主要是由 HortonWorks 和  Cloudera 这2家公司在维护，大部分的都属于这两家公司，所以现在市面上看到的主要有2个版本：<strong>CDH系列</strong> 和  <strong>社区版</strong> 。</p>
+<p>​    社区版的典型代表是：HDP，这个HDP 可以通过 Ambari 进行安装和管理hadoop集群。</p>
+        
+          <a class="article-more-a" href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ambari</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-CDH5.16.1部署" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/20/CDH5.16.1%E9%83%A8%E7%BD%B2/">CDH5.16.1部署</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/20/CDH5.16.1%E9%83%A8%E7%BD%B2/" class="archive-article-date">
+  	<time datetime="2019-03-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="⼀-准备⼯作"><a href="#⼀-准备⼯作" class="headerlink" title="⼀.准备⼯作"></a>⼀.准备⼯作</h3><p><strong>1.离线部署主要分为三块:</strong></p>
+<p>a.MySQL离线部署<br>b.CM离线部署<br>c.Parcel⽂件离线源部署</p>
+<p><strong>2.规划</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">节点</th>
+<th align="left">MySQL部署组件</th>
+<th align="left">Parcel⽂件离线源</th>
+<th>CM服务进程</th>
+<th>⼤数据组件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">hadoop001</td>
+<td align="left">MySQL</td>
+<td align="left">Parcel</td>
+<td>Activity Monitor</td>
+<td>NN RM DN NM</td>
+</tr>
+<tr>
+<td align="left">Hadoop002</td>
+<td align="left"></td>
+<td align="left"></td>
+<td>AlertPublisher EventServer</td>
+<td>DN NM</td>
+</tr>
+<tr>
+<td align="left">hadoop003</td>
+<td align="left"></td>
+<td align="left"></td>
+<td>HostMonitor ServiceMonitor</td>
+<td>DNNM</td>
+</tr>
+</tbody></table>
+        
+          <a class="article-more-a" href="/2019/03/20/CDH5.16.1%E9%83%A8%E7%BD%B2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/20/CDH5.16.1%E9%83%A8%E7%BD%B2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-把UDF函数集成到Hive源码中" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/15/%E6%8A%8AUDF%E5%87%BD%E6%95%B0%E9%9B%86%E6%88%90%E5%88%B0Hive%E6%BA%90%E7%A0%81%E4%B8%AD/">把UDF函数集成到Hive源码中</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/15/%E6%8A%8AUDF%E5%87%BD%E6%95%B0%E9%9B%86%E6%88%90%E5%88%B0Hive%E6%BA%90%E7%A0%81%E4%B8%AD/" class="archive-article-date">
+  	<time datetime="2019-02-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h2><ol>
+<li>开发两个UDF函数：<br> input：ename<br> UDF1：加上10[可传]以内的前缀 ename ==&gt; 8_ename   add_random_prefix<br> UDF2: 把前缀去掉     8_ename ==&gt; ename     remove_random_prefix<br>select ename, add_random_prefix(ename,10) ename1, remove_random_prefix(add_random_prefix(ename,10)) ename2 from emp;</li>
+<li>把UDF集成到Hive中源码中去</li>
+</ol>
+        
+          <a class="article-more-a" href="/2019/02/15/%E6%8A%8AUDF%E5%87%BD%E6%95%B0%E9%9B%86%E6%88%90%E5%88%B0Hive%E6%BA%90%E7%A0%81%E4%B8%AD/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/15/%E6%8A%8AUDF%E5%87%BD%E6%95%B0%E9%9B%86%E6%88%90%E5%88%B0Hive%E6%BA%90%E7%A0%81%E4%B8%AD/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Hadoop HA原理图示" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/06/Hadoop%20HA%E5%8E%9F%E7%90%86%E5%9B%BE%E7%A4%BA/">Hadoop HA原理图(Yarn HA/HDFS HA)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/06/Hadoop%20HA%E5%8E%9F%E7%90%86%E5%9B%BE%E7%A4%BA/" class="archive-article-date">
+  	<time datetime="2019-02-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-HDFS-HA"><a href="#1-HDFS-HA" class="headerlink" title="1.HDFS HA"></a>1.HDFS HA</h2>
+        
+          <a class="article-more-a" href="/2019/02/06/Hadoop%20HA%E5%8E%9F%E7%90%86%E5%9B%BE%E7%A4%BA/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/06/Hadoop%20HA%E5%8E%9F%E7%90%86%E5%9B%BE%E7%A4%BA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-MapReduce shuffle流程图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/05/MapReduce%20shuffle%E6%B5%81%E7%A8%8B%E5%9B%BE/">MapReduce shuffle流程图</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/05/MapReduce%20shuffle%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="archive-article-date">
+  	<time datetime="2019-02-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-MR-shuffle流程图示"><a href="#1-MR-shuffle流程图示" class="headerlink" title="1.MR shuffle流程图示"></a>1.MR shuffle流程图示</h2>
+        
+          <a class="article-more-a" href="/2019/02/05/MapReduce%20shuffle%E6%B5%81%E7%A8%8B%E5%9B%BE/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/05/MapReduce%20shuffle%E6%B5%81%E7%A8%8B%E5%9B%BE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-HBase和Hive表关联操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/01/HBase%E5%92%8CHive%E8%A1%A8%E5%85%B3%E8%81%94%E6%93%8D%E4%BD%9C/">HBase和Hive表关联操作</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/01/HBase%E5%92%8CHive%E8%A1%A8%E5%85%B3%E8%81%94%E6%93%8D%E4%BD%9C/" class="archive-article-date">
+  	<time datetime="2019-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-使用场景测试"><a href="#1-使用场景测试" class="headerlink" title="1.使用场景测试"></a>1.使用场景测试</h2><p>HBase和Hive关联操作【以emp表为例】<br>    ○ 案例一：在Hive表中插入数据，HBase中能scan到<br>    ○ 案例二：在HBase表中的数据，可以使用Hive SQL完成统计分析(deptno分组求每个组的人数)</p>
+        
+          <a class="article-more-a" href="/2019/02/01/HBase%E5%92%8CHive%E8%A1%A8%E5%85%B3%E8%81%94%E6%93%8D%E4%BD%9C/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/01/HBase%E5%92%8CHive%E8%A1%A8%E5%85%B3%E8%81%94%E6%93%8D%E4%BD%9C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Shell脚本实现Flume功能采集文件上传HDFS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/23/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Flume%E5%8A%9F%E8%83%BD%E9%87%87%E9%9B%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0HDFS/">Shell脚本实现Flume功能采集文件上传HDFS</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/23/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Flume%E5%8A%9F%E8%83%BD%E9%87%87%E9%9B%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0HDFS/" class="archive-article-date">
+  	<time datetime="2019-01-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-配置文件-leonginxconfig"><a href="#1-配置文件-leonginxconfig" class="headerlink" title="1.配置文件 leonginxconfig"></a>1.配置文件 leonginxconfig</h2>
+        
+          <a class="article-more-a" href="/2019/01/23/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Flume%E5%8A%9F%E8%83%BD%E9%87%87%E9%9B%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0HDFS/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Shell</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/23/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Flume%E5%8A%9F%E8%83%BD%E9%87%87%E9%9B%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0HDFS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Hadoop HA部署" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -242,18 +762,10 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>《</p>
-<h2 id="1-配置shell命令发出邮件"><a href="#1-配置shell命令发出邮件" class="headerlink" title="1.配置shell命令发出邮件"></a>1.配置shell命令发出邮件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /root/.certs/</span><br><span class="line">echo -n | openssl s_client -connect smtp.qq.com:465 | sed -ne &#x27;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#x27; &gt; ~/.certs/qq.crt</span><br><span class="line">certutil -A -n &quot;GeoTrust SSL CA&quot; -t &quot;C,,&quot; -d ~/.certs -i ~/.certs/qq.crt</span><br><span class="line">certutil -A -n &quot;GeoTrust Global CA&quot; -t &quot;C,,&quot; -d ~/.certs -i ~/.certs/qq.crt</span><br><span class="line">certutil -L -d /root/.certs</span><br><span class="line">cd /root/.certs</span><br><span class="line">certutil -A -n &quot;GeoTrust SSL CA - G3&quot; -t &quot;Pu,Pu,Pu&quot; -d ./ -i qq.crt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">set from=153334653@qq.com</span><br><span class="line">set smtp=smtps://smtp.qq.com:465</span><br><span class="line">set smtp-auth-user=153334653</span><br><span class="line">#授权码</span><br><span class="line">set smtp-auth-password=mjurvaknzwfbdice</span><br><span class="line">set smtp-auth=login</span><br><span class="line">set ssl-verify=ignore</span><br><span class="line">set nss-config-dir=/root/.certs</span><br></pre></td></tr></table></figure>
-
-<p>发邮件不带附件<br>EMAIL=153334653@qq.com</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;` : The current running $JOB_NAME job num is</span><br><span class="line">$RUNNINGNUM in 192.168.137.201 ......&quot; | mail \</span><br><span class="line">-r &quot;From: alertAdmin &lt;$&#123;EMAIL&#125;&gt;&quot; \</span><br><span class="line">-s &quot;Warn: Skip the new $JOB_NAME spark job.&quot; $&#123;EMAIL&#125;</span><br></pre></td></tr></table></figure>
-
-<p>邮件的标题是有级别的<br>INFO  WARN  ERROR</p>
-<p>发邮件带附件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;` : Please to check the fail sql attachement.&quot; \</span><br><span class="line">| mailx \</span><br><span class="line">-r &quot;From: alertAdmin &lt;$&#123;EMAIL&#125;&gt;&quot; \</span><br><span class="line">-a error.log \</span><br><span class="line">-s &quot;Critical:KSSH fail sql.&quot; $&#123;EMAIL&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-编写hdfs-ha脚本"><a href="#1-编写hdfs-ha脚本" class="headerlink" title="1.编写hdfs ha脚本"></a>1.编写hdfs ha脚本</h2><p>get_hdfs_ha_state.sh</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">NN1_HOSTNAME=&quot;&quot;</span><br><span class="line">NN2_HOSTNAME=&quot;&quot;</span><br><span class="line">NN1_SERVICEID=&quot;&quot;</span><br><span class="line">NN2_SERVICEID=&quot;&quot;</span><br><span class="line">NN1_SERVICESTATE=&quot;&quot;</span><br><span class="line">NN2_SERVICESTATE=&quot;&quot;</span><br><span class="line"></span><br><span class="line">EMAIL=2643854124@qq.com</span><br><span class="line"></span><br><span class="line">#CDH_BIN_HOME=/opt/cloudera/parcels/CDH/bin</span><br><span class="line">CDH_BIN_HOME=/home/hadoop/app/hadoop/bin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ha_name=$($&#123;CDH_BIN_HOME&#125;/hdfs getconf -confKey dfs.nameservices)</span><br><span class="line">namenode_serviceids=$($&#123;CDH_BIN_HOME&#125;/hdfs getconf -confKey dfs.ha.namenodes.$&#123;ha_name&#125;)</span><br><span class="line"></span><br><span class="line">for node in $(echo $&#123;namenode_serviceids//,/ &#125;); do</span><br><span class="line">	state=$($&#123;CDH_BIN_HOME&#125;/hdfs haadmin -getServiceState $node)</span><br><span class="line"></span><br><span class="line">	if [ &quot;$state&quot; == &quot;active&quot; ]; then</span><br><span class="line">		NN1_SERVICEID=&quot;$&#123;node&#125;&quot;  </span><br><span class="line">		NN1_SERVICESTATE=&quot;$&#123;state&#125;&quot; </span><br><span class="line">		NN1_HOSTNAME=`echo $($&#123;CDH_BIN_HOME&#125;/hdfs getconf -confKey dfs.namenode.rpc-address.$&#123;ha_name&#125;.$&#123;node&#125;) | awk -F &#x27;:&#x27; &#x27;&#123;print $1&#125;&#x27;`</span><br><span class="line">		#echo &quot;$&#123;NN1_HOSTNAME&#125; : $&#123;NN1_SERVICEID&#125; : $&#123;NN1_SERVICESTATE&#125;&quot;</span><br><span class="line"></span><br><span class="line">	elif [ &quot;$state&quot; == &quot;standby&quot; ]; then</span><br><span class="line">		NN2_SERVICEID=&quot;$&#123;node&#125;&quot;</span><br><span class="line">		NN2_SERVICESTATE=&quot;$&#123;state&#125;&quot;</span><br><span class="line">		NN2_HOSTNAME=`echo $($&#123;CDH_BIN_HOME&#125;/hdfs getconf -confKey dfs.namenode.rpc-address.$&#123;ha_name&#125;.$&#123;node&#125;) | awk -F &#x27;:&#x27; &#x27;&#123;print $1&#125;&#x27;`</span><br><span class="line">		#echo &quot;$&#123;NN2_HOSTNAME&#125; : $&#123;NN2_SERVICEID&#125; : $&#123;NN2_SERVICESTATE&#125;&quot;</span><br><span class="line">	else</span><br><span class="line">		echo &quot;hdfs haadmin -getServiceState $node: unkown&quot;</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo &quot;                                                                &quot;</span><br><span class="line">echo &quot;Hostname		Namenode_Serviceid		Namenode_State&quot;</span><br><span class="line">echo &quot;$&#123;NN1_HOSTNAME&#125;		$&#123;NN1_SERVICEID&#125;		$&#123;NN1_SERVICESTATE&#125;&quot;</span><br><span class="line">echo &quot;$&#123;NN2_HOSTNAME&#125;		$&#123;NN2_SERVICEID&#125;		$&#123;NN2_SERVICESTATE&#125;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">exit</span><br><span class="line">#save current NN1/2_HOSTNAME state</span><br><span class="line">echo &quot;$&#123;NN1_HOSTNAME&#125;           $&#123;NN1_SERVICEID&#125;	$&#123;NN1_SERVICESTATE&#125;&quot; &gt; HDFS_HA.log</span><br><span class="line">echo &quot;$&#123;NN2_HOSTNAME&#125;           $&#123;NN2_SERVICEID&#125;        $&#123;NN2_SERVICESTATE&#125;&quot; &gt;&gt; HDFS_HA.log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if [ -f HDFS_HA_LAST.log ];then</span><br><span class="line">        	HISTORYHOSTNAME=`cat HDFS_HA_LAST.log| awk &#x27;&#123;print $1&#125;&#x27; | head -n 1`</span><br><span class="line"></span><br><span class="line">        	if [ &quot;$HISTORYHOSTNAME&quot; != &quot;$&#123;NN1_HOSTNAME&#125;&quot;  ];then</span><br><span class="line"></span><br><span class="line">		echo &quot;send a mail&quot;</span><br><span class="line">                echo -e &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;` : Please to check namenode log.&quot; | mail \</span><br><span class="line">                -r &quot;From: alertAdmin &lt;2643854124@qq.com&gt;&quot; \</span><br><span class="line">                -s &quot;Warn: CDH HDFS HA Failover!.&quot; $&#123;EMAIL&#125;</span><br><span class="line">		</span><br><span class="line">		fi</span><br><span class="line"></span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">cat HDFS_HA.log &gt; HDFS_HA_LAST.log</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        <h2 id="1-配置shell命令发出邮件"><a href="#1-配置shell命令发出邮件" class="headerlink" title="1.配置shell命令发出邮件"></a>1.配置shell命令发出邮件</h2>
+        
+          <a class="article-more-a" href="/2019/01/19/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Hadoop%20HA%20%E5%88%87%E6%8D%A2%E5%91%8A%E8%AD%A6%E7%9B%91%E6%8E%A7/#more">more >></a>
+        
       
 
       
@@ -367,91 +879,9 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-Hadoop源码分析之NameNode启动源码分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/20/Hadoop%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BNameNode%E5%90%AF%E5%8A%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Hadoop源码分析之 NameNode启动源码</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/20/Hadoop%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BNameNode%E5%90%AF%E5%8A%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2018-07-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>提出问题</strong></p>
-<ul>
-<li>Hadoop 一些进程，怎么工作?</li>
-<li>HDFS 读写流程?</li>
-<li>HDFS 小文件?</li>
-<li>Hadoop 元数据，单节点，journal?</li>
-<li>NameNode、DataNode 启动过程，干了什么?</li>
-<li>HDFS 元数据的数据结构?</li>
-<li>NameNode 的职责？</li>
-<li>NN启动过程中做了什么事情？</li>
-</ul>
-<p><strong>带着以上问题，追踪源码寻找答案</strong></p>
-        
-          <a class="article-more-a" href="/2018/07/20/Hadoop%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BNameNode%E5%90%AF%E5%8A%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/20/Hadoop%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BNameNode%E5%90%AF%E5%8A%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -562,11 +992,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hive</a>
+                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,6 +1005,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
             
             <div class="clearfix"></div>
