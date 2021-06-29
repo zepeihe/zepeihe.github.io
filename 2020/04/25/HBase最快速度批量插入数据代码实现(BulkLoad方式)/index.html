@@ -6,17 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2018 | Leo的博客</title>
+  <title>HBase最快速度批量插入数据代码实现(BulkLoad方式) | Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Leo的博客">
-<meta property="og:url" content="http://example.com/archives/2018/index.html">
+  <meta name="description" content="场景：寻找更快速的方式将Hive里的数据快速稳定的写进HBase中。官方提供的HBase put api有写入压力大的缺陷。目前最快的是采用HBase官方提供的bulkload方式，通过生成HFile文件导入。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HBase最快速度批量插入数据代码实现(BulkLoad方式)">
+<meta property="og:url" content="http://example.com/2020/04/25/HBase%E6%9C%80%E5%BF%AB%E9%80%9F%E5%BA%A6%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0(BulkLoad%E6%96%B9%E5%BC%8F)/index.html">
 <meta property="og:site_name" content="Leo的博客">
-<meta property="og:description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
+<meta property="og:description" content="场景：寻找更快速的方式将Hive里的数据快速稳定的写进HBase中。官方提供的HBase put api有写入压力大的缺陷。目前最快的是采用HBase官方提供的bulkload方式，通过生成HFile文件导入。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-29T09:12:00.147Z">
 <meta property="article:author" content="Leo He">
-<meta property="article:tag" content="大数据,Hadoop,Spark,Flink,Hive,Kafka,Kylin,Hbase,Java,Scala,Python,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder">
+<meta property="article:tag" content="HBase">
+<meta property="article:tag" content="Spark">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Leo的博客" type="application/atom+xml">
@@ -149,64 +152,166 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-HBase最快速度批量插入数据代码实现(BulkLoad方式)" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/20/Hadoop%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BNameNode%E5%90%AF%E5%8A%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2018-07-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/20/Hadoop%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BNameNode%E5%90%AF%E5%8A%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Hadoop源码分析之 NameNode启动源码</a>
+    <h1 class="article-title" itemprop="name">
+      HBase最快速度批量插入数据代码实现(BulkLoad方式)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/04/25/HBase%E6%9C%80%E5%BF%AB%E9%80%9F%E5%BA%A6%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0(BulkLoad%E6%96%B9%E5%BC%8F)/" class="archive-article-date">
+  	<time datetime="2020-04-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>场景：<br>寻找更快速的方式将Hive里的数据快速稳定的写进HBase中。<br>官方提供的HBase put api有写入压力大的缺陷。<br>目前最快的是采用HBase官方提供的bulkload方式，通过生成HFile文件导入。</p>
+<span id="more"></span>
+
+<h2 id="1-数据准备"><a href="#1-数据准备" class="headerlink" title="1.数据准备"></a>1.数据准备</h2><p>准备1000w条数据，表中准备2个cf，分别是o1和o2，o1的字段有id name age，o2的字段有sex、address。</p>
+<h2 id="2-操作"><a href="#2-操作" class="headerlink" title="2.操作"></a>2.操作</h2><p>1）在hive中分析这个数据<br>2）分析完后，生成region的key划分配置文件<br>3）创建带有预留region的表<br>4）把1000w数据生成orc文件输出<br>5）执行mapreduce程序，Spark程序，用于将orc 转成 hfile 文件<br>6）用命令或代码将hfile文件导入到hbase中</p>
+<p>为了实现更好的性能，测试采用int类型作为rowkey插入速度更快(插入时有一步涉及到排序)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">hive创建表</span><br><span class="line">set hive.exec.mode.local.auto=true;</span><br><span class="line">CREATE DATABASE IF NOT EXISTS leodb;</span><br><span class="line"></span><br><span class="line">DROP TABLE IF EXISTS leodb.emp_hbase;</span><br><span class="line">CREATE TABLE leodb.emp_hbase(</span><br><span class="line">id string,</span><br><span class="line">name string,</span><br><span class="line">age int,</span><br><span class="line">sex string,</span><br><span class="line">address string</span><br><span class="line">) </span><br><span class="line">STORED AS ORC;</span><br><span class="line"></span><br><span class="line">LOAD DATA LOCAL INPATH &#x27;/Users/hezepei/workspace/192-386/SparkRDD-20200321/data/orc/userhbase100w/part-00000-a7329fe1-8d38-4b2b-b99f-930ae5f249ac-c000.snappy.orc&#x27; OVERWRITE INTO TABLE leodb.emp_hbase;</span><br><span class="line"></span><br><span class="line">SELECT * FROM leodb.emp_hbase;</span><br><span class="line"></span><br><span class="line">select sub as aid, count(*) </span><br><span class="line">from </span><br><span class="line">(select substring(aid,1,5) as sub from user_install_status_limit) t group by sub; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1）在hive中分析这个数据</span><br><span class="line">SELECT a.tag,count(*)</span><br><span class="line">FROM </span><br><span class="line">(</span><br><span class="line">SELECT</span><br><span class="line">SUBSTRING(id,1,1) as tag</span><br><span class="line">FROM leodb.emp_hbase</span><br><span class="line">) a</span><br><span class="line">GROUP BY tag;</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">0    62150</span><br><span class="line">1    62185</span><br><span class="line">2    62646</span><br><span class="line">3    62810</span><br><span class="line">4    62367</span><br><span class="line">5    62792</span><br><span class="line">6    62732</span><br><span class="line">7    62415</span><br><span class="line">8    63010</span><br><span class="line">9    62072</span><br><span class="line">a    62740</span><br><span class="line">b    62401</span><br><span class="line">c    62286</span><br><span class="line">d    62781</span><br><span class="line">e    62423</span><br><span class="line">f    62190</span><br><span class="line">一共16行，按字典序分布基本均匀</span><br><span class="line"></span><br><span class="line">region_split_info.txt</span><br><span class="line">0</span><br><span class="line">2</span><br><span class="line">4</span><br><span class="line">6</span><br><span class="line">8</span><br><span class="line">a</span><br><span class="line">c</span><br><span class="line">e</span><br><span class="line"></span><br><span class="line">2）分析完后，生成region的key划分配置文件</span><br><span class="line">hezepei@MacBook-Pro scala-reflect % hadoop fs -mkdir -p /data/hbase/split</span><br><span class="line">#hadoop fs -put /Users/hezepei/data/hbase/region_split_info.txt /data/hbase/split/</span><br><span class="line">#hezepei@MacBook-Pro hbase % hadoop fs -ls /data/hbase/split/</span><br><span class="line"></span><br><span class="line">3）创建带有预留region的表，使用snappy压缩，和SPLITS_FILE</span><br><span class="line">create &#x27;emp_hbase&#x27;, &#x27;O1&#x27;,&#x27;O2&#x27;, &#123;SPLITS_FILE =&gt; &#x27;/Users/hezepei/data/hbase/split/region_split_info.txt&#x27;&#125;</span><br><span class="line"></span><br><span class="line"># 使用压缩Hfile导入hbase会报错，</span><br><span class="line">create &#x27;emp_hbase&#x27;, &#123;NAME =&gt;&#x27;O1&#x27;, COMPRESSION =&gt; &#x27;SNAPPY&#x27;&#125;, &#123;NAME =&gt;&#x27;O2&#x27;, COMPRESSION =&gt; &#x27;SNAPPY&#x27;&#125;, &#123;SPLITS_FILE =&gt; &#x27;/Users/hezepei/data/hbase/split/region_split_info.txt&#x27;&#125;</span><br><span class="line"></span><br><span class="line">disable &#x27;emp_hbase&#x27; # 下线表</span><br><span class="line">drop &#x27;emp_hbase&#x27; #删除表</span><br><span class="line">truncate &#x27;emp_hbase&#x27; #清空表</span><br><span class="line">scan &#x27;emp_hbase&#x27;</span><br><span class="line">list</span><br><span class="line"></span><br><span class="line">报错：</span><br><span class="line">ERROR: org.apache.hadoop.hbase.DoNotRetryIOException: java.lang.UnsatisfiedLinkError: org.apache.hadoop.util.NativeCodeLoader.buildSupportsSnappy()Z Set hbase.table.sanity.checks to false at conf or table descriptor if you want to bypass sanity checks</span><br><span class="line"></span><br><span class="line">解决：</span><br><span class="line">hezepei@MacBook-Pro conf % vim hbase-site.xml</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.table.sanity.checks&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">重启hbase,成功解决。</span><br><span class="line"></span><br><span class="line">4）把1000w数据生成orc文件输出</span><br><span class="line">MR代码,Spark代码</span><br><span class="line"></span><br><span class="line">5）执行mapreduce程序，用于将orc 转成 hfile 文件</span><br><span class="line">hfile文件目录</span><br><span class="line">/data/hbase/orc2hfile</span><br><span class="line"></span><br><span class="line">hezepei@MacBook-Pro hbase % hadoop fs -mkdir -p /data/hbase/input/orc/10w</span><br><span class="line">hadoop fs -put /Users/hezepei/workspace/192-386/SparkRDD-20200321/data/orc/userhbase10w/* /data/hbase/input/orc/10w</span><br><span class="line">hadoop fs -put /Users/hezepei/workspace/192-386/SparkRDD-20200321/data/orc/userhbase100w/* /data/hbase/input/orc/100w</span><br><span class="line">hadoop fs -put /Users/hezepei/workspace/192-386/SparkRDD-20200321/data/orc/userhbase1000w/* /data/hbase/input/orc/1000w</span><br><span class="line"></span><br><span class="line">6）用命令或代码将hfile文件导入到hbase中</span><br><span class="line">hadoop jar /Users/hezepei/app/hbase/lib/hbase-shell-1.2.0-cdh5.16.2.jar completebulkload /data/hbase/input/orc/1000w emp_hbase</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-MR代码实现将orc文件转为Hfile"><a href="#3-MR代码实现将orc文件转为Hfile" class="headerlink" title="3.MR代码实现将orc文件转为Hfile"></a>3.MR代码实现将orc文件转为Hfile</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line">package com.leo.hbase;</span><br><span class="line"></span><br><span class="line">import com.leo.hadoop.mapreduce.utils.FileUtils;</span><br><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.apache.hadoop.fs.Path;</span><br><span class="line">import org.apache.hadoop.hbase.HBaseConfiguration;</span><br><span class="line">import org.apache.hadoop.hbase.TableName;</span><br><span class="line">import org.apache.hadoop.hbase.client.Connection;</span><br><span class="line">import org.apache.hadoop.hbase.client.ConnectionFactory;</span><br><span class="line">import org.apache.hadoop.hbase.client.HTable;</span><br><span class="line">import org.apache.hadoop.hbase.client.Put;</span><br><span class="line">import org.apache.hadoop.hbase.io.ImmutableBytesWritable;</span><br><span class="line">import org.apache.hadoop.hbase.mapreduce.HFileOutputFormat2;</span><br><span class="line">import org.apache.hadoop.hbase.util.Bytes;</span><br><span class="line">import org.apache.hadoop.hive.ql.io.orc.OrcNewInputFormat;</span><br><span class="line">import org.apache.hadoop.hive.ql.io.orc.OrcStruct;</span><br><span class="line">import org.apache.hadoop.hive.serde2.objectinspector.StructField;</span><br><span class="line">import org.apache.hadoop.hive.serde2.objectinspector.StructObjectInspector;</span><br><span class="line">import org.apache.hadoop.hive.serde2.typeinfo.TypeInfo;</span><br><span class="line">import org.apache.hadoop.hive.serde2.typeinfo.TypeInfoUtils;</span><br><span class="line">import org.apache.hadoop.io.NullWritable;</span><br><span class="line">import org.apache.hadoop.mapreduce.Job;</span><br><span class="line">import org.apache.hadoop.mapreduce.Mapper;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author Leo</span><br><span class="line"> */</span><br><span class="line">public class Orc2HfileDriver &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        long startTime = System.currentTimeMillis();   //获取开始时间</span><br><span class="line"></span><br><span class="line">        // 本地路径</span><br><span class="line">//        String input = &quot;file:///Users/hezepei/workspace/192-386/SparkRDD-20200321/data/orc/userhbase10w/&quot;;</span><br><span class="line">        String input = &quot;/data/hbase/input/orc/1000w&quot;;</span><br><span class="line">        // hdfs 路径</span><br><span class="line">//        String output = &quot;file:///Users/hezepei/workspace/192-386/SparkRDD-20200321/Orc2HfileDriver/10w/&quot;;</span><br><span class="line">        String output = &quot;/data/hbase/output/Orc2Hfile/1000w&quot;;</span><br><span class="line">        String tableName = &quot;emp_hbase&quot;;</span><br><span class="line">//</span><br><span class="line">        Configuration configuration = HBaseConfiguration.create();</span><br><span class="line"></span><br><span class="line">        // 1、获取Job对象</span><br><span class="line">        Job job = Job.getInstance(configuration);</span><br><span class="line"></span><br><span class="line">        // 2、设置class</span><br><span class="line">        job.setJarByClass(Orc2HfileDriver.class);</span><br><span class="line"></span><br><span class="line">        // 3、设置Mapper和Reducer</span><br><span class="line">        job.setMapperClass(MyMapper.class);</span><br><span class="line"></span><br><span class="line">        // 删除输出文件夹</span><br><span class="line">        FileUtils.deleteTarget(configuration, output);</span><br><span class="line"></span><br><span class="line">        // 4、设置Mapper阶段输出数据的key和value的类型</span><br><span class="line">        job.setMapOutputKeyClass(ImmutableBytesWritable.class);</span><br><span class="line">        job.setMapOutputValueClass(Put.class);</span><br><span class="line"></span><br><span class="line">//        job.setNumReduceTasks(0);</span><br><span class="line">        job.setInputFormatClass(OrcNewInputFormat.class);</span><br><span class="line"></span><br><span class="line">        // 6、设置输入和输出数据的路径</span><br><span class="line">        TextInputFormat.setInputPaths(job, new Path(input));</span><br><span class="line">        FileOutputFormat.setOutputPath(job, new Path(output));</span><br><span class="line"></span><br><span class="line">        // HBaseConfiguration</span><br><span class="line">        Connection conn = ConnectionFactory.createConnection(configuration);</span><br><span class="line">        HTable table = (HTable) conn.getTable(TableName.valueOf(tableName));</span><br><span class="line"></span><br><span class="line">        //生成hfile文件配置,方法需要参数(Job job, Table table, RegionLocator regionLocator)</span><br><span class="line">        HFileOutputFormat2.configureIncrementalLoad(job, table, table.getRegionLocator());</span><br><span class="line"></span><br><span class="line">        // 7、提交Job</span><br><span class="line">        boolean result = job.waitForCompletion(true);  // *****</span><br><span class="line">        long endTime = System.currentTimeMillis(); //获取结束时间</span><br><span class="line">        System.out.println(&quot;程序运行时间： &quot; + (endTime - startTime) + &quot;ms&quot;);</span><br><span class="line">        System.exit(result ? 0 : 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static class MyMapper extends Mapper&lt;NullWritable, OrcStruct, ImmutableBytesWritable, Put&gt; &#123;</span><br><span class="line"></span><br><span class="line">        static StructObjectInspector inspector = null;</span><br><span class="line"></span><br><span class="line">        public static String getOrcStructData(OrcStruct orcObj, String key) &#123;</span><br><span class="line">            //获取对应的字段的StructField对象</span><br><span class="line">            StructField structFieldRef = inspector.getStructFieldRef(key);</span><br><span class="line">            //根据对应的StructField对象，在OrcStruct 对象中获取对应字段的数据</span><br><span class="line">            return String.valueOf(inspector.getStructFieldData(orcObj, structFieldRef));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        protected void setup(Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">            String schema = &quot;struct&lt;id:string,name:string,age:int,sex:string,address:string&gt;&quot;;</span><br><span class="line">            TypeInfo typeInfo = TypeInfoUtils.getTypeInfoFromTypeString(schema);</span><br><span class="line">            inspector = (StructObjectInspector) OrcStruct.createObjectInspector(typeInfo);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        protected void map(NullWritable key, OrcStruct value, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">            String id = getOrcStructData(value, &quot;id&quot;);</span><br><span class="line">            String name = getOrcStructData(value, &quot;name&quot;);</span><br><span class="line">            String age = getOrcStructData(value, &quot;age&quot;);</span><br><span class="line">            String sex = getOrcStructData(value, &quot;sex&quot;);</span><br><span class="line">            String address = getOrcStructData(value, &quot;address&quot;);</span><br><span class="line"></span><br><span class="line">            // TODO 对列值加上判空</span><br><span class="line">            String rowkey = id;</span><br><span class="line">            Put put = new Put(Bytes.toBytes(rowkey));</span><br><span class="line">            put.addColumn(Bytes.toBytes(&quot;O1&quot;), Bytes.toBytes(&quot;id&quot;), Bytes.toBytes(id));</span><br><span class="line">            put.addColumn(Bytes.toBytes(&quot;O1&quot;), Bytes.toBytes(&quot;name&quot;), Bytes.toBytes(name));</span><br><span class="line">            put.addColumn(Bytes.toBytes(&quot;O1&quot;), Bytes.toBytes(&quot;age&quot;), Bytes.toBytes(age));</span><br><span class="line">            put.addColumn(Bytes.toBytes(&quot;O2&quot;), Bytes.toBytes(&quot;sex&quot;), Bytes.toBytes(sex));</span><br><span class="line">            put.addColumn(Bytes.toBytes(&quot;O2&quot;), Bytes.toBytes(&quot;address&quot;), Bytes.toBytes(address));</span><br><span class="line"></span><br><span class="line">            // write</span><br><span class="line">            context.write(new ImmutableBytesWritable(put.getRow()), put);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Spark代码实现将orc文件转为Hfile"><a href="#3-Spark代码实现将orc文件转为Hfile" class="headerlink" title="3.Spark代码实现将orc文件转为Hfile"></a>3.Spark代码实现将orc文件转为Hfile</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">package com.leo.sparkhbase</span><br><span class="line"></span><br><span class="line">import com.leo.hadoop.mapreduce.utils.FileUtils</span><br><span class="line">import org.apache.hadoop.conf.Configuration</span><br><span class="line">import org.apache.hadoop.fs.Path</span><br><span class="line">import org.apache.hadoop.hbase.client.&#123;Admin, Connection, ConnectionFactory, HTable&#125;</span><br><span class="line">import org.apache.hadoop.hbase.&#123;HBaseConfiguration, KeyValue, TableName&#125;</span><br><span class="line">import org.apache.hadoop.hbase.io.ImmutableBytesWritable</span><br><span class="line">import org.apache.hadoop.hbase.mapred.TableOutputFormat</span><br><span class="line">import org.apache.hadoop.hbase.util.Bytes</span><br><span class="line">import org.apache.hadoop.mapreduce.Job</span><br><span class="line">import org.apache.spark.rdd.RDD</span><br><span class="line">import org.apache.spark.serializer.KryoSerializer</span><br><span class="line">import org.apache.hadoop.hbase.mapreduce.&#123;HFileOutputFormat2, LoadIncrementalHFiles&#125;</span><br><span class="line">import org.apache.spark.sql.&#123;DataFrame, Dataset, Row, SparkSession&#125;</span><br><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import scala.collection.mutable.ListBuffer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class SparkHBaseBulkLoad</span><br><span class="line"></span><br><span class="line">object SparkHBaseBulkLoad &#123;</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">    val startTime = System.currentTimeMillis //获取开始时间</span><br><span class="line">    val output = &quot;/data/hbase/output/Orc2Hfile/1000wspark&quot;</span><br><span class="line">    //        val output = args(1)</span><br><span class="line">    val input: String = &quot;/data/hbase/input/orc/1000w&quot;</span><br><span class="line">    //        val input = args(0)</span><br><span class="line">    val config = new Configuration</span><br><span class="line">    FileUtils.deleteTarget(config, output)</span><br><span class="line"></span><br><span class="line">    val conf = new SparkConf()</span><br><span class="line">    conf.set(&quot;spark.serializer&quot;, classOf[KryoSerializer].getName).registerKryoClasses(Array(classOf[ImmutableBytesWritable]))</span><br><span class="line">    import spark.implicits._</span><br><span class="line"></span><br><span class="line">    val spark = SparkSession.builder().config(conf).appName(&quot;sparkhbasebulkload&quot;).master(&quot;local[*]&quot;).getOrCreate()</span><br><span class="line"></span><br><span class="line">    val df: DataFrame = spark.read.orc(input)</span><br><span class="line">    /**</span><br><span class="line">     * 注意排序sorted,不排序报以下的错误</span><br><span class="line">     * Caused by: java.io.IOException: Added a key not lexically larger than previous. Current cell = e011ff85-4f85-468b-bf40-7dc61bbc7605/O1:age/1619191881098/Put/vlen=2/seqid=0, lastCell = e011ff85-4f85-468b-bf40-7dc61bbc7605/O1:name/1619191881098/Put/vlen=10/seqid=0</span><br><span class="line">     */</span><br><span class="line">    val columns = df.columns.sorted // 获得所有列名</span><br><span class="line"></span><br><span class="line">//    val res: RDD[(ImmutableBytesWritable, KeyValue)] = df.rdd.mapPartitions(rows =&gt; &#123;</span><br><span class="line">//      val list: List[Row] = rows.toList</span><br><span class="line">//      val list1 = new ListBuffer[(ImmutableBytesWritable, KeyValue)]</span><br><span class="line">//      for (r &lt;- list) &#123;</span><br><span class="line">//        val rk = new ImmutableBytesWritable()</span><br><span class="line">//        rk.set(Bytes.toBytes(r.getString(0)))</span><br><span class="line">//        var keyValue = new KeyValue()</span><br><span class="line">//        for (i &lt;- 1 until columns.length) &#123;</span><br><span class="line">//          if (columns(i) == &quot;id&quot; || columns(i) == &quot;name&quot; || columns(i) == &quot;age&quot;) &#123;</span><br><span class="line">//            keyValue = new KeyValue(rk.get(), Bytes.toBytes(&quot;O1&quot;), Bytes.toBytes(columns(i)), Bytes.toBytes(r.get(i).toString))</span><br><span class="line">//          &#125; else &#123;</span><br><span class="line">//            keyValue = new KeyValue(rk.get(), Bytes.toBytes(&quot;O2&quot;), Bytes.toBytes(columns(i)), Bytes.toBytes(r.get(i).toString))</span><br><span class="line">//          &#125;</span><br><span class="line">//          list1 += ((rk, keyValue))</span><br><span class="line">//        &#125;</span><br><span class="line">//      &#125;</span><br><span class="line">//      list1.toIterator</span><br><span class="line">//    &#125;).sortByKey()</span><br><span class="line"></span><br><span class="line">    val hbaseRDD: RDD[(ImmutableBytesWritable, Seq[KeyValue])] = df.rdd.map(rows =&gt; &#123;</span><br><span class="line">      var kvList: Seq[KeyValue] = List()</span><br><span class="line">      val rk = new ImmutableBytesWritable(Bytes.toBytes(rows.getString(0)))</span><br><span class="line">      var keyValue = new KeyValue()</span><br><span class="line">      for (i &lt;- 1 until columns.length) &#123;</span><br><span class="line">        if (columns(i) == &quot;id&quot; || columns(i) == &quot;name&quot; || columns(i) == &quot;age&quot;) &#123;</span><br><span class="line">          keyValue = new KeyValue(rk.get(), Bytes.toBytes(&quot;O1&quot;), Bytes.toBytes(columns(i)), Bytes.toBytes(rows.get(i).toString))</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          keyValue = new KeyValue(rk.get(), Bytes.toBytes(&quot;O2&quot;), Bytes.toBytes(columns(i)), Bytes.toBytes(rows.get(i).toString))</span><br><span class="line">        &#125;</span><br><span class="line">        kvList = kvList :+ keyValue</span><br><span class="line">      &#125;</span><br><span class="line">      (rk, kvList)</span><br><span class="line">    &#125;).sortByKey() // 有shuffle</span><br><span class="line"></span><br><span class="line">    val res = hbaseRDD.flatMapValues(_.iterator)</span><br><span class="line"></span><br><span class="line">    val hbaseConf: Configuration = HBaseConfiguration.create()</span><br><span class="line">    hbaseConf.set(TableOutputFormat.OUTPUT_TABLE, &quot;emp_hbase&quot;)</span><br><span class="line"></span><br><span class="line">    val job: Job = Job.getInstance(hbaseConf)</span><br><span class="line"></span><br><span class="line">    job.setMapOutputKeyClass(classOf[ImmutableBytesWritable])</span><br><span class="line">    job.setMapOutputValueClass(classOf[KeyValue])</span><br><span class="line"></span><br><span class="line">    val connection: Connection = ConnectionFactory.createConnection(hbaseConf)</span><br><span class="line">    val table: HTable = connection.getTable(TableName.valueOf(&quot;emp_hbase&quot;)).asInstanceOf[HTable]</span><br><span class="line">    HFileOutputFormat2.configureIncrementalLoad(job, table.getTableDescriptor, table.getRegionLocator)</span><br><span class="line"></span><br><span class="line">    res.saveAsNewAPIHadoopFile(output, classOf[ImmutableBytesWritable], classOf[KeyValue], classOf[HFileOutputFormat2], job.getConfiguration)</span><br><span class="line"></span><br><span class="line">    val loader = new LoadIncrementalHFiles(hbaseConf)</span><br><span class="line">    val admin: Admin = connection.getAdmin</span><br><span class="line">    loader.doBulkLoad(new Path(output), admin, table, table.getRegionLocator)</span><br><span class="line">    val endTime = System.currentTimeMillis //获取结束时间</span><br><span class="line">    System.out.println(&quot;程序运行时间： &quot; + (endTime - startTime) + &quot;ms&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">注意：需要使用的Hbase jar包比较多，否则包找不到错误，所以--jars上传hbase目录下所有包。</span><br><span class="line">spark-submit --master local \</span><br><span class="line">--driver-memory 4G \</span><br><span class="line">--num-executors 2 \</span><br><span class="line">--executor-cores 4 \</span><br><span class="line">--executor-memory 8G \</span><br><span class="line">--class com.leo.sparkhbase.hbase.SparkHBaseBulkLoad \</span><br><span class="line">--jars $(echo /Users/hezepei/app/hbase/lib/*.jar | tr &#x27; &#x27; &#x27;,&#x27;) \</span><br><span class="line">/Users/hezepei/workspace/192-386/SparkRDD-20200321/target/SparkRDD-20200321-1.0.jar \</span><br><span class="line">hdfs://localhost:8020/data/hbase/input/orc/1000w \</span><br><span class="line">hdfs://localhost:8020/data/hbase/output/Orc2Hfile/1000wspark</span><br><span class="line"></span><br><span class="line">#运行时间：</span><br><span class="line">20/04/24 10:19:14 INFO LoadIncrementalHFiles: Trying to load hfile=hdfs://localhost:8020/data/hbase/output/Orc2Hfile/1000wspark/O2/6e7b673c849d4bf7bbd4a517b53e2441 first=61ebbd57-314b-4369-8ad9-53eb61d25881 last=8312d977-0464-4581-800e-2ef92441932a</span><br><span class="line">20/04/24 10:19:14 INFO LoadIncrementalHFiles: Trying to load hfile=hdfs://localhost:8020/data/hbase/output/Orc2Hfile/1000wspark/O2/8ed7c9e6859d420fae5e4bc9fa702537 first=a425e758-62d9-4707-90d1-a80e7f20abe5 last=beafc783-8821-44e6-9f32-ab851f6b8e23</span><br><span class="line">20/04/24 10:19:14 INFO LoadIncrementalHFiles: Trying to load hfile=hdfs://localhost:8020/data/hbase/output/Orc2Hfile/1000wspark/O2/38fd41d4c04840c191a28f63a3dec981 first=deca97e1-fa56-491b-9fe5-667cb1f76cbd last=ffffffdf-a48e-4f17-9dff-b841b3aad14e</span><br><span class="line">程序运行时间： 41803ms</span><br><span class="line">20/04/24 10:19:14 INFO SparkContext: Invoking stop() from shutdown hook</span><br><span class="line">20/04/24 10:19:14 INFO SparkUI: Stopped Spark web UI at http://macbook-pro.lan:4040</span><br><span class="line">20/04/24 10:19:14 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!</span><br><span class="line">20/04/24 10:19:15 INFO MemoryStore: MemoryStore cleared</span><br><span class="line">20/04/24 10:19:15 INFO BlockManager: BlockManager stopped</span><br><span class="line">20/04/24 10:19:15 INFO BlockManagerMaster: BlockManagerMaster stopped</span><br><span class="line">20/04/24 10:19:15 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!</span><br><span class="line">20/04/24 10:19:15 INFO SparkContext: Successfully stopped SparkContext</span><br><span class="line">20/04/24 10:19:15 INFO ShutdownHookManager: Shutdown hook called</span><br><span class="line">20/04/24 10:19:15 INFO ShutdownHookManager: Deleting directory /private/var/folders/t3/fww_2ryj7xn3p2t4j3lltf8r0000gn/T/spark-a13743cc-2591-4e9b-b794-cb6e82917798</span><br><span class="line">20/04/24 10:19:15 INFO ShutdownHookManager: Deleting directory /private/var/folders/t3/fww_2ryj7xn3p2t4j3lltf8r0000gn/T/spark-31150916-035e-4398-a90e-c5c2f1e247d9</span><br><span class="line">hezepei@MacBook-Pro hbase %</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>测试结果：<br>40秒内单机测试完成1000万行数据导入HBase。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/04/25/HBase%E6%9C%80%E5%BF%AB%E9%80%9F%E5%BA%A6%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0(BulkLoad%E6%96%B9%E5%BC%8F)/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/02/27/HBase%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HBase依赖冲突解决方案</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+  <div id="SOHUCS" sid="HBase最快速度批量插入数据代码实现(BulkLoad方式)" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyvsmwACT",
+        conf: "d4a9131c3f72e7526d8cba4214deb9fd"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -229,8 +334,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
