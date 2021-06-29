@@ -222,6 +222,81 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-Shell脚本实现Hadoop HA 切换告警监控" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/19/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Hadoop%20HA%20%E5%88%87%E6%8D%A2%E5%91%8A%E8%AD%A6%E7%9B%91%E6%8E%A7/">Shell脚本实现Hadoop HA 切换告警监控</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/19/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Hadoop%20HA%20%E5%88%87%E6%8D%A2%E5%91%8A%E8%AD%A6%E7%9B%91%E6%8E%A7/" class="archive-article-date">
+  	<time datetime="2019-01-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>《</p>
+<h2 id="1-配置shell命令发出邮件"><a href="#1-配置shell命令发出邮件" class="headerlink" title="1.配置shell命令发出邮件"></a>1.配置shell命令发出邮件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /root/.certs/</span><br><span class="line">echo -n | openssl s_client -connect smtp.qq.com:465 | sed -ne &#x27;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#x27; &gt; ~/.certs/qq.crt</span><br><span class="line">certutil -A -n &quot;GeoTrust SSL CA&quot; -t &quot;C,,&quot; -d ~/.certs -i ~/.certs/qq.crt</span><br><span class="line">certutil -A -n &quot;GeoTrust Global CA&quot; -t &quot;C,,&quot; -d ~/.certs -i ~/.certs/qq.crt</span><br><span class="line">certutil -L -d /root/.certs</span><br><span class="line">cd /root/.certs</span><br><span class="line">certutil -A -n &quot;GeoTrust SSL CA - G3&quot; -t &quot;Pu,Pu,Pu&quot; -d ./ -i qq.crt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">set from=153334653@qq.com</span><br><span class="line">set smtp=smtps://smtp.qq.com:465</span><br><span class="line">set smtp-auth-user=153334653</span><br><span class="line">#授权码</span><br><span class="line">set smtp-auth-password=mjurvaknzwfbdice</span><br><span class="line">set smtp-auth=login</span><br><span class="line">set ssl-verify=ignore</span><br><span class="line">set nss-config-dir=/root/.certs</span><br></pre></td></tr></table></figure>
+
+<p>发邮件不带附件<br>EMAIL=153334653@qq.com</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;` : The current running $JOB_NAME job num is</span><br><span class="line">$RUNNINGNUM in 192.168.137.201 ......&quot; | mail \</span><br><span class="line">-r &quot;From: alertAdmin &lt;$&#123;EMAIL&#125;&gt;&quot; \</span><br><span class="line">-s &quot;Warn: Skip the new $JOB_NAME spark job.&quot; $&#123;EMAIL&#125;</span><br></pre></td></tr></table></figure>
+
+<p>邮件的标题是有级别的<br>INFO  WARN  ERROR</p>
+<p>发邮件带附件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;` : Please to check the fail sql attachement.&quot; \</span><br><span class="line">| mailx \</span><br><span class="line">-r &quot;From: alertAdmin &lt;$&#123;EMAIL&#125;&gt;&quot; \</span><br><span class="line">-a error.log \</span><br><span class="line">-s &quot;Critical:KSSH fail sql.&quot; $&#123;EMAIL&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-编写hdfs-ha脚本"><a href="#1-编写hdfs-ha脚本" class="headerlink" title="1.编写hdfs ha脚本"></a>1.编写hdfs ha脚本</h2><p>get_hdfs_ha_state.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">NN1_HOSTNAME=&quot;&quot;</span><br><span class="line">NN2_HOSTNAME=&quot;&quot;</span><br><span class="line">NN1_SERVICEID=&quot;&quot;</span><br><span class="line">NN2_SERVICEID=&quot;&quot;</span><br><span class="line">NN1_SERVICESTATE=&quot;&quot;</span><br><span class="line">NN2_SERVICESTATE=&quot;&quot;</span><br><span class="line"></span><br><span class="line">EMAIL=2643854124@qq.com</span><br><span class="line"></span><br><span class="line">#CDH_BIN_HOME=/opt/cloudera/parcels/CDH/bin</span><br><span class="line">CDH_BIN_HOME=/home/hadoop/app/hadoop/bin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ha_name=$($&#123;CDH_BIN_HOME&#125;/hdfs getconf -confKey dfs.nameservices)</span><br><span class="line">namenode_serviceids=$($&#123;CDH_BIN_HOME&#125;/hdfs getconf -confKey dfs.ha.namenodes.$&#123;ha_name&#125;)</span><br><span class="line"></span><br><span class="line">for node in $(echo $&#123;namenode_serviceids//,/ &#125;); do</span><br><span class="line">	state=$($&#123;CDH_BIN_HOME&#125;/hdfs haadmin -getServiceState $node)</span><br><span class="line"></span><br><span class="line">	if [ &quot;$state&quot; == &quot;active&quot; ]; then</span><br><span class="line">		NN1_SERVICEID=&quot;$&#123;node&#125;&quot;  </span><br><span class="line">		NN1_SERVICESTATE=&quot;$&#123;state&#125;&quot; </span><br><span class="line">		NN1_HOSTNAME=`echo $($&#123;CDH_BIN_HOME&#125;/hdfs getconf -confKey dfs.namenode.rpc-address.$&#123;ha_name&#125;.$&#123;node&#125;) | awk -F &#x27;:&#x27; &#x27;&#123;print $1&#125;&#x27;`</span><br><span class="line">		#echo &quot;$&#123;NN1_HOSTNAME&#125; : $&#123;NN1_SERVICEID&#125; : $&#123;NN1_SERVICESTATE&#125;&quot;</span><br><span class="line"></span><br><span class="line">	elif [ &quot;$state&quot; == &quot;standby&quot; ]; then</span><br><span class="line">		NN2_SERVICEID=&quot;$&#123;node&#125;&quot;</span><br><span class="line">		NN2_SERVICESTATE=&quot;$&#123;state&#125;&quot;</span><br><span class="line">		NN2_HOSTNAME=`echo $($&#123;CDH_BIN_HOME&#125;/hdfs getconf -confKey dfs.namenode.rpc-address.$&#123;ha_name&#125;.$&#123;node&#125;) | awk -F &#x27;:&#x27; &#x27;&#123;print $1&#125;&#x27;`</span><br><span class="line">		#echo &quot;$&#123;NN2_HOSTNAME&#125; : $&#123;NN2_SERVICEID&#125; : $&#123;NN2_SERVICESTATE&#125;&quot;</span><br><span class="line">	else</span><br><span class="line">		echo &quot;hdfs haadmin -getServiceState $node: unkown&quot;</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo &quot;                                                                &quot;</span><br><span class="line">echo &quot;Hostname		Namenode_Serviceid		Namenode_State&quot;</span><br><span class="line">echo &quot;$&#123;NN1_HOSTNAME&#125;		$&#123;NN1_SERVICEID&#125;		$&#123;NN1_SERVICESTATE&#125;&quot;</span><br><span class="line">echo &quot;$&#123;NN2_HOSTNAME&#125;		$&#123;NN2_SERVICEID&#125;		$&#123;NN2_SERVICESTATE&#125;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">exit</span><br><span class="line">#save current NN1/2_HOSTNAME state</span><br><span class="line">echo &quot;$&#123;NN1_HOSTNAME&#125;           $&#123;NN1_SERVICEID&#125;	$&#123;NN1_SERVICESTATE&#125;&quot; &gt; HDFS_HA.log</span><br><span class="line">echo &quot;$&#123;NN2_HOSTNAME&#125;           $&#123;NN2_SERVICEID&#125;        $&#123;NN2_SERVICESTATE&#125;&quot; &gt;&gt; HDFS_HA.log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if [ -f HDFS_HA_LAST.log ];then</span><br><span class="line">        	HISTORYHOSTNAME=`cat HDFS_HA_LAST.log| awk &#x27;&#123;print $1&#125;&#x27; | head -n 1`</span><br><span class="line"></span><br><span class="line">        	if [ &quot;$HISTORYHOSTNAME&quot; != &quot;$&#123;NN1_HOSTNAME&#125;&quot;  ];then</span><br><span class="line"></span><br><span class="line">		echo &quot;send a mail&quot;</span><br><span class="line">                echo -e &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;` : Please to check namenode log.&quot; | mail \</span><br><span class="line">                -r &quot;From: alertAdmin &lt;2643854124@qq.com&gt;&quot; \</span><br><span class="line">                -s &quot;Warn: CDH HDFS HA Failover!.&quot; $&#123;EMAIL&#125;</span><br><span class="line">		</span><br><span class="line">		fi</span><br><span class="line"></span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">cat HDFS_HA.log &gt; HDFS_HA_LAST.log</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Shell</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/19/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Hadoop%20HA%20%E5%88%87%E6%8D%A2%E5%91%8A%E8%AD%A6%E7%9B%91%E6%8E%A7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Shell脚本编程经验总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
