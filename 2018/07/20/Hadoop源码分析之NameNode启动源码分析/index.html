@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hadoop源码分析之 NameNode启动源码 | Leo的博客</title>
+  <title>Hadoop源码分析之NameNode启动源码 | Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="提出问题  Hadoop 一些进程，怎么工作? HDFS 读写流程? HDFS 小文件? Hadoop 元数据，单节点，journal? NameNode、DataNode 启动过程，干了什么? HDFS 元数据的数据结构? NameNode 的职责？ NN启动过程中做了什么事情？  带着以上问题，追踪源码寻找答案">
+  <meta name="description" content="提出问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hadoop源码分析之 NameNode启动源码">
+<meta property="og:title" content="Hadoop源码分析之NameNode启动源码">
 <meta property="og:url" content="http://example.com/2018/07/20/Hadoop%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BNameNode%E5%90%AF%E5%8A%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="Leo的博客">
-<meta property="og:description" content="提出问题  Hadoop 一些进程，怎么工作? HDFS 读写流程? HDFS 小文件? Hadoop 元数据，单节点，journal? NameNode、DataNode 启动过程，干了什么? HDFS 元数据的数据结构? NameNode 的职责？ NN启动过程中做了什么事情？  带着以上问题，追踪源码寻找答案">
+<meta property="og:description" content="提出问题">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/assets/img/51649773.png">
 <meta property="og:image" content="http://example.com/assets/img/35369257.png">
 <meta property="og:image" content="http://example.com/assets/img/52626095.png">
 <meta property="og:image" content="http://example.com/assets/img/52598022.png">
 <meta property="article:published_time" content="2018-07-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-16T15:22:50.797Z">
+<meta property="article:modified_time" content="2021-06-29T13:27:52.924Z">
 <meta property="article:author" content="Leo He">
 <meta property="article:tag" content="Hadoop">
 <meta property="article:tag" content="源码分析">
@@ -164,7 +164,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Hadoop源码分析之 NameNode启动源码
+      Hadoop源码分析之NameNode启动源码
     </h1>
   
 
@@ -178,6 +178,8 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>提出问题</strong></p>
+<span id="more"></span>
+
 <ul>
 <li>Hadoop 一些进程，怎么工作?</li>
 <li>HDFS 读写流程?</li>
@@ -189,8 +191,6 @@ var _hmt = _hmt || [];
 <li>NN启动过程中做了什么事情？</li>
 </ul>
 <p><strong>带着以上问题，追踪源码寻找答案</strong></p>
-<span id="more"></span>
-
 <p>启动命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">start-all.sh</span><br><span class="line"></span><br><span class="line">start-dfs.sh</span><br><span class="line"></span><br><span class="line">hadoop-daemon.sh start namenode</span><br></pre></td></tr></table></figure>
 
@@ -361,11 +361,11 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/01/19/Shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/09/10/Hadoop%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BMR%20JOB%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Shell脚本编程经验总结
+          Hadoop源码分析之MR JOB配置加载机制
         
       </div>
     </a>
@@ -498,11 +498,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Azkaban</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
