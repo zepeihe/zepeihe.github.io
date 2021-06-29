@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | Leo的博客</title>
+  <title>RDD算子实现first_value和last_value | Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Leo的博客">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="1.实现代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RDD算子实现first_value和last_value">
+<meta property="og:url" content="http://example.com/2019/07/15/RDD%E7%AE%97%E5%AD%90%E5%AE%9E%E7%8E%B0first_value%E5%92%8Clast_value/index.html">
 <meta property="og:site_name" content="Leo的博客">
-<meta property="og:description" content="擅长各项大数据框架，深入研究大数据技术。此为博客一枚。">
+<meta property="og:description" content="1.实现代码">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-07-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-29T08:35:57.608Z">
 <meta property="article:author" content="Leo He">
-<meta property="article:tag" content="大数据,Hadoop,Spark,Flink,Hive,Kafka,Kylin,Hbase,Java,Scala,Python,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder">
+<meta property="article:tag" content="Spark">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Leo的博客" type="application/atom+xml">
@@ -149,160 +151,36 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-RDD算子实现first_value和last_value" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/12/%E5%A4%A7%E8%A1%A8join%E5%A4%A7%E8%A1%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88(%E9%87%87%E7%94%A8SMB%E5%88%86%E6%A1%B6)/" class="archive-article-date">
-  	<time datetime="2020-02-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/12/%E5%A4%A7%E8%A1%A8join%E5%A4%A7%E8%A1%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88(%E9%87%87%E7%94%A8SMB%E5%88%86%E6%A1%B6)/">大表join大表解决方案(采用SMB分桶)</a>
+    <h1 class="article-title" itemprop="name">
+      RDD算子实现first_value和last_value
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/06/RDD%E7%AE%97%E5%AD%90%E5%AE%9E%E7%8E%B0join%E7%AA%84%E4%BE%9D%E8%B5%96/" class="archive-article-date">
-  	<time datetime="2020-02-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/06/RDD%E7%AE%97%E5%AD%90%E5%AE%9E%E7%8E%B0join%E7%AA%84%E4%BE%9D%E8%B5%96/">RDD算子实现join窄依赖</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/06/%E6%9F%A5%E8%AF%A2Hive%E5%85%83%E6%95%B0%E6%8D%AE%E8%A1%A8%EF%BC%8C%E6%A0%B9%E6%8D%AE%E4%BC%A0%E5%85%A5%E7%9A%84tablename%E5%88%A0%E9%99%A4%E5%85%83%E6%95%B0%E6%8D%AE%E6%89%80%E6%9C%89%E4%BF%A1%E6%81%AF/" class="archive-article-date">
-  	<time datetime="2020-02-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/06/%E6%9F%A5%E8%AF%A2Hive%E5%85%83%E6%95%B0%E6%8D%AE%E8%A1%A8%EF%BC%8C%E6%A0%B9%E6%8D%AE%E4%BC%A0%E5%85%A5%E7%9A%84tablename%E5%88%A0%E9%99%A4%E5%85%83%E6%95%B0%E6%8D%AE%E6%89%80%E6%9C%89%E4%BF%A1%E6%81%AF/">查询Hive元数据表，根据传入的tablename删除元数据所有信息</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/15/RDD%E7%AE%97%E5%AD%90%E5%AE%9E%E7%8E%B0first_value%E5%92%8Clast_value/" class="archive-article-date">
+        
+        <a href="/2019/07/15/RDD%E7%AE%97%E5%AD%90%E5%AE%9E%E7%8E%B0first_value%E5%92%8Clast_value/" class="archive-article-date">
   	<time datetime="2019-07-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/15/RDD%E7%AE%97%E5%AD%90%E5%AE%9E%E7%8E%B0first_value%E5%92%8Clast_value/">RDD算子实现first_value和last_value</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-实现代码"><a href="#1-实现代码" class="headerlink" title="1.实现代码"></a>1.实现代码</h2><span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">package com.leo.sparkrdd</span><br><span class="line"></span><br><span class="line">import org.apache.spark.&#123;SparkConf, SparkContext&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author Leo </span><br><span class="line"> * 数据：</span><br><span class="line"> * leo,20190801</span><br><span class="line"> * leo,20190802</span><br><span class="line"> * leo,20190803</span><br><span class="line"> * leo,20190804</span><br><span class="line"> * leo,20190806</span><br><span class="line"> * leo,20190807</span><br><span class="line"> * leo,20190808</span><br><span class="line"> * leo,20190811</span><br><span class="line"> * leo,20190812</span><br><span class="line"> * zepei,20190730</span><br><span class="line"> * zepei,20190731</span><br><span class="line"> * zepei,20190801</span><br><span class="line"> * zepei,20190804</span><br><span class="line"> * zepei,20190806</span><br><span class="line"> */</span><br><span class="line">object FirstValueLastValueAppV2 &#123;</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">    val sparkConf = new SparkConf().setMaster(&quot;local[*]&quot;).setAppName(&quot;FirstValueLastValueApp&quot;)</span><br><span class="line">    val sc = new SparkContext(sparkConf)</span><br><span class="line"></span><br><span class="line">    val value = sc.textFile(&quot;file:///Users/hezepei/workspace/192-386/SparkRDD-20190321/data/access.txt&quot;)</span><br><span class="line">      .map(x =&gt; &#123;val strings = x.split(&quot;,&quot;);(strings(0),strings(1))&#125;)</span><br><span class="line">      .groupByKey()</span><br><span class="line">      .mapValues(x =&gt; &#123;</span><br><span class="line">        val list = x.toList.sorted</span><br><span class="line">        (list.head,list)</span><br><span class="line">      &#125;)</span><br><span class="line">      .flatMap(x =&gt; &#123;</span><br><span class="line">        x._2._2.map(y =&gt; &#123;</span><br><span class="line">          (x._1,y,x._2._1,y)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">      .collect()</span><br><span class="line">      .foreach(println)</span><br><span class="line"></span><br><span class="line">    // 输出结果：</span><br><span class="line">//    (zepei,20190730,20190730,20190730)</span><br><span class="line">//    (zepei,20190731,20190730,20190731)</span><br><span class="line">//    (zepei,20190801,20190730,20190801)</span><br><span class="line">//    (zepei,20190804,20190730,20190804)</span><br><span class="line">//    (zepei,20190806,20190730,20190806)</span><br><span class="line">//    (leo,20190801,20190801,20190801)</span><br><span class="line">//    (leo,20190802,20190801,20190802)</span><br><span class="line">//    (leo,20190803,20190801,20190803)</span><br><span class="line">//    (leo,20190804,20190801,20190804)</span><br><span class="line">//    (leo,20190806,20190801,20190806)</span><br><span class="line">//    (leo,20190807,20190801,20190807)</span><br><span class="line">//    (leo,20190808,20190801,20190808)</span><br><span class="line">//    (leo,20190811,20190801,20190811)</span><br><span class="line">//    (leo,20190812,20190801,20190812)</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -314,875 +192,116 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/09/Hive%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/" class="archive-article-date">
-  	<time datetime="2019-07-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/09/Hive%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/">Hive源码导入到IDEA中编译</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/06/Spark%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/" class="archive-article-date">
-  	<time datetime="2019-07-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/06/Spark%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/">Spark源码导入到IDEA中编译</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/" class="archive-article-date">
-  	<time datetime="2019-06-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/20/MacOSAzkaban%E9%83%A8%E7%BD%B2/">MacOS部署Azkaban</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Azkaban</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/11/HDFS%E6%A3%80%E6%9F%A5%E5%B0%8F%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  	<time datetime="2019-06-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/11/HDFS%E6%A3%80%E6%9F%A5%E5%B0%8F%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0/">HDFS检查小文件实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Scala</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/01/MacOSHive%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2019-05-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/01/MacOSHive%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">MacOS部署Hive的安装与配置</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/19/MacOS%E9%83%A8%E7%BD%B2Spark/" class="archive-article-date">
-  	<time datetime="2019-05-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/19/MacOS%E9%83%A8%E7%BD%B2Spark/">MacOS部署Spark</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/15/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" class="archive-article-date">
-  	<time datetime="2019-05-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/15/MacOS%E6%90%AD%E5%BB%BAHadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/">MacOS部署Hadoop伪分布式集群</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/26/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E5%9B%9B)/" class="archive-article-date">
-  	<time datetime="2019-03-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/26/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E5%9B%9B)/">Ambari集群部署(四)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ambari</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/25/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%89)/" class="archive-article-date">
-  	<time datetime="2019-03-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/25/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%89)/">Ambari集群部署(三)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ambari</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%BA%8C)/" class="archive-article-date">
-  	<time datetime="2019-03-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/24/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%BA%8C)/">Ambari集群部署(二)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ambari</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/" class="archive-article-date">
-  	<time datetime="2019-03-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/23/Ambari%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA(%E4%B8%80)/">Ambari集群部署(一)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ambari</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/20/CDH5.16.1%E9%83%A8%E7%BD%B2/" class="archive-article-date">
-  	<time datetime="2019-03-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/20/CDH5.16.1%E9%83%A8%E7%BD%B2/">CDH5.16.1部署</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/15/%E6%8A%8AUDF%E5%87%BD%E6%95%B0%E9%9B%86%E6%88%90%E5%88%B0Hive%E6%BA%90%E7%A0%81%E4%B8%AD/" class="archive-article-date">
-  	<time datetime="2019-02-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/15/%E6%8A%8AUDF%E5%87%BD%E6%95%B0%E9%9B%86%E6%88%90%E5%88%B0Hive%E6%BA%90%E7%A0%81%E4%B8%AD/">把UDF函数集成到Hive源码中</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/06/Hadoop%20HA%E5%8E%9F%E7%90%86%E5%9B%BE%E7%A4%BA/" class="archive-article-date">
-  	<time datetime="2019-02-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/06/Hadoop%20HA%E5%8E%9F%E7%90%86%E5%9B%BE%E7%A4%BA/">Hadoop HA原理图(Yarn HA/HDFS HA)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/05/MapReduce%20shuffle%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="archive-article-date">
-  	<time datetime="2019-02-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/05/MapReduce%20shuffle%E6%B5%81%E7%A8%8B%E5%9B%BE/">MapReduce shuffle流程图</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/01/HBase%E5%92%8CHive%E8%A1%A8%E5%85%B3%E8%81%94%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2019-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/01/HBase%E5%92%8CHive%E8%A1%A8%E5%85%B3%E8%81%94%E6%93%8D%E4%BD%9C/">HBase和Hive表关联操作</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hive</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/23/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Flume%E5%8A%9F%E8%83%BD%E9%87%87%E9%9B%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0HDFS/" class="archive-article-date">
-  	<time datetime="2019-01-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/23/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Flume%E5%8A%9F%E8%83%BD%E9%87%87%E9%9B%86%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0HDFS/">Shell脚本实现Flume功能采集文件上传HDFS</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Shell</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/20/Hadoop%20HA%E9%83%A8%E7%BD%B2/" class="archive-article-date">
-  	<time datetime="2019-01-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/20/Hadoop%20HA%E9%83%A8%E7%BD%B2/">Hadoop HA部署</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">集群搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/19/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Hadoop%20HA%20%E5%88%87%E6%8D%A2%E5%91%8A%E8%AD%A6%E7%9B%91%E6%8E%A7/" class="archive-article-date">
-  	<time datetime="2019-01-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/19/Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0Hadoop%20HA%20%E5%88%87%E6%8D%A2%E5%91%8A%E8%AD%A6%E7%9B%91%E6%8E%A7/">Shell脚本实现Hadoop HA 切换告警监控</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Shell</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/19/Shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2019-01-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/19/Shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">Shell脚本编程经验总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Shell</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/20/Hadoop%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BNameNode%E5%90%AF%E5%8A%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2018-07-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/20/Hadoop%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8BNameNode%E5%90%AF%E5%8A%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Hadoop源码分析之 NameNode启动源码</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2019/07/15/RDD%E7%AE%97%E5%AD%90%E5%AE%9E%E7%8E%B0first_value%E5%92%8Clast_value/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/02/06/%E6%9F%A5%E8%AF%A2Hive%E5%85%83%E6%95%B0%E6%8D%AE%E8%A1%A8%EF%BC%8C%E6%A0%B9%E6%8D%AE%E4%BC%A0%E5%85%A5%E7%9A%84tablename%E5%88%A0%E9%99%A4%E5%85%83%E6%95%B0%E6%8D%AE%E6%89%80%E6%9C%89%E4%BF%A1%E6%81%AF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          查询Hive元数据表，根据传入的tablename删除元数据所有信息
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2019/07/09/Hive%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5%E5%88%B0IDEA%E4%B8%AD%E7%BC%96%E8%AF%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hive源码导入到IDEA中编译</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+  <div id="SOHUCS" sid="RDD算子实现first_value和last_value" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyvsmwACT",
+        conf: "d4a9131c3f72e7526d8cba4214deb9fd"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -1205,8 +324,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
