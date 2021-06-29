@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://example.com/assets/img/8100a56d09370b029f3f7dc480080a10.png">
 <meta property="og:image" content="http://example.com/assets/img/c1805eb5e3c10b63fa67d14127fece96.png">
 <meta property="article:published_time" content="2019-01-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-29T03:49:50.494Z">
+<meta property="article:modified_time" content="2021-06-29T03:54:15.317Z">
 <meta property="article:author" content="Leo He">
 <meta property="article:tag" content="集群搭建">
 <meta property="article:tag" content="Hadoop">
@@ -177,9 +177,9 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="1-阿里云三台机器-按量付费"><a href="#1-阿里云三台机器-按量付费" class="headerlink" title="1.阿里云三台机器 按量付费"></a>1.阿里云三台机器 按量付费</h4><p><img src="/assets/img/cda446f20de21775cec0d955becac35f.png" alt="阿里云VM创建.png"></p>
-<span id="more"></span>
+        <h4 id="1-阿里云三台机器-按量付费"><a href="#1-阿里云三台机器-按量付费" class="headerlink" title="1.阿里云三台机器 按量付费"></a>1.阿里云三台机器 按量付费</h4><span id="more"></span>
 
+<p><img src="/assets/img/cda446f20de21775cec0d955becac35f.png" alt="阿里云VM创建.png"></p>
 <h4 id="2-上传安装包"><a href="#2-上传安装包" class="headerlink" title="2.上传安装包"></a>2.上传安装包</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">JDK</span><br><span class="line"></span><br><span class="line">hadoop-2.6.0-cdh5.16.2.tar.gz</span><br><span class="line"></span><br><span class="line">zookeeper-3.4.5-cdh5.16.2.tar.gz</span><br><span class="line"></span><br><span class="line">yum install -y lrzsz命令</span><br><span class="line"></span><br><span class="line">#scp命令拷贝文件到另外的机器</span><br><span class="line"></span><br><span class="line">scp * 172.17.130.101:/root</span><br><span class="line"></span><br><span class="line">scp * 172.17.130.102:/root</span><br></pre></td></tr></table></figure>
 
 <h4 id="3-多机同步脚本"><a href="#3-多机同步脚本" class="headerlink" title="3.多机同步脚本"></a>3.多机同步脚本</h4><p>yum install -y rsync</p>

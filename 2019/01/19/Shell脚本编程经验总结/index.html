@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Shell脚本编程经验总结 | Leo的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.脚本的规范1234[hadoop@hadoop002 shell]$ vi wc.sh#!&#x2F;bin&#x2F;bashecho &quot;www.hadoop.com&quot;  脚本后缀默认一般是.sh 第一行 #!&#x2F;bin&#x2F;bash 是解释器 cat &#x2F;etc&#x2F;passwd 最后一列这些标识禁止了用户的登录： 用户的 &#x2F;bin&#x2F;bash &#x2F;bin&#x2F;false &#x2F;sbin&#x2F;nologin 例子 C">
+  <meta name="description" content="1.脚本的规范1234[hadoop@hadoop002 shell]$ vi wc.sh#!&#x2F;bin&#x2F;bashecho &quot;www.hadoop.com&quot;  脚本后缀默认一般是.sh 第一行 #!&#x2F;bin&#x2F;bash 是解释器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shell脚本编程经验总结">
 <meta property="og:url" content="http://example.com/2019/01/19/Shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Leo的博客">
-<meta property="og:description" content="1.脚本的规范1234[hadoop@hadoop002 shell]$ vi wc.sh#!&#x2F;bin&#x2F;bashecho &quot;www.hadoop.com&quot;  脚本后缀默认一般是.sh 第一行 #!&#x2F;bin&#x2F;bash 是解释器 cat &#x2F;etc&#x2F;passwd 最后一列这些标识禁止了用户的登录： 用户的 &#x2F;bin&#x2F;bash &#x2F;bin&#x2F;false &#x2F;sbin&#x2F;nologin 例子 C">
+<meta property="og:description" content="1.脚本的规范1234[hadoop@hadoop002 shell]$ vi wc.sh#!&#x2F;bin&#x2F;bashecho &quot;www.hadoop.com&quot;  脚本后缀默认一般是.sh 第一行 #!&#x2F;bin&#x2F;bash 是解释器">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-01-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-16T14:45:31.164Z">
+<meta property="article:modified_time" content="2021-06-29T03:54:27.051Z">
 <meta property="article:author" content="Leo He">
 <meta property="article:tag" content="Shell">
 <meta name="twitter:card" content="summary">
@@ -175,6 +175,9 @@ var _hmt = _hmt || [];
 
 <p>脚本后缀默认一般是.sh</p>
 <p>第一行 #!/bin/bash 是解释器</p>
+<span id="more"></span>
+
+
 <p>cat /etc/passwd</p>
 <p><strong>最后一列这些标识禁止了用户的登录：</strong></p>
 <p>用户的 /bin/bash</p>
@@ -190,8 +193,6 @@ var _hmt = _hmt || [];
 <li><strong>不管脚本文件是否有x执行权限</strong></li>
 </ol>
 <p><strong>结论：执行脚本命令都用sh</strong></p>
-<span id="more"></span>
-
 <p>执行例子：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop002 shell]$ chmod u+x wc.sh</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$ ll</span><br><span class="line"></span><br><span class="line">total 4</span><br><span class="line"></span><br><span class="line">-rwxrw-r-- 1 hadoop hadoop 39 Jan 17 20:10 wc.sh</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$ ./wc.sh</span><br><span class="line"></span><br><span class="line">www.hadoop.com</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$ wc.sh</span><br><span class="line"></span><br><span class="line">-bash: wc.sh: command not found</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$ pwd</span><br><span class="line"></span><br><span class="line">/home/hadoop/shell</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$ /home/hadoop/shell/wc.sh</span><br><span class="line"></span><br><span class="line">www.hadoop.com</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$ sh wc.sh</span><br><span class="line"></span><br><span class="line">www.hadoop.com</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$ ll</span><br><span class="line"></span><br><span class="line">total 4</span><br><span class="line"></span><br><span class="line">-rwxrw-r-- 1 hadoop hadoop 27 Jan 17 20:18 wc.sh</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$ chmod u-x wc.sh</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$ ll</span><br><span class="line"></span><br><span class="line">total 4</span><br><span class="line"></span><br><span class="line">-rw-rw-r-- 1 hadoop hadoop 27 Jan 17 20:18 wc.sh</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$ sh wc.sh</span><br><span class="line"></span><br><span class="line">www.hadoop.com</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop002 shell]$</span><br></pre></td></tr></table></figure>
 
